@@ -36,6 +36,23 @@
 
 % Custom Commands
 
+\newenvironment{note}{
+% Formats a note.
+% Usage: \begin{note}
+% Example:
+% \begin{note}
+%   This is a draft.
+% \end{note}
+    \bigskip
+	\begin{samepage}
+	\begin{adjustwidth}{0.5cm}{0.5cm}
+		\emph{Note:}%
+		}{
+	\end{adjustwidth}
+	\end{samepage}
+    \bigskip
+}
+
 \newenvironment{gramprod}[2]{
 % Formats a grammar production rule.
 % Not intended to be used directly.
@@ -116,6 +133,12 @@
 \begin{document}
 
 \maketitle
+
+\begin{note}
+This document is a draft and may not represent the current state of the
+specification. For the most recent version, visit
+\url{https://github.com/jordanbtucker/json5-spec}.
+\end{note}
 
 \begin{abstract}
 The JSON5 Data Interchange Format is a proposed extension to JSON that aims to
