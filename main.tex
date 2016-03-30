@@ -1,25 +1,45 @@
 \documentclass{article}
 
+% TODO:
+% - Explain JSON5 features in detail.
+
+% UTF-8 support.
 \usepackage[utf8]{inputenc}
+
+% English hyphenation and typographical settings.
 \usepackage[english]{babel}
 
+% Stops tildes (~) from being superscripted.
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 
+% Hyperlink support.
 \usepackage{hyperref}
 
+% Citations and references.
 \usepackage[backend=biber]{biblatex}
 \addbibresource{references.bib}
 
+% Indentation support.
 \usepackage{changepage}
 
+% Syntax highlighting.
 \usepackage{minted}
-\usemintedstyle{vs}
+\usemintedstyle{vs} % Visual Studio
+
+% Stops single quotes from getting too fancy.
 \usepackage{upquote}
 
+% Don't hyphenate these words.
 \hyphenation{ECMAScript}
 
+
+% Custom Commands
+
 \newenvironment{gramprod}[2]{
+% Formats a grammar production rule.
+% Not intended to be used directly.
+% Usage: \begin{gramprod}{production-name}{punctuation}
 	\begin{samepage}
 	\begin{adjustwidth}{0.5cm}{0.5cm}
 		\emph{#1} \textbf{#2}
@@ -32,24 +52,52 @@
 }
 
 \newenvironment{lexprod}[1]{
+% Formats a lexical grammar production rule.
+% Usage: \begin{lexprod}{production-name}
+% Example:
+% \begin{lexprod}{JSON5Number}
+% 	\token{JSON5NumericLiteral}\\
+% 	\lit{+} \token{JSON5NumericLiteral}\\
+% 	\lit{-} \token{JSON5NumericLiteral}
+% \end{lexprod}
 	\begin{gramprod}{#1}{::}
 	}{
 	\end{gramprod}
 }
 
 \newenvironment{synprod}[1]{
+% Formats a syntactic grammar production rule.
+% Usage: \begin{synprod}{production-name}
+% Example:
+% \begin{synprod}{JSON5MemberName}
+% 	\token{JSON5Identifier}\\
+% 	\token{JSON5String}
+% \end{synprod}
 	\begin{gramprod}{#1}{:}
 	}{
 	\end{gramprod}
 }
 
 \newcommand{\token}[1]{\emph{#1}}
+% Formats a grammar token.
+% Usage:   \token{production-name}
+% Example: \token{JSON5Identifier}
 
 \newcommand{\lit}[1]{\textbf{\texttt{#1}}}
+% Formats a literal grammar token.
+% Usage:   \lit{literal-text}
+% Example: \lit{Infinity}
 
 \newcommand{\opt}[1]{#1\textsubscript{opt}}
+% Formats an optional grammar token.
+% Usage:   \opt{token}
+% Example: \opt{\lit{,}}
 
 \newcommand{\esref}[2]{\href{https://es5.github.io/\#x#2}{#1}}
+% Creates a hyperlink to Annotated ES5 spec.
+% Usage:   \esref{text}{section}
+% Example: \esref{BooleanLiteral}{7.8.2}
+
 
 \title{The JSON5 Data Interchange Format}
 
