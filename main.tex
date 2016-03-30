@@ -118,28 +118,42 @@
 \maketitle
 
 \begin{abstract}
-The JSON5 Data Interchange Format is a proposed extension to JSON that aims to make it easier for humans to write and maintain by hand. It does this by adding some minimal syntax features directly from ECMAScript 5.1.
+The JSON5 Data Interchange Format is a proposed extension to JSON that aims to
+make it easier for humans to write and maintain by hand. It does this by adding
+some minimal syntax features directly from ECMAScript 5.1.
 \end{abstract}
 
 \tableofcontents
 
 \section{Introduction}
 
-JSON \cite{json} \cite{rfc7159} is an excellent data interchange format, but it has limitations that can cause problems when written by hand. The JSON5 Data Interchange Format (JSON5) is a proposed extension to JSON that aims to alleviate some of the limitations of JSON by expanding its syntax to include some productions from ECMAScript 5.1 \cite{es5}.
+JSON \cite{json} \cite{rfc7159} is an excellent data interchange format, but it
+has limitations that can cause problems when written by hand. The JSON5 Data
+Interchange Format (JSON5) is a proposed extension to JSON that aims to
+alleviate some of the limitations of JSON by expanding its syntax to include
+some productions from ECMAScript 5.1 \cite{es5}.
 
-JSON5 is a subset of ECMAScript 5.1 that adds no new data types, and is backwards compatible with JSON documents.
+JSON5 is a subset of ECMAScript 5.1 that adds no new data types, and is
+backwards compatible with JSON documents.
 
-Similar to JSON, JSON5 can represent four primitive types (strings, numbers, booleans, and null) and two structured types (objects and arrays).
+Similar to JSON, JSON5 can represent four primitive types (strings, numbers,
+booleans, and null) and two structured types (objects and arrays).
 
-A string is a sequence of zero or more Unicode characters \cite{unicode}. Note that this citation references the latest version of Unicode rather than a specific release. It is not expected that future changes in the Unicode specification will impact the syntax of JSON5.
+A string is a sequence of zero or more Unicode characters \cite{unicode}. Note
+that this citation references the latest version of Unicode rather than a
+specific release. It is not expected that future changes in the Unicode
+specification will impact the syntax of JSON5.
 
-An object is an unordered collection of zero or more name/value pairs, where a name is a string or identifier and a value is a string, number, boolean, null, object, or array.
+An object is an unordered collection of zero or more name/value pairs, where a
+name is a string or identifier and a value is a string, number, boolean, null,
+object, or array.
 
 An array is an ordered sequence of zero or more values.
 
 \subsection{Summary of Features}
 
-The following ECMAScript 5.1 features, which are not supported in JSON, have been extended to JSON5.
+The following ECMAScript 5.1 features, which are not supported in JSON, have
+been extended to JSON5.
 
 \subsubsection*{Objects}
 
@@ -219,17 +233,29 @@ multi-line string',
 
 \section{Grammar}
 
-JSON5 is defined by a lexical grammar and a syntactic grammar. The lexical grammar defines productions that translate text into tokens, and the syntactic grammar defines productions that translate tokens into a JSON5 value.
+JSON5 is defined by a lexical grammar and a syntactic grammar. The lexical
+grammar defines productions that translate text into tokens, and the syntactic
+grammar defines productions that translate tokens into a JSON5 value.
 
-All productions that do not begin with the characters ``JSON5'' are defined by productions of the \esref{ECMAScript 5.1 Lexical Grammar}{5.1.2} \cite{es5}.
+All productions that do not begin with the characters ``JSON5'' are defined by
+productions of the \esref{ECMAScript 5.1 Lexical Grammar}{5.1.2} \cite{es5}.
 
 \subsection{Lexical Grammar}
 
-The lexical grammar for JSON5 has as its terminal symbols characters (Unicode code units \cite{unicode}) that conform to the rules for \token{JSON5SourceCharacter}. It defines a set of productions, starting from the goal symbol \token{JSON5InputElement}, that describe how sequences of such characters are translated into a sequence of input elements.
+The lexical grammar for JSON5 has as its terminal symbols characters (Unicode
+code units \cite{unicode}) that conform to the rules for
+\token{JSON5SourceCharacter}. It defines a set of productions, starting from the
+goal symbol \token{JSON5InputElement}, that describe how sequences of such
+characters are translated into a sequence of input elements.
 
-Input elements other than whitespace and comments form the terminal symbols for the syntactic grammar for JSON5 and are called tokens. These tokens are the identifiers, literals, and punctuators of the JSON5 language. Simple whitespace and comments are discarded and do not appear in the stream of input elements for the syntactic grammar.
+Input elements other than whitespace and comments form the terminal symbols for
+the syntactic grammar for JSON5 and are called tokens. These tokens are the
+identifiers, literals, and punctuators of the JSON5 language. Simple whitespace
+and comments are discarded and do not appear in the stream of input elements for
+the syntactic grammar.
 
-Productions of the lexical grammar are distinguished by having two colons ``::'' as separating punctuation.
+Productions of the lexical grammar are distinguished by having two colons ``::''
+as separating punctuation.
 
 \subsubsection*{Syntax}
 
@@ -298,11 +324,20 @@ Productions of the lexical grammar are distinguished by having two colons ``::''
 
 \subsection{Syntactic Grammar}
 
-The syntactic grammar for JSON5 has tokens defined by the lexical grammar as its terminal symbols. It defines a set of productions, starting from the goal symbol \token{JSON5Text}, that describe how sequences of tokens can form syntactically correct JSON5 values.
+The syntactic grammar for JSON5 has tokens defined by the lexical grammar as its
+terminal symbols. It defines a set of productions, starting from the goal symbol
+\token{JSON5Text}, that describe how sequences of tokens can form syntactically
+correct JSON5 values.
 
-When a stream of characters is to be parsed as a JSON5 value, it is first converted to a stream of input elements by repeated application of the lexical grammar; this stream of input elements is then parsed by a single application of the syntactic grammar. The program is syntactically in error if the tokens in the stream of input elements cannot be parsed as a single instance of the goal nonterminal \token{JSON5Text}, with no tokens left over.
+When a stream of characters is to be parsed as a JSON5 value, it is first
+converted to a stream of input elements by repeated application of the lexical
+grammar; this stream of input elements is then parsed by a single application of
+the syntactic grammar. The program is syntactically in error if the tokens in
+the stream of input elements cannot be parsed as a single instance of the goal
+nonterminal \token{JSON5Text}, with no tokens left over.
 
-Productions of the syntactic grammar are distinguished by having just one colon ``:'' as punctuation.
+Productions of the syntactic grammar are distinguished by having just one colon ``:''
+as punctuation.
 
 \subsubsection*{Syntax}
 
