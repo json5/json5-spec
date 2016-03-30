@@ -1,0 +1,303 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+\usepackage{hyperref}
+
+\usepackage[backend=biber]{biblatex}
+\addbibresource{references.bib}
+
+\usepackage{changepage}
+
+\usepackage{minted}
+\usemintedstyle{vs}
+\usepackage{upquote}
+
+\hyphenation{ECMAScript}
+
+\newenvironment{gramprod}[2]{
+	\begin{samepage}
+	\begin{adjustwidth}{0.5cm}{0.5cm}
+		\emph{#1} \textbf{#2}
+		\begin{adjustwidth}{0.5cm}{0.5cm}
+		}{
+		\medskip
+		\end{adjustwidth}
+	\end{adjustwidth}
+	\end{samepage}
+}
+
+\newenvironment{lexprod}[1]{
+	\begin{gramprod}{#1}{::}
+	}{
+	\end{gramprod}
+}
+
+\newenvironment{synprod}[1]{
+	\begin{gramprod}{#1}{:}
+	}{
+	\end{gramprod}
+}
+
+\newcommand{\token}[1]{\emph{#1}}
+
+\newcommand{\lit}[1]{\textbf{\texttt{#1}}}
+
+\newcommand{\opt}[1]{#1\textsubscript{opt}}
+
+\newcommand{\esref}[2]{\href{https://es5.github.io/\#x#2}{#1}}
+
+\title{The JSON5 Data Interchange Format}
+
+\author{
+	Jordan Tucker
+	\thanks{
+		In collaboration with Aseem Kishore
+		(\href{https://github.com/aseemk}{github.com/aseemk})
+	}\\
+	\href{https://github.com/jordanbtucker}{github.com/jordanbtucker}
+}
+\date{March, 2016}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+The JSON5 Data Interchange Format is a proposed extension to JSON that aims to make it easier for humans to write and maintain by hand. It does this by adding some minimal syntax features directly from ECMAScript 5.1.
+\end{abstract}
+
+\tableofcontents
+
+\section{Introduction}
+
+JSON \cite{json} \cite{rfc7159} is an excellent data interchange format, but it has limitations that can cause problems when written by hand. The JSON5 Data Interchange Format (JSON5) is a proposed extension to JSON that aims to alleviate some of the limitations of JSON by expanding its syntax to include some productions from ECMAScript 5.1 \cite{es5}.
+
+JSON5 is a subset of ECMAScript 5.1 that adds no new data types, and is backwards compatible with JSON documents.
+
+Similar to JSON, JSON5 can represent four primitive types (strings, numbers, booleans, and null) and two structured types (objects and arrays).
+
+A string is a sequence of zero or more Unicode characters \cite{unicode}. Note that this citation references the latest version of Unicode rather than a specific release. It is not expected that future changes in the Unicode specification will impact the syntax of JSON5.
+
+An object is an unordered collection of zero or more name/value pairs, where a name is a string or identifier and a value is a string, number, boolean, null, object, or array.
+
+An array is an ordered sequence of zero or more values.
+
+\subsection{Summary of Features}
+
+The following ECMAScript 5.1 features, which are not supported in JSON, have been extended to JSON5.
+
+\subsubsection*{Objects}
+
+\begin{itemize}
+	\item Object keys may be an ECMAScript 5.1 \esref{\token{IdentifierName}}{7.6}.
+	\item Objects may have a single trailing comma.
+\end{itemize}
+
+\subsubsection*{Arrays}
+
+\begin{itemize}
+	\item Arrays may have a single trailing comma.
+\end{itemize}
+
+\subsubsection*{Strings}
+
+\begin{itemize}
+	\item Strings may be single quoted.
+	\item Strings may span multiple lines by escaping new line characters.
+	\item Strings may include character escapes.
+\end{itemize}
+
+\subsubsection*{Numbers}
+
+\begin{itemize}
+	\item Numbers may be hexadecimal (base 16).
+	\item Numbers may have a leading or trailing decimal point.
+	\item Numbers may be Infinity, -Infinity, NaN, or -NaN \cite{float}.
+	\item Numbers may begin with an explicit plus sign.
+\end{itemize}
+
+\subsubsection*{Comments}
+
+\begin{itemize}
+	\item In-line and block comments are allowed.
+\end{itemize}
+
+\subsubsection*{Whitespace}
+
+\begin{itemize}
+	\item Additional whitespace characters are allowed.
+\end{itemize}
+
+\subsection{Short Example}
+
+The following example illustrates many of the features of JSON5.
+
+\begin{minted}{js}
+{
+	foo: 'bar',
+	while: true,
+
+	this: 'is a \
+multi-line string',
+
+	// this is an inline comment
+	here: 'is another', // inline comment
+
+	/* this is a block comment
+	   that continues on another line */
+
+	movie: 'The Great Escape\x21',
+
+	hex: 0xDEADbeef,
+	half: .5,
+	delta: +10,
+	to: Infinity,   // and beyond!
+
+	finally: 'a trailing comma',
+	oh: [
+		"we shouldn't forget",
+		'arrays can have',
+		'trailing commas too',
+	],
+}
+\end{minted}
+
+\section{Grammar}
+
+JSON5 is defined by a lexical grammar and a syntactic grammar. The lexical grammar defines productions that translate text into tokens, and the syntactic grammar defines productions that translate tokens into a JSON5 value.
+
+All productions that do not begin with the characters ``JSON5'' are defined by productions of the \esref{ECMAScript 5.1 Lexical Grammar}{5.1.2} \cite{es5}.
+
+\subsection{Lexical Grammar}
+
+The lexical grammar for JSON5 has as its terminal symbols characters (Unicode code units \cite{unicode}) that conform to the rules for \token{JSON5SourceCharacter}. It defines a set of productions, starting from the goal symbol \token{JSON5InputElement}, that describe how sequences of such characters are translated into a sequence of input elements.
+
+Input elements other than whitespace and comments form the terminal symbols for the syntactic grammar for JSON5 and are called tokens. These tokens are the identifiers, literals, and punctuators of the JSON5 language. Simple whitespace and comments are discarded and do not appear in the stream of input elements for the syntactic grammar.
+
+Productions of the lexical grammar are distinguished by having two colons ``::'' as separating punctuation.
+
+\subsubsection*{Syntax}
+
+\begin{lexprod}{JSON5SourceCharacter}
+	\esref{\token{SourceCharacter}}{6}
+\end{lexprod}
+
+\begin{lexprod}{JSON5InputElement}
+	\token{JSON5WhiteSpace}\\
+	\token{JSON5LineTerminator}\\
+	\token{JSON5Comment}\\
+	\token{JSON5Token}
+\end{lexprod}
+
+\begin{lexprod}{JSON5Token}
+	\token{JSON5Identifier}\\
+	\token{JSON5NullLiteral}\\
+	\token{JSON5BooleanLiteral}\\
+	\token{JSON5Number}\\
+	\token{JSON5String}
+\end{lexprod}
+
+\begin{lexprod}{JSON5WhiteSpace}
+	\esref{\token{WhiteSpace}}{7.2}
+\end{lexprod}
+
+\begin{lexprod}{JSON5LineTerminator}
+	\esref{\token{LineTerminator}}{7.3}
+\end{lexprod}
+
+\begin{lexprod}{JSON5LineTerminatorSequence}
+	\esref{\token{LineTerminatorSequence}}{7.3}
+\end{lexprod}
+
+\begin{lexprod}{JSON5Comment}
+	\esref{\token{Comment}}{7.4}
+\end{lexprod}
+
+\begin{lexprod}{JSON5Identifier}
+	\esref{\token{IdentifierName}}{7.6}
+\end{lexprod}
+
+\begin{lexprod}{JSON5NullLiteral}
+	\esref{\token{NullLiteral}}{7.8.1}
+\end{lexprod}
+
+\begin{lexprod}{JSON5BooleanLiteral}
+	\esref{\token{BooleanLiteral}}{7.8.2}
+\end{lexprod}
+
+\begin{lexprod}{JSON5NumericLiteral}
+	\esref{\token{NumericLiteral}}{7.8.3}\\
+	\lit{Infinity}\\
+	\lit{NaN}
+\end{lexprod}
+
+\begin{lexprod}{JSON5Number}
+	\token{JSON5NumericLiteral}\\
+	\lit{+} \token{JSON5NumericLiteral}\\
+	\lit{-} \token{JSON5NumericLiteral}
+\end{lexprod}
+
+\begin{lexprod}{JSON5String}
+	\esref{\token{StringLiteral}}{7.8.4}
+\end{lexprod}
+
+\subsection{Syntactic Grammar}
+
+The syntactic grammar for JSON5 has tokens defined by the lexical grammar as its terminal symbols. It defines a set of productions, starting from the goal symbol \token{JSON5Text}, that describe how sequences of tokens can form syntactically correct JSON5 values.
+
+When a stream of characters is to be parsed as a JSON5 value, it is first converted to a stream of input elements by repeated application of the lexical grammar; this stream of input elements is then parsed by a single application of the syntactic grammar. The program is syntactically in error if the tokens in the stream of input elements cannot be parsed as a single instance of the goal nonterminal \token{JSON5Text}, with no tokens left over.
+
+Productions of the syntactic grammar are distinguished by having just one colon ``:'' as punctuation.
+
+\subsubsection*{Syntax}
+
+\begin{synprod}{JSON5Text}
+	\token{JSON5Value}
+\end{synprod}
+
+\begin{synprod}{JSON5Value}
+	\token{JSON5NullLiteral}\\
+	\token{JSON5BooleanLiteral}\\
+	\token{JSON5Number}\\
+	\token{JSON5String}\\
+	\token{JSON5Object}\\
+	\token{JSON5Array}
+\end{synprod}
+
+\begin{synprod}{JSON5Object}
+	\lit{\{} \lit{\}}\\
+	\lit{\{} \token{JSON5MemberList} \opt{\lit{,}} \lit{\}}
+\end{synprod}
+
+\begin{synprod}{JSON5MemberList}
+	\token{JSON5Member}\\
+	\token{JSON5MemberList} \lit{,} \token{JSON5Member}
+\end{synprod}
+
+\begin{synprod}{JSON5Member}
+	\token{JSON5MemberName} \lit{:} \token{JSON5Value}
+\end{synprod}
+
+\begin{synprod}{JSON5MemberName}
+	\token{JSON5Identifier}\\
+	\token{JSON5String}
+\end{synprod}
+
+\begin{synprod}{JSON5Array}
+	\lit{[} \lit{]}\\
+	\lit{[} \token{JSON5ElementList} \opt{\lit{,}} \lit{]}
+\end{synprod}
+
+\begin{synprod}{JSON5ElementList}
+	\token{JSON5Value}\\
+	\token{JSON5ElementList} \lit{,} \token{JSON5Value}
+\end{synprod}
+
+\printbibliography
+
+\end{document}
