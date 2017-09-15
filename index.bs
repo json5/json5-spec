@@ -1,0 +1,222 @@
+<pre class='metadata'>
+Title: The JSON5 Data Interchange Format
+Shortname: json5
+Level: none
+Status: iso/DTS
+URL: https://json5.github.io/json5-spec
+Editor:
+    Jordan Tucker, jordanbtucker@gmail.com, https://github.com/jordanbtucker
+    Aseem Kishore, aseemk@gmail.com, https://github.com/aseemk
+Abstract:
+    The JSON5 Data Interchange Format is a proposed extension to JSON that aims to
+    make it easier for humans to write and maintain by hand. It does this by
+    adding some minimal syntax features directly from ECMAScript 5.1.
+Repository: json5/json5-spec
+Max ToC Depth: 2
+Boilerplate: index off
+</pre>
+
+# Introduction # {#introduction}
+
+JSON [[ECMA-404]] [[RFC7159]] is an excellent data interchange format, but it
+has limitations that can cause problems when written by hand. The JSON5 Data
+Interchange Format (JSON5) is a proposed extension to JSON that aims to
+alleviate some of the limitations of JSON by expanding its syntax to include
+some productions from ECMAScript 5.1 [[!ECMASCRIPT-5.1]].
+
+JSON5 is a subset of ECMAScript 5.1 that adds no new data types, and is
+backwards compatible with JSON documents.
+
+Similar to JSON, JSON5 can represent four primitive types (strings, numbers,
+booleans, and null) and two structured types (objects and arrays).
+
+A string is a sequence of zero or more Unicode characters [[!UNICODE]]. Note
+that this citation references the latest version of Unicode rather than a
+specific release. It is not expected that future changes in the Unicode
+specification will impact the syntax of JSON5.
+
+An object is an unordered collection of zero or more name/value pairs, where a
+name is a string or identifier and a value is a string, number, boolean, null,
+object, or array.
+
+An array is an ordered sequence of zero or more values.
+
+## Summary of Features ## {#summary-of-features}
+
+The following ECMAScript 5.1 features, which are not supported in JSON, have
+been extended to JSON5.
+
+<h4 id="summary-of-features-objects" class="no-num">Objects</h4>
+- Object keys may be an ECMAScript 5.1 [=IdentifierName=].
+- Objects may have a single trailing comma.
+
+<h4 id="summary-of-features-arrays" class="no-num">Arrays</h4>
+- Arrays may have a single trailing comma.
+
+<h4 id="summary-of-features-strings" class="no-num">Strings</h4>
+- Strings may be single quoted.
+- Strings may span multiple lines by escaping new line characters.
+- Strings may include character escapes.
+
+<h4 id="summary-of-features-numbers" class="no-num">Numbers</h4>
+- Numbers may be hexadecimal (base 16).
+- Numbers may have a leading or trailing decimal point.
+- Numbers may be Infinity, -Infinity, NaN, or -NaN [[!IEEE-754]].
+- Numbers may begin with an explicit plus sign.
+
+<h4 id="summary-of-features-comments" class="no-num">Comments</h4>
+- In-line and block comments are allowed.
+
+<h4 id="summary-of-features-whitespace" class="no-num">Whitespace</h4>
+- Additional whitespace characters are allowed.
+
+## Short Example ## {#short-example}
+
+<div class="example">
+The following example illustrates many of the features of JSON5.
+
+<xmp highlight="js">
+{
+    // comments
+    unquoted: 'and you can quote me on that',
+    singleQuotes: 'I can use "double quotes" here',
+    lineBreaks: "Look, Mom!\
+No \\n's!",
+    hexadecimal: 0xdecaf,
+    leadingDecimalPoint: .8675309, andTrailing: 8675309.,
+    positiveSign: +1,
+    trailingComma: 'in objects', andIn: ['arrays',],
+    "backwards compatible": "with JSON",
+}
+</xmp>
+</div>
+
+# Grammar # {#grammar}
+
+JSON5 is defined by a lexical grammar and a syntactic grammar. The lexical
+grammar defines productions that translate text into tokens, and the syntactic
+grammar defines productions that translate tokens into a JSON5 value.
+
+All productions that do not begin with the characters "JSON5" are defined by
+productions of the [=ECMAScript 5.1 Lexical Grammar=].
+
+## Lexical Grammar ## {#lexical-grammar}
+
+The lexical grammar for JSON5 has as its terminal symbols characters (Unicode
+code units [[!UNICODE]]) that conform to the rules for [=JSON5SourceCharacter=].
+It defines a set of productions, starting from the goal symbol
+[=JSON5InputElement=], that describe how sequences of such characters are
+translated into a sequence of input elements.
+
+Input elements other than whitespace and comments form the terminal symbols
+for the syntactic grammar for JSON5 and are called tokens. These tokens are the
+identifiers, literals, and punctuators of the JSON5 language. Simple whitespace
+and comments are discarded and do not appear in the stream of input elements for
+the syntactic grammar.
+
+Productions of the lexical grammar are distinguished by having two colons
+"::" as separating punctuation.
+
+### Syntax ### {#lexical-grammar-syntax}
+
+: <dfn>JSON5SourceCharacter</dfn> ::
+::  [=SourceCharacter=]
+
+: <dfn>JSON5InputElement</dfn> ::
+::  [=WhiteSpace=]<br/>
+    [=LineTerminator=]<br/>
+    [=Comment=]<br/>
+    [=JSON5Token=]
+
+: <dfn>JSON5Token</dfn> ::
+::  [=IdentifierName=]<br/>
+    [=NullLiteral=]<br/>
+    [=BooleanLiteral=]<br/>
+    [=StringLiteral=]<br/>
+    [=JSON5Number=]
+
+: <dfn>JSON5Number</dfn> ::
+::  [=JSON5NumericLiteral=]<br/>
+    <code>+</code> [=JSON5NumericLiteral=]<br/>
+    <code>-</code> [=JSON5NumericLiteral=]
+
+: <dfn>JSON5NumericLiteral</dfn> ::
+::  [=NumericLiteral=]<br/>
+    <code>Infinity</code><br/>
+    <code>NaN</code>
+
+## Syntactic Grammar ## {#syntactic-grammar}
+
+The syntactic grammar for JSON5 has tokens defined by the lexical grammar as its
+terminal symbols. It defines a set of productions, starting from the goal symbol
+[=JSON5Text=], that describe how sequences of tokens can form syntactically
+correct JSON5 values.
+
+When a stream of characters is to be parsed as a JSON5 value, it is first
+converted to a stream of input elements by repeated application of the lexical
+grammar; this stream of input elements is then parsed by a single application of
+the syntactic grammar. The program is syntactically in error if the tokens in
+the stream of input elements cannot be parsed as a single instance of the goal
+nonterminal [=JSON5Text=], with no tokens left over.
+
+Productions of the syntactic grammar are distinguished by having just one colon
+":" as punctuation.
+
+### Syntax ### {#syntactic-grammar-syntax}
+
+: <dfn>JSON5Text</dfn> :
+::  [=JSON5Value=]
+
+: <dfn>JSON5Value</dfn> :
+::  [=NullLiteral=]<br/>
+    [=BooleanLiteral=]<br/>
+    [=StringLiteral=]<br/>
+    [=JSON5Number=]<br/>
+    [=JSON5Object=]<br/>
+    [=JSON5Array=]
+
+: <dfn>JSON5Object</dfn> :
+::  <code>{</code> <code>}</code><br/>
+    <code>{</code> [=JSON5MemberList=] <code>,</code><sub>opt</sub> <code>}</code>
+
+: <dfn>JSON5MemberList</dfn> :
+::  [=JSON5Member=]<br/>
+    [=JSON5MemberList=] <code>,</code> [=JSON5Member=]
+
+: <dfn>JSON5Member</dfn> :
+::  [=JSON5MemberName=] <code>:</code> [=JSON5Value=]
+
+: <dfn>JSON5MemberName</dfn> :
+::  [=IdentifierName=]<br/>
+    [=StringLiteral=]
+
+: <dfn>JSON5Array</dfn> :
+::  <code>[</code> <code>]</code><br/>
+    <code>[</code> [=JSON5ElementList=] <code>,</code><sub>opt</sub> <code>]</code>
+
+: <dfn>JSON5ElementList</dfn> :
+::  [=JSON5Value=]<br/>
+    [=JSON5ElementList=] <code>,</code> [=JSON5Value=]
+
+<pre class="anchors">
+url: https://www.ecma-international.org/ecma-262/5.1/#sec-7.6; type: dfn
+    text: IdentifierName
+url: https://www.ecma-international.org/ecma-262/5.1/#sec-5.1.2; type: dfn
+    text: ECMAScript 5.1 Lexical Grammar
+url: https://www.ecma-international.org/ecma-262/5.1/#sec-6; type: dfn
+    text: SourceCharacter
+url: https://www.ecma-international.org/ecma-262/5.1/#sec-7.2; type: dfn
+    text: WhiteSpace
+url: https://www.ecma-international.org/ecma-262/5.1/#sec-7.3; type: dfn
+    text: LineTerminator
+url: https://www.ecma-international.org/ecma-262/5.1/#sec-7.4; type: dfn
+    text: Comment
+url: https://www.ecma-international.org/ecma-262/5.1/#sec-7.8.1; type: dfn
+    text: NullLiteral
+url: https://www.ecma-international.org/ecma-262/5.1/#sec-7.8.2; type: dfn
+    text: BooleanLiteral
+url: https://www.ecma-international.org/ecma-262/5.1/#sec-7.8.4; type: dfn
+    text: StringLiteral
+url: https://www.ecma-international.org/ecma-262/5.1/#sec-7.8.3; type: dfn
+    text: NumericLiteral
+</pre>
