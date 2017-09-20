@@ -2,7 +2,7 @@
 
 This is a draft of the JSON5 specification in bikeshed format.
 
-The latest version is available at https://json5.github.com/json5-spec
+The latest version is available at https://json5.github.io/json5-spec/
 
 ## Contributing
 
