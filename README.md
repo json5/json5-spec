@@ -1,5 +1,12 @@
 # The JSON5 Data Interchange Format
 
-This is a draft of the JSON5 specification in LaTeX format.
+This is a draft of the JSON5 specification in bikeshed format.
 
-[Releases](https://github.com/json5/json5-spec/releases) are available in PDF format.
+The latest version is available at https://json5.github.com/json5-spec
+
+## Contributing
+
+To contribute to the spec, please install [Bikeshed] and familiarize yourself
+with it.
+
+[Bikeshed]: https://tabatkins.github.io/bikeshed/
