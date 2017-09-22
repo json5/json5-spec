@@ -8,8 +8,8 @@ Editor:
     Jordan Tucker, jordanbtucker@gmail.com, https://github.com/jordanbtucker
     Aseem Kishore, aseemk@gmail.com, https://github.com/aseemk
 Abstract:
-    The JSON5 Data Interchange Format is a proposed extension to JSON that aims to
-    make it easier for humans to write and maintain by hand. It does this by
+    The JSON5 Data Interchange Format is a proposed extension to JSON that aims
+    to make it easier for humans to write and maintain by hand. It does this by
     adding some minimal syntax features directly from ECMAScript 5.1.
 Repository: json5/json5-spec
 Max ToC Depth: 2
@@ -132,8 +132,32 @@ Productions of the lexical grammar are distinguished by having two colons
 ::  [=IdentifierName=]<br/>
     [=NullLiteral=]<br/>
     [=BooleanLiteral=]<br/>
-    [=StringLiteral=]<br/>
+    [=JSON5String=]<br/>
     [=JSON5Number=]
+
+: <dfn>JSON5String</dfn> ::
+::  <code>"</code> [=JSON5DoubleStringCharacters=]<sub>opt</sub> <code>"</code><br/>
+    <code>'</code> [=JSON5SingleStringCharacters=]<sub>opt</sub> <code>'</code>
+
+: <dfn>JSON5DoubleStringCharacters</dfn> ::
+::  [=JSON5DoubleStringCharacter=] [=JSON5DoubleStringCharacters=]<sub>opt</sub>
+
+: <dfn>JSON5SingleStringCharacters</dfn> ::
+::  [=JSON5SingleStringCharacter=] [=JSON5SingleStringCharacters=]<sub>opt</sub>
+
+: <dfn>JSON5DoubleStringCharacter</dfn> ::
+::  [=SourceCharacter=] but not one of <code>"</code> or <code>\</code> or [=LineTerminator=]<br/>
+    <code>\</code> [=EscapeSequence=]<br/>
+    [=LineContinuation=]<br/>
+    U+2028<br/>
+    U+2029
+
+: <dfn>JSON5DoubleStringCharacter</dfn> ::
+::  [=SourceCharacter=] but not one of <code>'</code> or <code>\</code> or [=LineTerminator=]<br/>
+    <code>\</code> [=EscapeSequence=]<br/>
+    [=LineContinuation=]<br/>
+    U+2028<br/>
+    U+2029
 
 : <dfn>JSON5Number</dfn> ::
 ::  [=JSON5NumericLiteral=]<br/>
@@ -170,7 +194,7 @@ Productions of the syntactic grammar are distinguished by having just one colon
 : <dfn>JSON5Value</dfn> :
 ::  [=NullLiteral=]<br/>
     [=BooleanLiteral=]<br/>
-    [=StringLiteral=]<br/>
+    [=JSON5String=]<br/>
     [=JSON5Number=]<br/>
     [=JSON5Object=]<br/>
     [=JSON5Array=]
@@ -188,7 +212,7 @@ Productions of the syntactic grammar are distinguished by having just one colon
 
 : <dfn>JSON5MemberName</dfn> :
 ::  [=IdentifierName=]<br/>
-    [=StringLiteral=]
+    [=JSON5String=]
 
 : <dfn>JSON5Array</dfn> :
 ::  <code>[</code> <code>]</code><br/>
@@ -197,6 +221,261 @@ Productions of the syntactic grammar are distinguished by having just one colon
 : <dfn>JSON5ElementList</dfn> :
 ::  [=JSON5Value=]<br/>
     [=JSON5ElementList=] <code>,</code> [=JSON5Value=]
+
+# Values # {#values}
+
+A JSON5 value must be an [[#objects|object]], [[#arrays|array]],
+[[#numbers|number]], or [[#strings|string]], or one of the three literal names
+<code>true</code>, <code>false</code>, or <code>null</code>.
+
+# Objects # {#objects}
+
+An object structure is represented as a pair of curly brackets surrounding zero
+or more name/value pairs (or members). A name is a string or ECMAScript 5.1
+[=IdentifierName=]. A single colon comes after each name, separating the name
+from the value. A single comma separates a value from a following name. A single
+comma may follow the name/value pair. The names within an object should be
+unique.
+
+An object whose names are all unique is interoperable in the sense that all
+software implementations receiving that object will agree on the name-value
+mappings. When the names within an object are not unique, the behavior of
+software that receives such an object is unpredictable. Implementations may
+report the last name/value pair only. Implementations may report an error or
+fail to parse the object. Implementations may report all of the name/value
+pairs, including duplicates.
+
+Implementations may make the ordering of object members visible to calling
+software. Implementations whose behavior does not depend on member ordering will
+be interoperable in the sense that they will not be affected by this.
+
+<div class="example">
+The following documents are examples of JSON5 objects.
+
+```js
+// An empty object
+{}
+```
+
+```js
+// An object with two properties and a trailing comma
+{
+    width: 1920,
+    height: 1080,
+}
+```
+
+```js
+// Objects can be nested
+{
+    image: {
+        width: 1920,
+        height: 1080,
+        'aspect-ratio': '16:9',
+    }
+}
+```
+
+```js
+// An array of objects
+[
+  { name: 'Joe', age: 27 },
+  { name: 'Jane', age: 32 },
+]
+```
+</div>
+
+# Arrays # {#arrays}
+
+An array structure is represented as square brackets surrounding zero or more
+values (or elements). Elements are separated by commas. A single comma may
+follow the final element.
+
+There is no requirement that the values in an array be of the same type.
+
+<div class="example">
+The following documents are examples of arrays.
+
+```js
+// An empty array
+[]
+```
+
+```js
+// An array with three elements and a trailing comma
+[
+    1,
+    true,
+    'three',
+]
+```
+
+```js
+// Arrays can be nested
+[
+    [1, true, 'three'],
+    [4, "five", 0x6],
+]
+```
+</div>
+
+# Numbers # {#numbers}
+
+The representation of numbers is similar to that used in most programming
+languages. A number may be represented in in base 10 using decimal digits, base
+16 using hexadecimal digits, or the IEEE 754 values Infinity, -Infinity, or NaN.
+
+Decimal numbers contain an integer component that may be prefixed with an
+optional plus or minus sign, which may be followed by a fraction part and/or an
+exponent part.
+
+A fraction part is a decimal point followed by one or more digits.
+
+An exponent part begins with the letter E in upper or lower case, which may be
+followed by a plus or minus sign. The E and optional sign are followed by one or
+more digits.
+
+<div class="example">
+These are some examples of decimal numbers.
+
+```js
+{
+    integer: 123,
+    withFractionPart: 123.456,
+    onlyFractionPart: .456,
+    withExponent: 123e-456,
+}
+```
+</div>
+
+Hexadecimal numbers contain the literal characters <code>0x</code> that may be
+prefixed with an optional plus or minus sign, which may be followed by one or
+more hexadecimal digits. The hexadecimal letters A through F can be upper or
+lower case.
+
+<div class="example">
+    These are some examples of hexadecimal numbers.
+
+```js
+{
+    positiveHex: 0xdecaf
+    negativeHex: -0xC0FFEE
+}
+```
+</div>
+
+IEEE 754 values must be the literal names <code>Infinity</code> or
+<code>NaN</code> and may be prefixed with an optional plus or minus sign.
+
+# Strings # {#strings}
+
+A string begins and ends with single or double quotation marks. The same
+quotation mark that begins a string must also end the string. All Unicode
+characters may be placed within the quotation marks, except for the characters
+that must be escaped: the quotation mark used to begin and end the string,
+reverse solidus, and the control characters (U+0000 through U+001F).
+
+Any character may be escaped. If the character is in the Basic Latin or Latin-1
+Supplement Unicode character ranges (U+0000 through U+00FF), then it may be
+represented as a four-character sequence: a reverse solidus, followed by the
+lower case letter <code>x</code>, followed by two hexadecimal digits that encode
+the character's code point. A reverse solidus followed by the lower case letter
+<code>x</code> must be followed by two hexadecimal digits. If the character is
+in the Basic Multilingual Plane (U+0000 through U+FFFF), then it may be
+represented as a six-character sequence: a reverse solidus, followed by the
+lower case letter <code>u</code>, followed by four hexadecimal digits that
+encode the character's code point. A reverse solidus followed by the lower case
+letter <code>u</code> must be followed by four hexadecimal digits. The
+hexadecimal letters A though F can be upper or lower case.
+
+<div class="example">
+A string containing only a single reverse solidus character may be represented
+as <code>'\x5C'</code> or <code>'\u005C'</code>.
+</div>
+
+To escape an extended character that is not in the Basic Multilingual Plane, the
+character is represented as a 12-character sequence, encoding the UTF-16
+surrogate pair.
+
+<div class="example">
+A string containing only the musical score character 🎼 (U+1F3BC) may be
+represented as <code>'\uD83C\uDFBC'</code>.
+</div>
+
+Alternatively, there are two-character sequence escape representations of some
+popular characters.
+
+<table>
+    <tr><th>Escape Sequence</th><th>Description</th><th>Code Point</th></tr>
+    <tr><td><code>\'</code></td><td>Apostrophe</td><td>U+0027</td></tr>
+    <tr><td><code>\"</code></td><td>Quotation mark</td><td>U+0022</td></tr>
+    <tr><td><code>\\</code></td><td>Reverse solidus</td><td>U+005C</td></tr>
+    <tr><td><code>\b</code></td><td>Backspace</td><td>U+0008</td></tr>
+    <tr><td><code>\f</code></td><td>Form feed</td><td>U+000C</td></tr>
+    <tr><td><code>\n</code></td><td>Line feed</td><td>U+000A</td></tr>
+    <tr><td><code>\r</code></td><td>Carriage return</td><td>U+000D</td></tr>
+    <tr><td><code>\t</code></td><td>Horizontal tab</td><td>U+0009</td></tr>
+    <tr><td><code>\v</code></td><td>Vertical tab</td><td>U+000B</td></tr>
+    <tr><td><code>\0</code></td><td>Null</td><td>U+0000</td></tr>
+</table>
+
+<div class="example">
+A string containing only a single reverse solidus character may be represented
+more compactly as <code>'\\'</code>.
+</div>
+
+A string may be continued on a new line by following a reverse solidus with one
+of the following character sequences. The new line characters are not included
+in the string.
+
+<table>
+    <tr><th>Code Points</th><th>Description</th></tr>
+    <tr><td>U+000A</td><td>Line feed</td></tr>
+    <tr><td>U+000D</td><td>Carriage return</td></tr>
+    <tr><td>U+000D U+000A</td><td>Carriage return and line feed</td></tr>
+    <tr><td>U+2028</td><td>Line separator</td></tr>
+    <tr><td>U+2029</td><td>Paragraph separator</td></tr>
+</table>
+
+<div class="example">
+The following documents represent the same information.
+
+```js
+'Lorem ipsum dolor sit amet, \
+consectetur adipiscing elit.'
+```
+
+```js
+'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+```
+</div>
+
+Any other character following a reverse solidus is treated as if the reverse
+solidus was not included.
+
+# Parsers # {#parsers}
+
+A JSON5 parser transforms a JSON text into another representation. A JSON5
+parser must accept all texts that conform to the JSON5 grammar. A JSON5 parser
+may accept non-JSON5 forms or extensions.
+
+An implementation may set limits on the size of texts that it accepts. An
+implementation may set limits on the maximum depth of nesting. An implementation
+may set limits on the range and precision of numbers. An implementation may set
+limits on the length and character contents of strings.
+
+# Generators # {#generators}
+
+A JSON5 generator produces JSON5 text. The resulting text must strictly conform
+to the JSON5 grammar.
+
+# Paragraph and Line Separators # {#separators}
+
+Like JSON, JSON5 allows the Unicode code points U+2028 and U+2029 to appear
+unescaped in strings. Since ECMAScript 5.1 does not allow these code points in
+strings, JSON5 authors should avoid including them in JSON5 documents. JSON5
+parsers should produce a warning when they are found unescaped in strings. JSON5
+generators must escape these code points in strings.
 
 <pre class="anchors">
 url: https://www.ecma-international.org/ecma-262/5.1/#sec-7.6; type: dfn
@@ -216,7 +495,9 @@ url: https://www.ecma-international.org/ecma-262/5.1/#sec-7.8.1; type: dfn
 url: https://www.ecma-international.org/ecma-262/5.1/#sec-7.8.2; type: dfn
     text: BooleanLiteral
 url: https://www.ecma-international.org/ecma-262/5.1/#sec-7.8.4; type: dfn
-    text: StringLiteral
+    text: LineContinuation
+url: https://www.ecma-international.org/ecma-262/5.1/#sec-7.8.4; type: dfn
+    text: EscapeSequence
 url: https://www.ecma-international.org/ecma-262/5.1/#sec-7.8.3; type: dfn
     text: NumericLiteral
 </pre>
