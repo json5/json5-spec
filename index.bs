@@ -475,7 +475,7 @@ Like JSON, JSON5 allows the Unicode code points U+2028 and U+2029 to appear
 unescaped in strings. Since ECMAScript 5.1 does not allow these code points in
 strings, JSON5 authors should avoid including them in JSON5 documents. JSON5
 parsers should produce a warning when they are found unescaped in strings. JSON5
-generators must escape these code points in strings.
+generators should escape these code points in strings.
 
 <pre class="anchors">
 url: https://www.ecma-international.org/ecma-262/5.1/#sec-7.6; type: dfn
