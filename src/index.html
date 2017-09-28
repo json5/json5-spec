@@ -636,6 +636,7 @@ consectetur adipiscing elit.'
           BooleanLiteral
           JSON5String
           JSON5Number
+          JSON5Punctuator
 
         JSON5String ::
           `"` JSON5DoubleStringCharacters? `"`
@@ -670,6 +671,9 @@ consectetur adipiscing elit.'
           NumericLiteral
           `Infinity`
           `NaN`
+
+        JSON5Punctuator :: one of
+          `{` `}` `[` `]` `:` `,`
       </emu-grammar>
     </emu-clause>
   </emu-clause>
