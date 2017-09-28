@@ -1,0 +1,27 @@
+{
+  "name": "json5-spec",
+  "version": "1.0.0",
+  "description": "The JSON5 Data Interchange Format",
+  "private": true,
+  "scripts": {
+    "build": "ecmarkup src/index.html dist/index.html",
+    "watch": "ecmarkup -w src/index.html dist/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/json5/json5-spec.git"
+  },
+  "keywords": [
+    "json5",
+    "spec"
+  ],
+  "author": "Jordan Tucker <jordanbtucker@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/json5/json5-spec/issues"
+  },
+  "homepage": "https://github.com/json5/json5-spec#readme",
+  "devDependencies": {
+    "ecmarkup": "^3.12.0"
+  }
+}

@@ -1,0 +1,787 @@
+<link rel="icon" href="icon.ico"/>
+<link rel="stylesheet" href="default.css"/>
+
+<pre class="metadata">
+  title: The JSON5 Data Interchange Format
+  status: draft
+  version: 1.0.0
+  shortname: JSON5
+  location: https://json5.github.io/json5-spec
+  copyright: false
+  contributors: Aseem Kishore, Jordan Tucker
+</pre>
+
+<emu-biblio href="./biblio.json"></emu-biblio>
+
+<emu-clause id="introduction">
+  <h1>Introduction</h1>
+
+  <p>
+    <a href="https://tools.ietf.org/html/rfc7159">JSON</a> is an excellent data
+    interchange format, but it has limitations that can cause problems when
+    written by hand. The JSON5 Data Interchange Format (JSON5) is a proposed
+    extension to JSON that aims to alleviate some of the limitations of JSON by
+    expanding its syntax to include some productions from <a
+    href="https://www.ecma-international.org/ecma-262/5.1/">ECMAScript 5.1</a>.
+  </p>
+
+  <p>
+    JSON5 is a subset of ECMAScript 5.1 that adds no new data types, and is
+    backwards compatible with JSON documents.
+  </p>
+
+  <p>
+    Similar to JSON, JSON5 can represent four primitive types (strings, numbers,
+    Booleans, and null) and two structured types (objects and arrays).
+  </p>
+
+  <p>
+    A string is a sequence of zero or more <a
+    href="http://www.unicode.org/versions/latest/">Unicode</a> characters. Note
+    that this citation references the latest version of Unicode rather than a
+    specific release. It is not expected that future changes in the Unicode
+    specification will impact the syntax of JSON5.
+  </p>
+
+  <p>
+    An object is an unordered collection of zero or more name/value pairs, where
+    a name is a string or identifier and a value is a string, number, Boolean,
+    null, object, or array.
+  </p>
+
+  <p>
+    An array is an ordered sequence of zero or more values.
+  </p>
+
+  <emu-clause id="summary-of-features">
+    <h1>Summary of Features</h1>
+
+    <p>
+      The following ECMAScript 5.1 features, which are not supported in JSON,
+      have been extended to JSON5.
+    </p>
+
+    <h2 id="summary-of-features-objects">Objects</h2>
+    <ul>
+      <li>Object keys may be an ECMAScript 5.1 |IdentifierName|.</li>
+      <li>Objects may have a single trailing comma.</li>
+    </ul>
+
+    <h2 id="summary-of-features-arrays">Arrays</h2>
+    <ul>
+      <li>Arrays may have a single trailing comma.</li>
+    </ul>
+
+    <h2 id="summary-of-features-strings">Strings</h2>
+    <ul>
+      <li>Strings may be single quoted.</li>
+      <li>Strings may span multiple lines by escaping new line characters.</li>
+      <li>Strings may include character escapes.</li>
+    </ul>
+
+    <h2 id="summary-of-features-numbers">Numbers</h2>
+    <ul>
+      <li>Numbers may be hexadecimal (base 16).</li>
+      <li>Numbers may have a leading or trailing decimal point.</li>
+      <li>Numbers may be <a
+      href="http://ieeexplore.ieee.org/servlet/opac?punumber=4610933">IEEE
+      754</a>
+      Infinity, -Infinity, and NaN.</li>
+      <li>Numbers may begin with an explicit plus sign.</li>
+    </ul>
+
+    <h2 id="summary-of-features-comments">Comments</h2>
+    <ul>
+      <li>Single and multi-line comments are allowed.</li>
+    </ul>
+
+    <h2 id="summary-of-features-white-space">White Space</h2>
+    <ul>
+      <li>Additional white space characters are allowed.</li>
+    </ul>
+  </emu-clause>
+
+  <emu-clause id="short-example">
+    <h1>Short Example</h1>
+
+    <emu-example>
+      <pre><code class="javascript">
+{
+  // comments
+  unquoted: 'and you can quote me on that',
+  singleQuotes: 'I can use "double quotes" here',
+  lineBreaks: "Look, Mom!\
+No \\n's!",
+  hexadecimal: 0xdecaf,
+  leadingDecimalPoint: .8675309, andTrailing: 8675309.,
+  positiveSign: +1,
+  trailingComma: 'in objects', andIn: ['arrays',],
+  "backwardsCompatible": "with JSON",
+}
+</code></pre>
+    </emu-example>
+  </emu-clause>
+</emu-clause>
+
+<emu-clause id="values">
+  <h1>Values</h1>
+
+  <p>
+    A JSON5 value must be an <emu-xref href="#objects">object</emu-xref>,
+    <emu-xref href="#arrays">array</emu-xref>, <emu-xref
+    href="#strings">string</emu-xref>, or <emu-xref
+    href="#numbers">number</emu-xref>, or one of the three literal names
+    <code>true</code>, <code>false</code>, or <code>null</code>.
+  </p>
+
+  <emu-grammar>
+    JSON5Value :
+      NullLiteral
+      BooleanLiteral
+      JSON5String
+      JSON5Number
+      JSON5Object
+      JSON5Array
+  </emu-grammar>
+
+</emu-clause>
+
+<emu-clause id="objects">
+  <h1>Objects</h1>
+
+  <p>
+    An object structure is represented as a pair of curly brackets surrounding
+    zero or more name/value pairs (or members). A name is a string or
+    identifier. A single colon comes after each name, separating the name from
+    the value. A single comma separates a value from a following name. A single
+    comma may follow the name/value pair. The names within an object should be
+    unique.
+  </p>
+
+  <emu-grammar>
+    JSON5Object :
+      `{` `}`
+      `{` JSON5MemberList `,`? `}`
+
+    JSON5MemberList :
+      JSON5Member
+      JSON5MemberList `,` JSON5Member
+
+    JSON5Member :
+      JSON5MemberName `:` JSON5Value
+
+    JSON5MemberName :
+      IdentifierName
+      JSON5String
+  </emu-grammar>
+
+  <p>
+    An object whose names are all unique is interoperable in the sense that all
+    software implementations receiving that object will agree on the name-value
+    mappings. When the names within an object are not unique, the behavior of
+    software that receives such an object is unpredictable. Implementations may
+    report the last name/value pair only. Implementations may report an error or
+    fail to parse the object. Implementations may report all of the name/value
+    pairs, including duplicates.
+  </p>
+
+  <p>
+    Implementations may make the ordering of object members visible to calling
+    software. Implementations whose behavior does not depend on member ordering
+    will be interoperable in the sense that they will not be affected by this.
+  </p>
+
+  <emu-example>
+    <pre><code class="javascript">
+// An empty object
+{}
+
+// An object with two properties and a trailing comma
+{
+    width: 1920,
+    height: 1080,
+}
+
+// Objects can be nested
+{
+    image: {
+        width: 1920,
+        height: 1080,
+        'aspect-ratio': '16:9',
+    }
+}
+
+// An array of objects
+[
+    { name: 'Joe', age: 27 },
+    { name: 'Jane', age: 32 },
+]
+</code></pre>
+  </emu-example>
+
+</emu-clause>
+
+<emu-clause id="arrays">
+  <h1>Arrays</h1>
+
+  <p>
+    An array structure is represented as square brackets surrounding zero or
+    more values (or elements). Elements are separated by commas. A single comma
+    may follow the final element.
+  </p>
+
+  <emu-grammar>
+    JSON5Array :
+      `[` `]`
+      `[` JSON5ElementList `,`? `]`
+
+    JSON5ElementList :
+      JSON5Value
+      JSON5ElementList `,` JSON5Value
+  </emu-grammar>
+
+  <p>
+    There is no requirement that the values in an array be of the same type.
+  </p>
+
+  <emu-example>
+    <pre><code class="javascript">
+// An empty array
+[]
+
+// An array with three elements and a trailing comma
+[
+    1,
+    true,
+    'three',
+]
+
+// Arrays can be nested
+[
+    [1, true, 'three'],
+    [4, "five", 0x6],
+]
+</code></pre>
+  </emu-example>
+</emu-clause>
+
+<emu-clause id="strings">
+  <h1>Strings</h1>
+
+  <p>
+    A string begins and ends with single or double quotation marks. The same
+    quotation mark that begins a string must also end the string. All Unicode
+    characters may be placed within the quotation marks, except for the
+    characters that must be escaped: the quotation mark used to begin and end
+    the string, reverse solidus, and the control characters (U+0000 through
+    U+001F).
+  </p>
+
+  <emu-grammar>
+    JSON5String ::
+      `"` JSON5DoubleStringCharacters? `"`
+      `'` JSON5SingleStringCharacters? `'`
+
+    JSON5DoubleStringCharacters ::
+      JSON5DoubleStringCharacter JSON5DoubleStringCharacters?
+
+    JSON5SingleStringCharacters ::
+      JSON5SingleStringCharacter JSON5SingleStringCharacters?
+
+    JSON5DoubleStringCharacter ::
+      SourceCharacter but not one of `"` or `\` or LineTerminator
+      `\` EscapeSequence
+      LineContinuation
+      U+2028
+      U+2029
+
+    JSON5SingleStringCharacter ::
+      SourceCharacter but not one of `'` or `\` or LineTerminator
+      `\` EscapeSequence
+      LineContinuation
+      U+2028
+      U+2029
+  </emu-grammar>
+
+  <emu-clause id="escapes">
+    <h1>Escapes</h1>
+
+    <p>
+      Any character may be escaped. If the character is in the Basic Latin or
+      Latin-1 Supplement Unicode character ranges (U+0000 through U+00FF), then
+      it may be represented as a four-character sequence: a reverse solidus,
+      followed by the lower case letter `x`, followed by two hexadecimal digits
+      that encode the character's code point. A reverse solidus followed by the
+      lower case letter `x` must be followed by two hexadecimal digits. If the
+      character is in the Basic Multilingual Plane (U+0000 through U+FFFF), then
+      it may be represented as a six-character sequence: a reverse solidus,
+      followed by the lower case letter `u`, followed by four hexadecimal digits
+      that encode the character's code point. A reverse solidus followed by the
+      lower case letter `u` must be followed by four hexadecimal digits. The
+      hexadecimal letters A though F can be upper or lower case.
+    </p>
+
+    <emu-example>
+      <p>
+        A string containing only a single reverse solidus character may be
+        represented as `'\x5C'` or `'\u005C'`.
+      </p>
+    </emu-example>
+
+    <p>
+      To escape an extended character that is not in the Basic Multilingual
+      Plane, the character is represented as a 12-character sequence, encoding
+      the UTF-16 surrogate pair.
+    </p>
+
+    <emu-example>
+      <p>
+        A string containing only the musical score character 🎼 (U+1F3BC) may be
+        represented as `'\uD83C\uDFBC'`.
+      </p>
+    </emu-example>
+
+    <p>
+      Alternatively, there are two-character sequence escape representations of
+      some popular characters.
+    </p>
+
+    <emu-table caption="Escape sequences">
+      <table>
+        <tr><th>Escape Sequence</th><th>Description</th><th>Code Point</th></tr>
+        <tr><td>`\'`</td><td>Apostrophe</td><td>U+0027</td></tr>
+        <tr><td>`\"`</td><td>Quotation mark</td><td>U+0022</td></tr>
+        <tr><td>`\\\\`</td><td>Reverse solidus</td><td>U+005C</td></tr>
+        <tr><td>`\b`</td><td>Backspace</td><td>U+0008</td></tr>
+        <tr><td>`\f`</td><td>Form feed</td><td>U+000C</td></tr>
+        <tr><td>`\n`</td><td>Line feed</td><td>U+000A</td></tr>
+        <tr><td>`\r`</td><td>Carriage return</td><td>U+000D</td></tr>
+        <tr><td>`\t`</td><td>Horizontal tab</td><td>U+0009</td></tr>
+        <tr><td>`\v`</td><td>Vertical tab</td><td>U+000B</td></tr>
+        <tr><td>`\0`</td><td>Null</td><td>U+0000</td></tr>
+      </table>
+    </emu-table>
+
+    <emu-example>
+      <p>
+        A string containing only a single reverse solidus character may be
+        represented more compactly as `'\\\\'`.
+      </p>
+    </emu-example>
+
+    <p>
+      A string may be continued on a new line by following a reverse solidus
+      with one of the following line terminator sequences. The reverse solidus
+      and line terminator sequence are not included in the string.
+    </p>
+
+    <emu-table caption="Line terminator sequences">
+      <table>
+        <tr><th>Code Points</th><th>Description</th></tr>
+        <tr><td>U+000A</td><td>Line feed</td></tr>
+        <tr><td>U+000D</td><td>Carriage return</td></tr>
+        <tr><td>U+000D U+000A</td><td>Carriage return and line feed</td></tr>
+        <tr><td>U+2028</td><td>Line separator</td></tr>
+        <tr><td>U+2029</td><td>Paragraph separator</td></tr>
+      </table>
+    </emu-table>
+
+    <emu-example>
+      <p>
+        The following strings represent the same information.
+      </p>
+
+      <pre><code class="javascript">
+'Lorem ipsum dolor sit amet, \
+consectetur adipiscing elit.'
+
+'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+</code></pre>
+    </emu-example>
+
+    <p>
+      If any other character follows a reverse solidus, that character will be
+      included in the string, but the reverse solidus will not.
+    </p>
+
+    <emu-example>
+      <p>
+          The following strings represent the same information.
+      </p>
+
+      <pre><code class="javascript">
+'\A\C\/\D\C'
+
+'AC/DC'
+</code></pre>
+    </emu-example>
+  </emu-clause>
+
+  <emu-clause id="separators">
+    <h1>Paragraph and Line Separators</h1>
+
+    <p>
+      Like JSON, JSON5 allows the Unicode code points U+2028 and U+2029 to
+      appear unescaped in strings. Since ECMAScript 5.1 does not allow these
+      code points in strings, JSON5 authors should avoid including them in JSON5
+      documents. JSON5 <emu-xref href="#parsers">parsers</emu-xref> should
+      produce a warning when they are found unescaped in strings. JSON5
+      <emu-xref href="#generators">generators</emu-xref> should escape these
+      code points in strings.
+    </p>
+  </emu-clause>
+</emu-clause>
+
+<emu-clause id="numbers">
+  <h1>Numbers</h1>
+
+  <p>
+    The representation of numbers is similar to that used in most programming
+    languages. A number may be represented in in base 10 using decimal digits,
+    base 16 using hexadecimal digits, or the IEEE 754 values Infinity,
+    -Infinity, or NaN.
+  </p>
+
+  <emu-grammar>
+    JSON5Number ::
+      JSON5NumericLiteral
+      `+` JSON5NumericLiteral
+      `-` JSON5NumericLiteral
+
+    JSON5NumericLiteral ::
+      NumericLiteral
+      `Infinity`
+      `NaN`
+  </emu-grammar>
+
+  <p>
+    Decimal numbers contain an integer component that may be prefixed with an
+    optional plus or minus sign, which may be followed by a fraction part and/or
+    an exponent part.
+  </p>
+
+  <p>
+    A fraction part is a decimal point followed by one or more digits.
+  </p>
+
+  <p>
+    An exponent part begins with the letter E in upper or lower case, which may
+    be followed by a plus or minus sign. The E and optional sign are followed by
+    one or more digits.
+  </p>
+
+  <emu-example>
+    <pre><code class="javascript">
+{
+    integer: 123,
+    withFractionPart: 123.456,
+    onlyFractionPart: .456,
+    withExponent: 123e-456,
+}
+</code></pre>
+  </emu-example>
+
+  <p>
+    Hexadecimal numbers contain the literal characters `0x` or `0X` that may be
+    prefixed with an optional plus or minus sign, which may be followed by one
+    or more hexadecimal digits. The hexadecimal letters A through F can be upper
+    or lower case.
+  </p>
+
+  <emu-example>
+    <pre><code class="javascript">
+{
+    positiveHex: 0xdecaf,
+    negativeHex: -0xC0FFEE,
+}
+</code></pre>
+  </emu-example>
+
+  <p>
+    IEEE 754 values must be the literal names `Infinity` or `NaN` and may be
+    prefixed with an optional plus or minus sign.
+  </p>
+</emu-clause>
+
+<emu-clause id="comments">
+  <h1>Comments</h1>
+
+  <p>
+    Comments can be either single or multi-line. Multi-line comments cannot
+    nest. Comments may appear before and after any |JSON5Token|.
+  </p>
+
+  <p>
+    A single line comment begins with two soliduses and ends with a
+    |LineTerminator|. All Unicode characters may be placed within the start and
+    end, except for a |LineTerminator|.
+  </p>
+
+  <p>
+    A multi-line comment begins with a solidus and an asterisk and ends with an
+    asterisk and a solidus. All Unicode characters may be placed within the
+    start and end, except for an asterisk immediately followed by a solidus.
+  </p>
+
+  <emu-example>
+    <pre><code class="javascript">
+// This is a single line comment.
+
+/* This is a multi-
+   line comment. */
+</code></pre>
+  </emu-example>
+</emu-clause>
+
+<emu-clause id="white-space">
+  <h1>White Space</h1>
+
+  <p>
+    White space may appear before and after any |JSON5Token|.
+  </p>
+
+  <emu-table caption="White space">
+    <table>
+      <tr><th>Code Points</th><th>Description</th></tr>
+      <tr><td>U+0009</td><td>Horizontal tab</td></tr>
+      <tr><td>U+000A</td><td>Line feed</td></tr>
+      <tr><td>U+000B</td><td>Vertical tab</td></tr>
+      <tr><td>U+000C</td><td>Form feed</td></tr>
+      <tr><td>U+000D</td><td>Carriage return</td></tr>
+      <tr><td>U+0020</td><td>Space</td></tr>
+      <tr><td>U+00A0</td><td>Non-breaking space</td></tr>
+      <tr><td>U+2028</td><td>Line separator</td></tr>
+      <tr><td>U+2029</td><td>Paragraph separator</td></tr>
+      <tr><td>U+FEFF</td><td>Byte order mark</td></tr>
+      <tr><td>Unicode Zs category</td><td>Any other character in the Space
+      Separator Unicode category</td></tr>
+    </table>
+  </emu-table>
+</emu-clause>
+
+<emu-clause id="grammar">
+  <h1>Grammar</h1>
+
+  <p>
+    JSON5 is defined by a lexical grammar and a syntactic grammar. The lexical
+    grammar defines productions that translate text into tokens, and the
+    syntactic grammar defines productions that translate tokens into a JSON5
+    value.
+  </p>
+
+  <p>
+    All productions that do not begin with the characters "JSON5" are defined by
+    productions of the <a
+    href="https://www.ecma-international.org/ecma-262/5.1/#sec-5.1.2">ECMAScript
+    5.1 Lexical Grammar</a>.
+  </p>
+
+  <emu-clause id="lexical-grammar">
+    <h1>Lexical Grammar</h1>
+
+    <p>
+      The lexical grammar for JSON5 has as its terminal symbols characters
+      (Unicode code units) that conform to the rules for |JSON5SourceCharacter|.
+      It defines a set of productions, starting from the goal symbol
+      |JSON5InputElement|, that describe how sequences of such characters are
+      translated into a sequence of input elements.
+    </p>
+
+    <p>
+      Input elements other than white space and comments form the terminal
+      symbols for the syntactic grammar for JSON5 and are called tokens. These
+      tokens are the identifiers, literals, and punctuators of the JSON5
+      language. Simple white space and comments are discarded and do not appear
+      in the stream of input elements for the syntactic grammar.
+    </p>
+
+    <p>
+      Productions of the lexical grammar are distinguished by having two colons
+      "::" as separating punctuation.
+    </p>
+
+    <emu-clause id="lexical-grammar-syntax">
+      <h1>Syntax</h1>
+
+      <emu-grammar>
+        JSON5SourceCharacter ::
+          SourceCharacter
+
+        JSON5InputElement ::
+          WhiteSpace
+          LineTerminator
+          Comment
+          JSON5Token
+
+        JSON5Token ::
+          IdentifierName
+          NullLiteral
+          BooleanLiteral
+          JSON5String
+          JSON5Number
+
+        JSON5String ::
+          `"` JSON5DoubleStringCharacters? `"`
+          `'` JSON5SingleStringCharacters? `'`
+
+        JSON5DoubleStringCharacters ::
+          JSON5DoubleStringCharacter JSON5DoubleStringCharacters?
+
+        JSON5SingleStringCharacters ::
+          JSON5SingleStringCharacter JSON5SingleStringCharacters?
+
+        JSON5DoubleStringCharacter ::
+          SourceCharacter but not one of `"` or `\` or LineTerminator
+          `\` EscapeSequence
+          LineContinuation
+          U+2028
+          U+2029
+
+        JSON5SingleStringCharacter ::
+          SourceCharacter but not one of `'` or `\` or LineTerminator
+          `\` EscapeSequence
+          LineContinuation
+          U+2028
+          U+2029
+
+        JSON5Number ::
+          JSON5NumericLiteral
+          `+` JSON5NumericLiteral
+          `-` JSON5NumericLiteral
+
+        JSON5NumericLiteral ::
+          NumericLiteral
+          `Infinity`
+          `NaN`
+      </emu-grammar>
+    </emu-clause>
+  </emu-clause>
+
+  <emu-clause id="syntactic-grammar">
+    <h1>Syntactic Grammar</h1>
+
+    <p>
+      The syntactic grammar for JSON5 has tokens defined by the lexical grammar
+      as its terminal symbols. It defines a set of productions, starting from
+      the goal symbol |JSON5Text|, that describe how sequences of tokens can
+      form syntactically correct JSON5 values.
+    </p>
+
+    <p>
+      When a stream of characters is to be parsed as a JSON5 value, it is first
+      converted to a stream of input elements by repeated application of the
+      lexical grammar; this stream of input elements is then parsed by a single
+      application of the syntactic grammar. The program is syntactically in
+      error if the tokens in the stream of input elements cannot be parsed as a
+      single instance of the goal nonterminal |JSON5Text|, with no tokens left
+      over.
+    </p>
+
+    <p>
+      Productions of the syntactic grammar are distinguished by having just one
+      colon ":" as punctuation.
+    </p>
+
+    <emu-clause id="syntacic-grammar-syntax">
+      <h1>Syntax</h1>
+
+      <emu-grammar>
+        JSON5Text :
+          JSON5Value
+
+        JSON5Value :
+          NullLiteral
+          BooleanLiteral
+          JSON5String
+          JSON5Number
+          JSON5Object
+          JSON5Array
+
+        JSON5Object :
+          `{` `}`
+          `{` JSON5MemberList `,`? `}`
+
+        JSON5MemberList :
+          JSON5Member
+          JSON5MemberList `,` JSON5Member
+
+        JSON5Member :
+          JSON5MemberName `:` JSON5Value
+
+        JSON5MemberName :
+          IdentifierName
+          JSON5String
+
+        JSON5Array :
+          `[` `]`
+          `[` JSON5ElementList `,`? `]`
+
+        JSON5ElementList :
+          JSON5Value
+          JSON5ElementList `,` JSON5Value
+      </emu-grammar>
+    </emu-clause>
+  </emu-clause>
+</emu-clause>
+
+<emu-clause id="parsers">
+  <h1>Parsers</h1>
+
+  <p>
+    A JSON5 parser transforms a JSON text into another representation. A JSON5
+    parser must accept all texts that conform to the JSON5 <emu-xref
+    href="#grammar">grammar</emu-xref>. A JSON5 parser may accept non-JSON5
+    forms or extensions.
+  </p>
+
+  <p>
+    An implementation may set limits on the size of texts that it accepts, the
+    maximum depth of nesting, the range and precision of numbers, and the length
+    and character contents of strings.
+  </p>
+</emu-clause>
+
+<emu-clause id="generators">
+  <h1>Generators</h1>
+
+  <p>
+    A JSON5 generator produces JSON5 text. The resulting text must strictly
+    conform to the JSON5 <emu-xref href="#grammar">grammar</emu-xref>.
+  </p>
+</emu-clause>
+
+<emu-annex id="license">
+  <h1>License</h1>
+
+  <p>
+    The MIT License (MIT)
+  </p>
+
+  <p>
+    Copyright (c) 2017 Aseem Kishore, Jordan Tucker
+  </p>
+
+  <p>
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to
+    deal in the Software without restriction, including without limitation the
+    rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+    sell copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+  </p>
+
+  <p>
+    The above copyright notice and this permission notice shall be included in
+    all copies or substantial portions of the Software.
+  </p>
+
+  <p>
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+    IN THE SOFTWARE.
+  </p>
+</emu-annex>

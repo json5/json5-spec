@@ -1,0 +1,54 @@
+{
+  "https://www.ecma-international.org/ecma-262/5.1/": [
+    {
+      "type": "production",
+      "id": "sec-6",
+      "name": "SourceCharacter"
+    },
+    {
+      "type": "production",
+      "id": "sec-7.2",
+      "name": "WhiteSpace"
+    },
+    {
+      "type": "production",
+      "id": "sec-7.3",
+      "name": "LineTerminator"
+    },
+    {
+      "type": "production",
+      "id": "sec-7.4",
+      "name": "Comment"
+    },
+    {
+      "type": "production",
+      "id": "sec-7.6",
+      "name": "IdentifierName"
+    },
+    {
+      "type": "production",
+      "id": "sec-7.8.1",
+      "name": "NullLiteral"
+    },
+    {
+      "type": "production",
+      "id": "sec-7.8.2",
+      "name": "BooleanLiteral"
+    },
+    {
+      "type": "production",
+      "id": "sec-7.8.3",
+      "name": "NumericLiteral"
+    },
+    {
+      "type": "production",
+      "id": "sec-7.8.4",
+      "name": "LineContinuation"
+    },
+    {
+      "type": "production",
+      "id": "sec-7.8.4",
+      "name": "EscapeSequence"
+    }
+  ]
+}

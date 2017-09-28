@@ -1,0 +1,2594 @@
+<!doctype html>
+<head><meta charset="utf-8"><link rel="icon" href="icon.ico">
+<link rel="stylesheet" href="default.css">
+
+<title>The JSON5 Data Interchange Format</title><script type="application/json" id="menu-search-biblio">[{"type":"clause","id":"summary-of-features","aoid":null,"title":"Summary of Features","titleHTML":"Summary of Features","number":"1.1","namespace":"https://json5.github.io/json5-spec","location":"","referencingIds":[],"key":"Summary of Features"},{"type":"clause","id":"short-example","aoid":null,"title":"Short Example","titleHTML":"Short Example","number":"1.2","namespace":"https://json5.github.io/json5-spec","location":"","referencingIds":[],"key":"Short Example"},{"type":"clause","id":"introduction","aoid":null,"title":"Introduction","titleHTML":"Introduction","number":"1","namespace":"https://json5.github.io/json5-spec","location":"","referencingIds":[],"key":"Introduction"},{"type":"production","id":"prod-JSON5Value","name":"JSON5Value","referencingIds":["_ref_17","_ref_20","_ref_22","_ref_50","_ref_60","_ref_63","_ref_65"],"namespace":"https://json5.github.io/json5-spec","location":"","key":"JSON5Value"},{"type":"clause","id":"values","aoid":null,"title":"Values","titleHTML":"Values","number":"2","namespace":"https://json5.github.io/json5-spec","location":"","referencingIds":[],"key":"Values"},{"type":"production","id":"prod-JSON5Object","name":"JSON5Object","referencingIds":["_ref_10","_ref_53"],"namespace":"https://json5.github.io/json5-spec","location":"","key":"JSON5Object"},{"type":"production","id":"prod-JSON5MemberList","name":"JSON5MemberList","referencingIds":["_ref_12","_ref_14","_ref_55","_ref_57"],"namespace":"https://json5.github.io/json5-spec","location":"","key":"JSON5MemberList"},{"type":"production","id":"prod-JSON5Member","name":"JSON5Member","referencingIds":["_ref_13","_ref_15","_ref_56","_ref_58"],"namespace":"https://json5.github.io/json5-spec","location":"","key":"JSON5Member"},{"type":"production","id":"prod-JSON5MemberName","name":"JSON5MemberName","referencingIds":["_ref_16","_ref_59"],"namespace":"https://json5.github.io/json5-spec","location":"","key":"JSON5MemberName"},{"type":"clause","id":"objects","aoid":null,"title":"Objects","titleHTML":"Objects","number":"3","namespace":"https://json5.github.io/json5-spec","location":"","referencingIds":["_ref_0"],"key":"Objects"},{"type":"production","id":"prod-JSON5Array","name":"JSON5Array","referencingIds":["_ref_11","_ref_54"],"namespace":"https://json5.github.io/json5-spec","location":"","key":"JSON5Array"},{"type":"production","id":"prod-JSON5ElementList","name":"JSON5ElementList","referencingIds":["_ref_19","_ref_21","_ref_62","_ref_64"],"namespace":"https://json5.github.io/json5-spec","location":"","key":"JSON5ElementList"},{"type":"clause","id":"arrays","aoid":null,"title":"Arrays","titleHTML":"Arrays","number":"4","namespace":"https://json5.github.io/json5-spec","location":"","referencingIds":["_ref_1"],"key":"Arrays"},{"type":"production","id":"prod-JSON5String","name":"JSON5String","referencingIds":["_ref_8","_ref_18","_ref_37","_ref_51","_ref_61"],"namespace":"https://json5.github.io/json5-spec","location":"","key":"JSON5String"},{"type":"production","id":"prod-JSON5DoubleStringCharacters","name":"JSON5DoubleStringCharacters","referencingIds":["_ref_23","_ref_26","_ref_39","_ref_42"],"namespace":"https://json5.github.io/json5-spec","location":"","key":"JSON5DoubleStringCharacters"},{"type":"production","id":"prod-JSON5SingleStringCharacters","name":"JSON5SingleStringCharacters","referencingIds":["_ref_24","_ref_28","_ref_40","_ref_44"],"namespace":"https://json5.github.io/json5-spec","location":"","key":"JSON5SingleStringCharacters"},{"type":"production","id":"prod-JSON5DoubleStringCharacter","name":"JSON5DoubleStringCharacter","referencingIds":["_ref_25","_ref_41"],"namespace":"https://json5.github.io/json5-spec","location":"","key":"JSON5DoubleStringCharacter"},{"type":"production","id":"prod-JSON5SingleStringCharacter","name":"JSON5SingleStringCharacter","referencingIds":["_ref_27","_ref_43"],"namespace":"https://json5.github.io/json5-spec","location":"","key":"JSON5SingleStringCharacter"},{"type":"clause","id":"escapes","aoid":null,"title":"Escapes","titleHTML":"Escapes","number":"5.1","namespace":"https://json5.github.io/json5-spec","location":"","referencingIds":[],"key":"Escapes"},{"type":"clause","id":"separators","aoid":null,"title":"Paragraph and Line Separators","titleHTML":"Paragraph and Line Separators","number":"5.2","namespace":"https://json5.github.io/json5-spec","location":"","referencingIds":[],"key":"Paragraph and Line Separators"},{"type":"clause","id":"strings","aoid":null,"title":"Strings","titleHTML":"Strings","number":"5","namespace":"https://json5.github.io/json5-spec","location":"","referencingIds":["_ref_2"],"key":"Strings"},{"type":"production","id":"prod-JSON5Number","name":"JSON5Number","referencingIds":["_ref_9","_ref_38","_ref_52"],"namespace":"https://json5.github.io/json5-spec","location":"","key":"JSON5Number"},{"type":"production","id":"prod-JSON5NumericLiteral","name":"JSON5NumericLiteral","referencingIds":["_ref_29","_ref_30","_ref_31","_ref_45","_ref_46","_ref_47"],"namespace":"https://json5.github.io/json5-spec","location":"","key":"JSON5NumericLiteral"},{"type":"clause","id":"numbers","aoid":null,"title":"Numbers","titleHTML":"Numbers","number":"6","namespace":"https://json5.github.io/json5-spec","location":"","referencingIds":["_ref_3"],"key":"Numbers"},{"type":"clause","id":"comments","aoid":null,"title":"Comments","titleHTML":"Comments","number":"7","namespace":"https://json5.github.io/json5-spec","location":"","referencingIds":[],"key":"Comments"},{"type":"clause","id":"white-space","aoid":null,"title":"White Space","titleHTML":"White Space","number":"8","namespace":"https://json5.github.io/json5-spec","location":"","referencingIds":[],"key":"White Space"},{"type":"production","id":"prod-JSON5SourceCharacter","name":"JSON5SourceCharacter","referencingIds":["_ref_34"],"namespace":"https://json5.github.io/json5-spec","location":"","key":"JSON5SourceCharacter"},{"type":"production","id":"prod-JSON5InputElement","name":"JSON5InputElement","referencingIds":["_ref_35"],"namespace":"https://json5.github.io/json5-spec","location":"","key":"JSON5InputElement"},{"type":"production","id":"prod-JSON5Token","name":"JSON5Token","referencingIds":["_ref_32","_ref_33","_ref_36"],"namespace":"https://json5.github.io/json5-spec","location":"","key":"JSON5Token"},{"type":"clause","id":"lexical-grammar-syntax","aoid":null,"title":"Syntax","titleHTML":"Syntax","number":"9.1.1","namespace":"https://json5.github.io/json5-spec","location":"","referencingIds":[],"key":"Syntax"},{"type":"clause","id":"lexical-grammar","aoid":null,"title":"Lexical Grammar","titleHTML":"Lexical Grammar","number":"9.1","namespace":"https://json5.github.io/json5-spec","location":"","referencingIds":[],"key":"Lexical Grammar"},{"type":"production","id":"prod-JSON5Text","name":"JSON5Text","referencingIds":["_ref_48","_ref_49"],"namespace":"https://json5.github.io/json5-spec","location":"","key":"JSON5Text"},{"type":"clause","id":"syntacic-grammar-syntax","aoid":null,"title":"Syntax","titleHTML":"Syntax","number":"9.2.1","namespace":"https://json5.github.io/json5-spec","location":"","referencingIds":[],"key":"Syntax"},{"type":"clause","id":"syntactic-grammar","aoid":null,"title":"Syntactic Grammar","titleHTML":"Syntactic Grammar","number":"9.2","namespace":"https://json5.github.io/json5-spec","location":"","referencingIds":[],"key":"Syntactic Grammar"},{"type":"clause","id":"grammar","aoid":null,"title":"Grammar","titleHTML":"Grammar","number":"9","namespace":"https://json5.github.io/json5-spec","location":"","referencingIds":["_ref_6","_ref_7"],"key":"Grammar"},{"type":"clause","id":"parsers","aoid":null,"title":"Parsers","titleHTML":"Parsers","number":"10","namespace":"https://json5.github.io/json5-spec","location":"","referencingIds":["_ref_4"],"key":"Parsers"},{"type":"clause","id":"generators","aoid":null,"title":"Generators","titleHTML":"Generators","number":"11","namespace":"https://json5.github.io/json5-spec","location":"","referencingIds":["_ref_5"],"key":"Generators"},{"type":"clause","id":"license","aoid":null,"title":"License","titleHTML":"License","number":"A","namespace":"https://json5.github.io/json5-spec","location":"","referencingIds":[],"key":"License"}]</script><script>"use strict";
+
+function Search(menu) {
+  this.menu = menu;
+  this.$search = document.getElementById('menu-search');
+  this.$searchBox = document.getElementById('menu-search-box');
+  this.$searchResults = document.getElementById('menu-search-results');
+  
+  this.loadBiblio();
+  
+  document.addEventListener('keydown', this.documentKeydown.bind(this));
+  
+  this.$searchBox.addEventListener('keydown', debounce(this.searchBoxKeydown.bind(this), { stopPropagation: true }));
+  this.$searchBox.addEventListener('keyup', debounce(this.searchBoxKeyup.bind(this), { stopPropagation: true }));
+}
+
+Search.prototype.loadBiblio = function () {
+  var $biblio = document.getElementById('menu-search-biblio');
+  if (!$biblio) {
+    this.biblio = [];
+  } else {
+    this.biblio = JSON.parse($biblio.textContent);
+    this.biblio.clauses = this.biblio.filter(function (e) { return e.type === 'clause' });
+    this.biblio.byId = this.biblio.reduce(function (map, entry) {
+      map[entry.id] = entry;
+      return map;
+    }, {});
+  }
+}
+
+Search.prototype.documentKeydown = function (e) {
+  if (e.keyCode === 191) {
+    e.preventDefault();
+    e.stopPropagation();
+    this.triggerSearch();
+  }
+}
+
+Search.prototype.searchBoxKeydown = function (e) {
+  e.stopPropagation();
+  e.preventDefault();
+  if (e.keyCode === 191 && e.target.value.length === 0) {
+    e.preventDefault();
+  } else if (e.keyCode === 13) {
+    e.preventDefault();
+    this.selectResult();
+  }
+}
+
+Search.prototype.searchBoxKeyup = function (e) {
+  if (e.keyCode === 13 || e.keyCode === 9) {
+    return;
+  }
+  
+  this.search(e.target.value);
+}
+
+
+Search.prototype.triggerSearch = function (e) {
+  if (this.menu.isVisible()) {
+    this._closeAfterSearch = false;
+  } else {
+    this._closeAfterSearch = true;
+    this.menu.show();
+  }
+
+  this.$searchBox.focus();
+  this.$searchBox.select();
+}
+// bit 12 - Set if the result starts with searchString
+// bits 8-11: 8 - number of chunks multiplied by 2 if cases match, otherwise 1.
+// bits 1-7: 127 - length of the entry
+// General scheme: prefer case sensitive matches with fewer chunks, and otherwise
+// prefer shorter matches.
+function relevance(result, searchString) {
+  var relevance = 0;
+  
+  relevance = Math.max(0, 8 - result.match.chunks) << 7;
+  
+  if (result.match.caseMatch) {
+    relevance *= 2;
+  }
+  
+  if (result.match.prefix) {
+    relevance += 2048
+  }
+  
+  relevance += Math.max(0, 255 - result.entry.key.length);
+  
+  return relevance;
+}
+
+Search.prototype.search = function (searchString) {
+  var s = Date.now();
+
+  if (searchString === '') {
+    this.displayResults([]);
+    this.hideSearch();
+    return;
+  } else {
+    this.showSearch();
+  }
+  
+  if (searchString.length === 1) {
+    this.displayResults([]);
+    return;
+  }
+    
+  var results;
+
+  if (/^[\d\.]*$/.test(searchString)) {
+    results = this.biblio.clauses.filter(function (clause) {
+      return clause.number.substring(0, searchString.length) === searchString;
+    }).map(function (clause) {
+      return { entry: clause };
+    });
+  } else {
+    results = [];
+    
+    for (var i = 0; i < this.biblio.length; i++) {
+      var entry = this.biblio[i];
+  
+      var match = fuzzysearch(searchString, entry.key);
+      if (match) {
+        results.push({ entry: entry, match: match });
+      }
+    }
+  
+    results.forEach(function (result) {
+      result.relevance = relevance(result, searchString);
+    });
+    
+    results = results.sort(function (a, b) { return b.relevance - a.relevance });
+
+  }
+
+  if (results.length > 50) {
+    results = results.slice(0, 50);
+  }
+  
+  this.displayResults(results);
+}
+Search.prototype.hideSearch = function () {
+  this.$search.classList.remove('active');
+}
+
+Search.prototype.showSearch = function () {
+  this.$search.classList.add('active');
+}
+
+Search.prototype.selectResult = function () {
+  var $first = this.$searchResults.querySelector('li:first-child a');
+
+  if ($first) {
+    document.location = $first.getAttribute('href');
+  }
+  
+  this.$searchBox.value = '';
+  this.$searchBox.blur();
+  this.displayResults([]);
+  this.hideSearch();
+
+  if (this._closeAfterSearch) {
+    this.menu.hide();
+  }
+}
+
+Search.prototype.displayResults = function (results) {
+  if (results.length > 0) {
+    this.$searchResults.classList.remove('no-results');
+    
+    var html = '<ul>';
+
+    results.forEach(function (result) {
+      var entry = result.entry;
+      var id = entry.id;
+      var cssClass = '';
+      var text = '';
+
+      if (entry.type === 'clause') {
+        var number = entry.number ? entry.number + ' ' : '';
+        text = number + entry.key;
+        cssClass = 'clause';
+        id = entry.id;
+      } else if (entry.type === 'production') {
+        text = entry.key;
+        cssClass = 'prod';
+        id = entry.id;  
+      } else if (entry.type === 'op') {
+        text = entry.key;
+        cssClass = 'op';
+        id = entry.id || entry.refId;
+      } else if (entry.type === 'term') {
+        text = entry.key;
+        cssClass = 'term';
+        id = entry.id || entry.refId;
+      }
+
+      if (text) {
+        html += '<li class=menu-search-result-' + cssClass + '><a href="#' + id + '">' + text + '</a></li>'
+      }
+    });
+
+    html += '</ul>'
+
+    this.$searchResults.innerHTML = html;
+  } else {
+    this.$searchResults.innerHTML = '';
+    this.$searchResults.classList.add('no-results');
+  }
+}
+
+
+function Menu() {
+  this.$toggle = document.getElementById('menu-toggle');
+  this.$menu = document.getElementById('menu');
+  this.$toc = document.querySelector('menu-toc > ol');
+  this.$pins = document.querySelector('#menu-pins');
+  this.$pinList = document.getElementById('menu-pins-list');
+  this.$toc = document.querySelector('#menu-toc > ol');
+  this.$specContainer = document.getElementById('spec-container');
+  this.search = new Search(this);
+  
+  this._pinnedIds = {}; 
+  this.loadPinEntries();
+
+  // toggle menu
+  this.$toggle.addEventListener('click', this.toggle.bind(this));
+
+  // keydown events for pinned clauses
+  document.addEventListener('keydown', this.documentKeydown.bind(this));
+
+  // toc expansion
+  var tocItems = this.$menu.querySelectorAll('#menu-toc li');
+  for (var i = 0; i < tocItems.length; i++) {
+    var $item = tocItems[i];
+    $item.addEventListener('click', function($item, event) {
+      $item.classList.toggle('active');
+      event.stopPropagation();
+    }.bind(null, $item));
+  }
+
+  // close toc on toc item selection
+  var tocLinks = this.$menu.querySelectorAll('#menu-toc li > a');
+  for (var i = 0; i < tocLinks.length; i++) {
+    var $link = tocLinks[i];
+    $link.addEventListener('click', function(event) {
+      this.toggle();
+      event.stopPropagation();
+    }.bind(this));
+  }
+
+  // update active clause on scroll
+  window.addEventListener('scroll', debounce(this.updateActiveClause.bind(this)));
+  this.updateActiveClause();
+
+  // prevent menu scrolling from scrolling the body
+  this.$toc.addEventListener('wheel', function (e) {
+    var target = e.currentTarget;
+    var offTop = e.deltaY < 0 && target.scrollTop === 0;
+    if (offTop) {
+      e.preventDefault();
+    }
+    var offBottom = e.deltaY > 0
+                    && target.offsetHeight + target.scrollTop >= target.scrollHeight;
+
+    if (offBottom) {
+		  e.preventDefault();
+	  }
+  })
+}
+
+Menu.prototype.documentKeydown = function (e) {
+  e.stopPropagation();
+  if (e.keyCode === 80) {
+    this.togglePinEntry();
+  } else if (e.keyCode > 48 && e.keyCode < 58) {
+    this.selectPin(e.keyCode - 49);
+  }
+}
+
+Menu.prototype.updateActiveClause = function () {
+  this.setActiveClause(findActiveClause(this.$specContainer))
+}
+
+Menu.prototype.setActiveClause = function (clause) {
+  this.$activeClause = clause;
+  this.revealInToc(this.$activeClause);
+}
+
+Menu.prototype.revealInToc = function (path) {
+  var current = this.$toc.querySelectorAll('li.revealed');
+  for (var i = 0; i < current.length; i++) {
+    current[i].classList.remove('revealed');
+    current[i].classList.remove('revealed-leaf');
+  }
+  
+  var current = this.$toc;
+  var index = 0;
+  while (index < path.length) {
+    var children = current.children;
+    for (var i = 0; i < children.length; i++) {
+      if ('#' + path[index].id === children[i].children[1].getAttribute('href') ) {
+        children[i].classList.add('revealed');
+        if (index === path.length - 1) {
+          children[i].classList.add('revealed-leaf');
+          var rect = children[i].getBoundingClientRect();
+          this.$toc.getBoundingClientRect().top
+          var tocRect = this.$toc.getBoundingClientRect();
+          if (rect.top + 10 > tocRect.bottom) {
+            this.$toc.scrollTop = this.$toc.scrollTop + (rect.top - tocRect.bottom) + (rect.bottom - rect.top);
+          } else if (rect.top < tocRect.top) {
+            this.$toc.scrollTop = this.$toc.scrollTop - (tocRect.top - rect.top);
+          }
+        }
+        current = children[i].querySelector('ol');
+        index++;
+        break;
+      }      
+    }
+    
+  }
+}
+
+function findActiveClause(root, path) {
+  var clauses = new ClauseWalker(root);
+  var $clause;
+  var found = false;
+  var path = path || [];
+  
+  while ($clause = clauses.nextNode()) {
+    var rect = $clause.getBoundingClientRect();
+    var $header = $clause.children[0];
+    var marginTop = parseInt(getComputedStyle($header)["margin-top"]);
+    
+    if ((rect.top - marginTop) <= 0 && rect.bottom > 0) {
+      found = true;
+      return findActiveClause($clause, path.concat($clause)) || path;
+    }
+  }
+  
+  return path;
+}
+
+function ClauseWalker(root) {
+  var previous;
+  var treeWalker = document.createTreeWalker(
+    root,
+    NodeFilter.SHOW_ELEMENT,
+    {
+      acceptNode: function (node) {
+        if (previous === node.parentNode) {
+          return NodeFilter.FILTER_REJECT;
+        } else {
+          previous = node;
+        }
+        if (node.nodeName === 'EMU-CLAUSE' || node.nodeName === 'EMU-INTRO' || node.nodeName === 'EMU-ANNEX') {
+          return NodeFilter.FILTER_ACCEPT;
+        } else {
+          return NodeFilter.FILTER_SKIP;
+        }
+      }
+    },
+    false
+    );
+  
+  return treeWalker;
+}
+
+Menu.prototype.toggle = function () {
+  this.$menu.classList.toggle('active');
+}
+
+Menu.prototype.show = function () {
+  this.$menu.classList.add('active');
+}
+
+Menu.prototype.hide = function () {
+  this.$menu.classList.remove('active');
+}
+
+Menu.prototype.isVisible = function() {
+  return this.$menu.classList.contains('active');
+}
+
+Menu.prototype.showPins = function () {
+  this.$pins.classList.add('active');
+}
+
+Menu.prototype.hidePins = function () {
+  this.$pins.classList.remove('active');
+}
+
+Menu.prototype.addPinEntry = function (id) {
+  var entry = this.search.biblio.byId[id];
+  if (!entry) {
+    // id was deleted after pin (or something) so remove it
+    delete this._pinnedIds[id];
+    this.persistPinEntries();
+    return;
+  }
+
+  if (entry.type === 'clause') {
+    var prefix;
+    if (entry.number) {
+      prefix = entry.number + ' ';
+    } else {
+      prefix = '';
+    }
+    this.$pinList.innerHTML += '<li><a href="#' + entry.id + '">' + prefix + entry.titleHTML + '</a></li>';
+  } else {
+    this.$pinList.innerHTML += '<li><a href="#' + entry.id + '">' + entry.key + '</a></li>';
+  }
+
+  if (Object.keys(this._pinnedIds).length === 0) {
+    this.showPins();
+  }
+  this._pinnedIds[id] = true;
+  this.persistPinEntries();
+}
+
+Menu.prototype.removePinEntry = function (id) {
+  var item = this.$pinList.querySelector('a[href="#' + id + '"]').parentNode;
+  this.$pinList.removeChild(item);
+  delete this._pinnedIds[id];
+  if (Object.keys(this._pinnedIds).length === 0) {
+    this.hidePins();
+  }
+
+  this.persistPinEntries();
+}
+
+Menu.prototype.persistPinEntries = function () {
+  try {
+    if (!window.localStorage) return;
+  } catch (e) {
+    return;
+  }
+
+  localStorage.pinEntries = JSON.stringify(Object.keys(this._pinnedIds));
+}
+
+Menu.prototype.loadPinEntries = function () {
+  try {
+    if (!window.localStorage) return;
+  } catch (e) {
+    return;
+  }
+  
+  var pinsString = window.localStorage.pinEntries;
+  if (!pinsString) return;
+  var pins = JSON.parse(pinsString);
+  for(var i = 0; i < pins.length; i++) {
+    this.addPinEntry(pins[i]);
+  }
+}
+
+Menu.prototype.togglePinEntry = function (id) {
+  if (!id) {
+    id = this.$activeClause[this.$activeClause.length - 1].id;
+  }
+
+  if (this._pinnedIds[id]) {
+    this.removePinEntry(id);
+  } else {
+    this.addPinEntry(id);
+  }
+}
+
+Menu.prototype.selectPin = function (num) {
+  document.location = this.$pinList.children[num].children[0].href;
+}
+
+var menu;
+function init() {
+  menu = new Menu();
+  var $container = document.getElementById('spec-container');
+  $container.addEventListener('mouseover', debounce(function (e) {
+    Toolbox.activateIfMouseOver(e);
+  }));
+}
+
+document.addEventListener('DOMContentLoaded', init);
+
+function debounce(fn, opts) {
+  opts = opts || {};
+  var timeout;
+  return function(e) {
+    if (opts.stopPropagation) {
+      e.stopPropagation();
+    }
+    var args = arguments;
+    if (timeout) {
+      clearTimeout(timeout);
+    }
+    timeout = setTimeout(function() {
+      timeout = null;
+      fn.apply(this, args);
+    }.bind(this), 150);
+  }
+}
+
+var CLAUSE_NODES = ['EMU-CLAUSE', 'EMU-INTRO', 'EMU-ANNEX'];
+function findLocalReferences ($elem) {
+  var name = $elem.innerHTML;
+  var references = [];
+
+  var parentClause = $elem.parentNode;
+  while (parentClause && CLAUSE_NODES.indexOf(parentClause.nodeName) === -1) {
+    parentClause = parentClause.parentNode;
+  }
+
+  if(!parentClause) return;
+
+  var vars = parentClause.querySelectorAll('var');
+
+  for (var i = 0; i < vars.length; i++) {
+    var $var = vars[i];
+
+    if ($var.innerHTML === name) {
+      references.push($var);
+    }
+  }
+
+  return references;
+}
+
+function toggleFindLocalReferences($elem) {
+  var references = findLocalReferences($elem);
+  if ($elem.classList.contains('referenced')) {
+    references.forEach(function ($reference) {
+      $reference.classList.remove('referenced');
+    });
+  } else {
+    references.forEach(function ($reference) {
+      $reference.classList.add('referenced');
+    });
+  }
+}
+
+function installFindLocalReferences () {
+  document.addEventListener('click', function (e) {
+    if (e.target.nodeName === 'VAR') {
+      toggleFindLocalReferences(e.target);
+    }
+  });
+}
+
+document.addEventListener('DOMContentLoaded', installFindLocalReferences);
+
+
+
+
+// The following license applies to the fuzzysearch function
+// The MIT License (MIT)
+// Copyright © 2015 Nicolas Bevacqua
+// Copyright © 2016 Brian Terlson
+// Permission is hereby granted, free of charge, to any person obtaining a copy of
+// this software and associated documentation files (the "Software"), to deal in
+// the Software without restriction, including without limitation the rights to
+// use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+// the Software, and to permit persons to whom the Software is furnished to do so,
+// subject to the following conditions:
+
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+// FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+// COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+// IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+// CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+function fuzzysearch (searchString, haystack, caseInsensitive) {
+  var tlen = haystack.length;
+  var qlen = searchString.length;
+  var chunks = 1;
+  var finding = false;
+  var prefix = true;
+  
+  if (qlen > tlen) {
+    return false;
+  }
+  
+  if (qlen === tlen) {
+    if (searchString === haystack) {
+      return { caseMatch: true, chunks: 1, prefix: true };
+    } else if (searchString.toLowerCase() === haystack.toLowerCase()) {
+      return { caseMatch: false, chunks: 1, prefix: true };
+    } else {
+      return false;
+    }
+  }
+  
+  outer: for (var i = 0, j = 0; i < qlen; i++) {
+    var nch = searchString[i];
+    while (j < tlen) {
+      var targetChar = haystack[j++];
+      if (targetChar === nch) {
+        finding = true;
+        continue outer;
+      }
+      if (finding) {
+        chunks++;
+        finding = false;
+      }
+    }
+    
+    if (caseInsensitive) { return false }
+    
+    return fuzzysearch(searchString.toLowerCase(), haystack.toLowerCase(), true);
+  }
+  
+  return { caseMatch: !caseInsensitive, chunks: chunks, prefix: j <= qlen };
+}
+
+var Toolbox = {
+  init: function () {
+    this.$container = document.createElement('div');
+    this.$container.classList.add('toolbox');
+    this.$permalink = document.createElement('a');
+    this.$permalink.textContent = 'Permalink';
+    this.$pinLink = document.createElement('a');
+    this.$pinLink.textContent = 'Pin';
+    this.$pinLink.setAttribute('href', '#');
+    this.$pinLink.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      menu.togglePinEntry(this.entry.id);
+    }.bind(this));
+
+    this.$refsLink = document.createElement('a');
+    this.$refsLink.setAttribute('href', '#');
+    this.$refsLink.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      referencePane.showReferencesFor(this.entry);
+    }.bind(this));
+    this.$container.appendChild(this.$permalink);
+    this.$container.appendChild(this.$pinLink);
+    this.$container.appendChild(this.$refsLink);
+    document.body.appendChild(this.$container);
+  },
+
+  activate: function (el, entry, target) {
+    if (el === this._activeEl) return;
+    this.active = true;
+    this.entry = entry;
+    this.$container.classList.add('active');
+    this.top = el.offsetTop - this.$container.offsetHeight - 10;
+    this.left = el.offsetLeft;
+    this.$container.setAttribute('style', 'left: ' + this.left + 'px; top: ' + this.top + 'px');
+    this.updatePermalink();
+    this.updateReferences();
+    this._activeEl = el;
+    if (this.top < document.body.scrollTop && el === target) {
+      // don't scroll unless it's a small thing (< 200px)
+      this.$container.scrollIntoView();
+    }
+  },
+
+  updatePermalink: function () {
+    this.$permalink.setAttribute('href', '#' + this.entry.id);
+  },
+
+  updateReferences: function () {
+    this.$refsLink.textContent = 'References (' + this.entry.referencingIds.length + ')';
+  },
+
+  activateIfMouseOver: function (e) {
+    var ref = this.findReferenceUnder(e.target);
+    if (ref && (!this.active || e.pageY > this._activeEl.offsetTop)) {
+      var entry = menu.search.biblio.byId[ref.id];
+      this.activate(ref.element, entry, e.target);
+    } else if (this.active && ((e.pageY < this.top) || e.pageY > (this._activeEl.offsetTop + this._activeEl.offsetHeight))) {
+      this.deactivate();
+    }
+  },
+
+  findReferenceUnder: function (el) {
+    while (el) {
+      var parent = el.parentNode;
+      if (el.nodeName === 'H1' && parent.nodeName.match(/EMU-CLAUSE|EMU-ANNEX|EMU-INTRO/) && parent.id) {
+        return { element: el, id: parent.id };
+      } else if (el.nodeName.match(/EMU-(?!CLAUSE|XREF|ANNEX|INTRO)|DFN/) &&
+                el.id && el.id[0] !== '_') {
+        if (el.nodeName === 'EMU-FIGURE' || el.nodeName === 'EMU-TABLE' || el.nodeName === 'EMU-EXAMPLE') {
+          // return the figcaption element
+          return { element: el.children[0].children[0], id: el.id };
+        } else if (el.nodeName === 'EMU-PRODUCTION') {
+          // return the LHS non-terminal element
+          return { element: el.children[0], id: el.id };
+        } else {
+          return { element: el, id: el.id };
+        }
+      }
+      el = parent;
+    }
+  },
+
+  deactivate: function () {
+    this.$container.classList.remove('active');
+    this._activeEl = null;
+    this.activeElBounds = null;
+    this.active = false;
+  }
+}
+
+var referencePane = {
+  init: function() {
+    this.$container = document.createElement('div');
+    this.$container.setAttribute('id', 'references-pane-container');
+
+    var $spacer = document.createElement('div');
+    $spacer.setAttribute('id', 'references-pane-spacer');
+
+    this.$pane = document.createElement('div');
+    this.$pane.setAttribute('id', 'references-pane');
+
+    this.$container.appendChild($spacer);
+    this.$container.appendChild(this.$pane);
+
+    this.$header = document.createElement('div');
+    this.$header.classList.add('menu-pane-header');
+    this.$header.textContent = 'References to ';
+    this.$headerRefId = document.createElement('a');
+    this.$header.appendChild(this.$headerRefId);
+    this.$closeButton = document.createElement('span');
+    this.$closeButton.setAttribute('id', 'references-pane-close');
+    this.$closeButton.addEventListener('click', function (e) {
+      this.deactivate();
+    }.bind(this));
+    this.$header.appendChild(this.$closeButton);
+
+    this.$pane.appendChild(this.$header);
+    var tableContainer = document.createElement('div');
+    tableContainer.setAttribute('id', 'references-pane-table-container');
+
+    this.$table = document.createElement('table');
+    this.$table.setAttribute('id', 'references-pane-table');
+
+    this.$tableBody = this.$table.createTBody();
+
+    tableContainer.appendChild(this.$table);
+    this.$pane.appendChild(tableContainer);
+
+    menu.$specContainer.appendChild(this.$container);
+  },
+
+  activate: function () {
+    this.$container.classList.add('active');
+  },
+
+  deactivate: function () {
+    this.$container.classList.remove('active');
+  },
+
+  showReferencesFor(entry) {
+    this.activate();
+    var newBody = document.createElement('tbody');
+    var previousId;
+    var previousCell;
+    var dupCount = 0;
+    this.$headerRefId.textContent = '#' + entry.id;
+    this.$headerRefId.setAttribute('href', '#' + entry.id);
+    entry.referencingIds.map(function (id) {
+      var target = document.getElementById(id);
+      var cid = findParentClauseId(target);
+      var clause = menu.search.biblio.byId[cid];
+      var dupCount = 0;
+      return { id: id, clause: clause }
+    }).sort(function (a, b) {
+      return sortByClauseNumber(a.clause, b.clause);
+    }).forEach(function (record, i) {
+      if (previousId === record.clause.id) {
+        previousCell.innerHTML += ' (<a href="#' + record.id + '">' + (dupCount + 2) + '</a>)';
+        dupCount++;
+      } else {
+        var row = newBody.insertRow();
+        var cell = row.insertCell();
+        cell.innerHTML = record.clause.number;
+        cell = row.insertCell();
+        cell.innerHTML = '<a href="#' + record.id + '">' + record.clause.titleHTML + '</a>';
+        previousCell = cell;
+        previousId = record.clause.id;
+        dupCount = 0;
+      }
+    }, this);
+    this.$table.removeChild(this.$tableBody);
+    this.$tableBody = newBody;
+    this.$table.appendChild(this.$tableBody);
+  }
+}
+function findParentClauseId(node) {
+  while (node && node.nodeName !== 'EMU-CLAUSE' && node.nodeName !== 'EMU-INTRO' && node.nodeName !== 'EMU-ANNEX') {
+    node = node.parentNode;
+  }
+  if (!node) return null;
+  return node.getAttribute('id');
+}
+
+function sortByClauseNumber(c1, c2) {
+  var c1c = c1.number.split('.');
+  var c2c = c2.number.split('.');
+
+  for (var i = 0; i < c1c.length; i++) {
+    if (i >= c2c.length) {
+      return 1;
+    }
+    
+    var c1 = c1c[i];
+    var c2 = c2c[i];
+    var c1cn = Number(c1);
+    var c2cn = Number(c2);
+
+    if (Number.isNaN(c1cn) && Number.isNaN(c2cn)) {
+      if (c1 > c2) {
+        return 1;
+      } else if (c1 < c2) {
+        return -1;
+      }
+    } else if (!Number.isNaN(c1cn) && Number.isNaN(c2cn)) {
+      return -1;
+    } else if (Number.isNaN(c1cn) && !Number.isNaN(c2cn)) {
+      return 1;
+    } else if(c1cn > c2cn) {
+      return 1;
+    } else if (c1cn < c2cn) {
+      return -1;
+    }
+  }
+
+  if (c1c.length === c2c.length) {
+    return 0;
+  }
+  return -1;
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  Toolbox.init();
+  referencePane.init();
+})
+var CLAUSE_NODES = ['EMU-CLAUSE', 'EMU-INTRO', 'EMU-ANNEX'];
+function findLocalReferences ($elem) {
+  var name = $elem.innerHTML;
+  var references = [];
+
+  var parentClause = $elem.parentNode;
+  while (parentClause && CLAUSE_NODES.indexOf(parentClause.nodeName) === -1) {
+    parentClause = parentClause.parentNode;
+  }
+
+  if(!parentClause) return;
+
+  var vars = parentClause.querySelectorAll('var');
+
+  for (var i = 0; i < vars.length; i++) {
+    var $var = vars[i];
+
+    if ($var.innerHTML === name) {
+      references.push($var);
+    }
+  }
+
+  return references;
+}
+
+function toggleFindLocalReferences($elem) {
+  var references = findLocalReferences($elem);
+  if ($elem.classList.contains('referenced')) {
+    references.forEach(function ($reference) {
+      $reference.classList.remove('referenced');
+    });
+  } else {
+    references.forEach(function ($reference) {
+      $reference.classList.add('referenced');
+    });
+  }
+}
+
+function installFindLocalReferences () {
+  document.addEventListener('click', function (e) {
+    if (e.target.nodeName === 'VAR') {
+      toggleFindLocalReferences(e.target);
+    }
+  });
+}
+
+document.addEventListener('DOMContentLoaded', installFindLocalReferences);
+</script><style>body {
+  display: flex;
+  font-size: 18px;
+  line-height: 1.5;
+  font-family: Cambria, Palatino Linotype, Palatino, Liberation Serif, serif;
+  padding: 0;
+  margin: 0;
+  color: #111;
+}
+
+#spec-container {
+  padding: 0 20px;
+  flex-grow: 1;
+  flex-basis: 66%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+body.oldtoc {
+  margin: 0 auto;
+}
+
+a {
+    text-decoration: none;
+    color: #206ca7;
+}
+
+a:visited {
+  color: #206ca7;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #239dee;
+}
+
+
+code {
+    font-weight: bold;
+    font-family: Consolas, Monaco, monospace;
+    white-space: pre;
+}
+
+pre code {
+  font-weight: inherit;
+}
+
+pre code.hljs {
+  background-color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+ol.toc {
+    list-style: none;
+    padding-left: 0;
+}
+
+ol.toc ol.toc {
+    padding-left: 2ex;
+    list-style: none;
+}
+
+var {
+  color: #2aa198;
+  transition: background-color 0.25s ease;
+  cursor: pointer;
+}
+
+var.referenced {
+  background-color: #ffff33;
+}
+
+emu-const {
+  font-family: sans-serif;
+}
+
+emu-val {
+  font-weight: bold;
+}
+emu-alg ol, emu-alg ol ol ol ol {
+    list-style-type: decimal;
+}
+
+emu-alg ol ol, emu-alg ol ol ol ol ol {
+    list-style-type: lower-alpha;
+}
+
+emu-alg ol ol ol, ol ol ol ol ol ol {
+    list-style-type: lower-roman;
+}
+
+emu-eqn {
+  display: block;
+  margin-left: 4em;
+}
+
+emu-eqn.inline {
+  display: inline;
+  margin: 0;
+}
+
+emu-eqn div:first-child {
+  margin-left: -2em;
+}
+
+emu-note {
+    margin: 1em 0;
+    color: #666;
+    border-left: 5px solid #ccc;
+    display: flex;
+    flex-direction: row;
+}
+
+emu-note > span.note {
+    flex-basis: 100px;
+    min-width: 100px;
+    flex-grow: 0;
+    flex-shrink: 1;
+    text-transform: uppercase;
+    padding-left: 5px;
+}
+
+emu-note[type=editor] {
+  border-left-color: #faa;
+}
+
+emu-note > div.note-contents {
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+
+emu-note > div.note-contents > p:first-of-type {
+  margin-top: 0;
+}
+
+emu-note > div.note-contents > p:last-of-type {
+  margin-bottom: 0;
+}
+
+emu-figure {
+  display: block;
+}
+
+emu-example {
+  display: block;
+  margin: 1em 3em;
+}
+
+emu-example figure figcaption {
+  margin-top: 0.5em;
+  text-align: left;
+}
+
+emu-figure figure,
+emu-example figure,
+emu-table figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+emu-production {
+    display: block;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 5ex;
+}
+
+emu-grammar.inline, emu-production.inline,
+emu-grammar.inline emu-production emu-rhs, emu-production.inline emu-rhs,
+emu-grammar[collapsed] emu-production emu-rhs, emu-production[collapsed] emu-rhs {
+    display: inline;
+    padding-left: 1ex;
+    margin-left: 0;
+}
+
+emu-grammar[collapsed] emu-production, emu-production[collapsed] {
+    margin: 0;
+}
+
+emu-constraints {
+    font-size: .75em;
+    margin-right: 1ex;
+}
+
+emu-gann {
+    margin-right: 1ex;
+}
+
+emu-gann emu-t:last-child,
+emu-gann emu-nt:last-child {
+    margin-right: 0;
+}
+
+emu-geq {
+    margin-left: 1ex;
+    font-weight: bold;
+}
+
+emu-oneof {
+    font-weight: bold;
+    margin-left: 1ex;
+}
+
+emu-nt {
+    display: inline-block;
+    font-style: italic;
+    white-space: nowrap;
+    text-indent: 0;
+}
+
+emu-nt a, emu-nt a:visited {
+  color: #333;
+}
+
+emu-rhs emu-nt {
+    margin-right: 1ex;
+}
+
+emu-t {
+    display: inline-block;
+    font-family: monospace;
+    font-weight: bold;
+    white-space: nowrap;
+    text-indent: 0;
+}
+
+emu-production emu-t {
+    margin-right: 1ex;
+}
+
+emu-rhs {
+    display: block;
+    padding-left: 75px;
+    text-indent: -25px;
+}
+
+emu-mods {
+    font-size: .85em;
+    vertical-align: sub;
+    font-style: normal;
+    font-weight: normal;
+}
+
+emu-production[collapsed] emu-mods {
+  display: none;
+}
+
+emu-params, emu-opt {
+  margin-right: 1ex;
+  font-family: monospace;
+}
+
+emu-params, emu-constraints {
+  color: #2aa198;
+}
+
+emu-opt {
+  color: #b58900;
+}
+
+emu-gprose {
+    font-size: 0.9em;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+h1.shortname {
+  color: #f60;
+  font-size: 1.5em;
+  margin: 0;
+}
+
+h1.version {
+  color: #f60;
+  font-size: 1.5em;
+  margin: 0;
+}
+
+h1.title {
+  margin-top: 0;
+  color: #f60;
+}
+
+h1.first {
+  margin-top: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    position: relative;
+}
+
+h1 .secnum {
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+h1 span.title {
+  order: 2;
+}
+
+
+h1 { font-size: 2.67em; margin-top: 2em; margin-bottom: 0; line-height: 1em;}
+h2 { font-size: 2em; }
+h3 { font-size: 1.56em; }
+h4 { font-size: 1.25em; }
+h5 { font-size: 1.11em; }
+h6 { font-size: 1em; }
+
+h1:hover span.utils {
+  display: block;
+}
+
+span.utils {
+  font-size: 18px;
+  line-height: 18px;
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  font-weight: normal;
+}
+
+span.utils:before {
+    content: "⤷";
+    display: inline-block;
+    padding: 0 5px;
+}
+
+span.utils > * {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+h1 span.utils span.anchor a,
+h2 span.utils span.anchor a,
+h3 span.utils span.anchor a,
+h4 span.utils span.anchor a,
+h5 span.utils span.anchor a,
+h6 span.utils span.anchor a {
+  text-decoration: none;
+  font-variant: small-caps;
+}
+
+h1 span.utils span.anchor a:hover,
+h2 span.utils span.anchor a:hover,
+h3 span.utils span.anchor a:hover,
+h4 span.utils span.anchor a:hover,
+h5 span.utils span.anchor a:hover,
+h6 span.utils span.anchor a:hover {
+  color: #333;
+}
+
+emu-intro h1, emu-clause h1, emu-annex h1 { font-size: 2em; }
+emu-intro h2, emu-clause h2, emu-annex h2 { font-size: 1.56em; }
+emu-intro h3, emu-clause h3, emu-annex h3 { font-size: 1.25em; }
+emu-intro h4, emu-clause h4, emu-annex h4 { font-size: 1.11em; }
+emu-intro h5, emu-clause h5, emu-annex h5 { font-size: 1em; }
+emu-intro h6, emu-clause h6, emu-annex h6 { font-size: 0.9em; }
+emu-intro emu-intro h1, emu-clause emu-clause h1, emu-annex emu-annex h1 { font-size: 1.56em; }
+emu-intro emu-intro h2, emu-clause emu-clause h2, emu-annex emu-annex h2 { font-size: 1.25em; }
+emu-intro emu-intro h3, emu-clause emu-clause h3, emu-annex emu-annex h3 { font-size: 1.11em; }
+emu-intro emu-intro h4, emu-clause emu-clause h4, emu-annex emu-annex h4 { font-size: 1em; }
+emu-intro emu-intro h5, emu-clause emu-clause h5, emu-annex emu-annex h5 { font-size: 0.9em; }
+emu-intro emu-intro emu-intro h1, emu-clause emu-clause emu-clause h1, emu-annex emu-annex emu-annex h1 { font-size: 1.25em; }
+emu-intro emu-intro emu-intro h2, emu-clause emu-clause emu-clause h2, emu-annex emu-annex emu-annex h2 { font-size: 1.11em; }
+emu-intro emu-intro emu-intro h3, emu-clause emu-clause emu-clause h3, emu-annex emu-annex emu-annex h3 { font-size: 1em; }
+emu-intro emu-intro emu-intro h4, emu-clause emu-clause emu-clause h4, emu-annex emu-annex emu-annex h4 { font-size: 0.9em; }
+emu-intro emu-intro emu-intro emu-intro h1, emu-clause emu-clause emu-clause emu-clause h1, emu-annex emu-annex emu-annex emu-annex h1 { font-size: 1.11em; }
+emu-intro emu-intro emu-intro emu-intro h2, emu-clause emu-clause emu-clause emu-clause h2, emu-annex emu-annex emu-annex emu-annex h2 { font-size: 1em; }
+emu-intro emu-intro emu-intro emu-intro h3, emu-clause emu-clause emu-clause emu-clause h3, emu-annex emu-annex emu-annex emu-annex h3 { font-size: 0.9em; }
+emu-intro emu-intro emu-intro emu-intro emu-intro h1, emu-clause emu-clause emu-clause emu-clause emu-clause h1, emu-annex emu-annex emu-annex emu-annex emu-annex h1 { font-size: 1em; }
+emu-intro emu-intro emu-intro emu-intro emu-intro h2, emu-clause emu-clause emu-clause emu-clause emu-clause h2, emu-annex emu-annex emu-annex emu-annex emu-annex h2 { font-size: 0.9em; }
+emu-intro emu-intro emu-intro emu-intro emu-intro emu-intro h1, emu-clause emu-clause emu-clause emu-clause emu-clause emu-clause h1, emu-annex emu-annex emu-annex emu-annex emu-annex emu-annex h1 { font-size: 0.9em }
+
+emu-clause, emu-intro, emu-annex {
+    display: block;
+}
+
+/* Figures and tables */
+figure { display: block; margin: 1em 0 3em 0; }
+figure object { display: block; margin: 0 auto; }
+figure table.real-table { margin: 0 auto; }
+figure figcaption {
+    display: block;
+    color: #555555;
+    font-weight: bold;
+    text-align: center;
+}
+
+emu-table table {
+  margin: 0 auto;
+}
+
+emu-table table, table.real-table {
+    border-collapse: collapse;
+}
+
+emu-table td, emu-table th, table.real-table td, table.real-table th {
+    border: 1px solid black;
+    padding: 0.4em;
+    vertical-align: baseline;
+}
+emu-table th, emu-table thead td, table.real-table th {
+    background-color: #eeeeee;
+}
+
+/* Note: the left content edges of table.lightweight-table >tbody >tr >td
+   and div.display line up. */
+table.lightweight-table {
+    border-collapse: collapse;
+    margin: 0 0 0 1.5em;
+}
+table.lightweight-table td, table.lightweight-table th {
+    border: none;
+    padding: 0 0.5em;
+    vertical-align: baseline;
+}
+
+/* diff styles */
+ins {
+    background-color: #e0f8e0;
+    text-decoration: none;
+    border-bottom: 1px solid #396;
+}
+
+del {
+    background-color: #fee;
+}
+
+ins.block, del.block,
+emu-production > ins, emu-production > del,
+emu-grammar > ins, emu-grammar > del {
+  display: block;
+}
+
+tr.ins > td > ins {
+  border-bottom: none;
+}
+
+tr.ins > td {
+  background-color: #e0f8e0;
+}
+
+tr.del > td {
+  background-color: #fee;
+}
+
+/* Menu Styles */
+#menu-toggle {
+  font-size: 2em;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 1.5em;
+  height: 1.5em;
+  z-index: 3;
+  visibility: hidden;
+  color: #1567a2;
+  background-color: #fff;
+
+  line-height: 1.5em;
+  text-align: center;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;;
+
+  cursor: pointer;
+}
+
+#menu {
+  display: flex;
+  flex-direction: column;
+  width: 33%; height: 100vh;
+  max-width: 500px;
+  box-sizing: border-box;
+  background-color: #ddd;
+  overflow: hidden;
+  transition: opacity 0.1s linear;
+  padding: 0 5px;
+  position: fixed;
+  left: 0; top: 0;
+  border-right: 2px solid #bbb;
+
+  z-index: 2;
+}
+
+#menu-spacer {
+  flex-basis: 33%;
+  max-width: 500px;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+#menu a {
+  color: #1567a2;
+}
+
+#menu.active {
+  display: flex;
+  opacity: 1;
+  z-index: 2;
+}
+
+#menu-pins {
+  flex-grow: 1;
+  display: none;
+}
+
+#menu-pins.active {
+  display: block;
+}
+
+#menu-pins-list {
+  margin: 0;
+  padding: 0;
+  counter-reset: pins-counter;
+}
+
+#menu-pins-list > li:before {
+  content: counter(pins-counter);
+  counter-increment: pins-counter;
+  display: inline-block;
+  width: 25px;
+  text-align: center;
+  border: 1px solid #bbb;
+  padding: 2px;
+  margin: 4px;
+  box-sizing: border-box;
+  line-height: 1em;
+  background-color: #ccc;
+  border-radius: 4px;
+}
+#menu-toc > ol {
+  padding: 0;
+  flex-grow: 1;
+}
+
+#menu-toc > ol li {
+  padding: 0;
+}
+
+#menu-toc > ol , #menu-toc > ol ol {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#menu-toc > ol ol {
+  padding-left: 0.75em;
+}
+
+#menu-toc li {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+#menu-toc .item-toggle {
+  display: inline-block;
+  transform: rotate(-45deg) translate(-5px, -5px);
+  transition: transform 0.1s ease;
+  text-align: center;
+  width: 20px;
+
+  color: #aab;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;;
+
+  cursor: pointer;
+}
+
+#menu-toc .item-toggle-none {
+  display: inline-block;
+  width: 20px;
+}
+
+#menu-toc li.active > .item-toggle {
+  transform: rotate(45deg) translate(-5px, -5px);
+}
+
+#menu-toc li > ol {
+  display: none;
+}
+
+#menu-toc li.active > ol {
+  display: block;
+}
+
+#menu-toc li.revealed > a {
+  background-color: #bbb;
+  font-weight: bold;
+  /*
+  background-color: #222;
+  color: #c6d8e4;
+  */
+}
+
+#menu-toc li.revealed-leaf> a {
+  color: #206ca7;
+  /*
+  background-color: #222;
+  color: #c6d8e4;
+  */
+}
+
+#menu-toc li.revealed > .item-toggle {
+  transform: rotate(45deg) translate(-5px, -5px);
+}
+
+#menu-toc li.revealed > ol {
+  display: block;
+}
+
+#menu-toc li > a {
+  padding: 2px 5px;
+}
+
+#menu > * {
+  margin-bottom: 5px;
+}
+
+.menu-pane-header {
+  padding: 0 5px;
+  text-transform: uppercase;
+  background-color: #aaa;
+  color: #335;
+  font-weight: bold;
+  letter-spacing: 2px;
+  flex-grow: 0;
+  flex-shrink: 0;
+  font-size: 0.8em;
+}
+
+#menu-toc {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+  flex-grow: 1;
+}
+
+#menu-toc ol.toc {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+#menu-search {
+  position: relative;
+  flex-grow: 0;
+  flex-shrink: 0;
+  width: 100%;
+  
+  display: flex;
+  flex-direction: column;
+  
+  max-height: 300px;
+}
+
+#menu-trace-list {
+  display: none;
+}
+
+#menu-search-box {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  margin: 5px 0 0 0;
+  font-size: 1em;
+  padding: 2px;
+  background-color: #bbb;
+  border: 1px solid #999;
+}
+
+#menu-search-results {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+li.menu-search-result-clause:before {
+    content: 'clause';
+    width: 40px;
+    display: inline-block;
+    text-align: right;
+    padding-right: 1ex;
+    color: #666;
+    font-size: 75%;
+}
+li.menu-search-result-op:before {
+    content: 'op';
+    width: 40px;
+    display: inline-block;
+    text-align: right;
+    padding-right: 1ex;
+    color: #666;
+    font-size: 75%;
+}
+
+li.menu-search-result-prod:before {
+    content: 'prod';
+    width: 40px;
+    display: inline-block;
+    text-align: right;
+    padding-right: 1ex;
+    color: #666;
+    font-size: 75%
+}
+
+
+li.menu-search-result-term:before {
+    content: 'term';
+    width: 40px;
+    display: inline-block;
+    text-align: right;
+    padding-right: 1ex;
+    color: #666;
+    font-size: 75%
+}
+
+#menu-search-results ul {
+  padding: 0 5px;
+  margin: 0;
+}
+
+#menu-search-results li {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+
+#menu-trace-list {
+  counter-reset: item;
+  margin: 0 0 0 20px;
+  padding: 0;
+}
+#menu-trace-list li {
+  display: block;
+  white-space: nowrap;
+}
+
+#menu-trace-list li .secnum:after {
+  content: " ";
+}
+#menu-trace-list li:before {
+    content: counter(item) " ";
+    background-color: #222;
+    counter-increment: item;
+    color: #999;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    display: inline-block;
+    text-align: center;
+    margin: 2px 4px 2px 0;
+}
+
+@media (max-width: 1000px) {
+  body {
+    margin: 0;
+    display: block;
+  }
+
+  #menu {
+    display: none;
+    padding-top: 3em;
+    width: 450px;
+  }
+
+  #menu.active {
+    position: fixed;
+    height: 100%;
+    left: 0;
+    top: 0;
+    right: 300px;
+  }
+
+  #menu-toggle {
+    visibility: visible;
+  }
+
+  #spec-container {
+    padding: 0 5px;
+  }
+
+  #references-pane-spacer {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  #menu {
+    width: 100%;
+  }
+
+  h1 .secnum:empty {
+    margin: 0; padding: 0;
+  }
+}
+
+
+/* Toolbox */
+.toolbox {
+	position: absolute;
+	background: #ddd;
+	border: 1px solid #aaa;
+  display: none;
+  color: #eee;
+  padding: 5px;
+  border-radius: 3px;
+}
+
+.toolbox.active {
+  display: inline-block;
+}
+
+.toolbox a {
+  text-decoration: none;
+  padding: 0 5px;
+}
+
+.toolbox a:hover {
+  text-decoration: underline;
+}
+
+.toolbox:after, .toolbox:before {
+	top: 100%;
+	left: 15px;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.toolbox:after {
+	border-color: rgba(0, 0, 0, 0);
+	border-top-color: #ddd;
+	border-width: 10px;
+	margin-left: -10px;
+}
+.toolbox:before {
+	border-color: rgba(204, 204, 204, 0);
+	border-top-color: #aaa;
+	border-width: 12px;
+	margin-left: -12px;
+}
+
+#references-pane-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 250px;
+  display: none;
+  background-color: #ddd;
+  z-index: 1;
+}
+
+#references-pane-table-container {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+#references-pane-spacer {
+  flex-basis: 33%;
+  max-width: 500px;
+}
+
+#references-pane {
+  flex-grow: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+#references-pane-container.active {
+  display: flex;
+}
+
+#references-pane-close:after {
+  content: '✖';
+  float: right;
+  cursor: pointer;
+}
+
+#references-pane table tr td:first-child {
+  text-align: right;
+  padding-right: 5px;
+}
+</style></head><body><div id="menu-toggle">☰</div><div id="menu-spacer"></div><div id="menu"><div id="menu-search"><input type="text" id="menu-search-box" placeholder="Search..."><div id="menu-search-results" class="inactive"></div></div><div id="menu-pins"><div class="menu-pane-header">Pins</div><ul id="menu-pins-list"></ul></div><div class="menu-pane-header">Table of Contents</div><div id="menu-toc"><ol class="toc"><li><span class="item-toggle">◢</span><a href="#introduction" title="Introduction"><span class="secnum">1</span> Introduction</a><ol class="toc"><li><span class="item-toggle-none"></span><a href="#summary-of-features" title="Summary of Features"><span class="secnum">1.1</span> Summary of Features</a></li><li><span class="item-toggle-none"></span><a href="#short-example" title="Short Example"><span class="secnum">1.2</span> Short Example</a></li></ol></li><li><span class="item-toggle-none"></span><a href="#values" title="Values"><span class="secnum">2</span> Values</a></li><li><span class="item-toggle-none"></span><a href="#objects" title="Objects"><span class="secnum">3</span> Objects</a></li><li><span class="item-toggle-none"></span><a href="#arrays" title="Arrays"><span class="secnum">4</span> Arrays</a></li><li><span class="item-toggle">◢</span><a href="#strings" title="Strings"><span class="secnum">5</span> Strings</a><ol class="toc"><li><span class="item-toggle-none"></span><a href="#escapes" title="Escapes"><span class="secnum">5.1</span> Escapes</a></li><li><span class="item-toggle-none"></span><a href="#separators" title="Paragraph and Line Separators"><span class="secnum">5.2</span> Paragraph and Line Separators</a></li></ol></li><li><span class="item-toggle-none"></span><a href="#numbers" title="Numbers"><span class="secnum">6</span> Numbers</a></li><li><span class="item-toggle-none"></span><a href="#comments" title="Comments"><span class="secnum">7</span> Comments</a></li><li><span class="item-toggle-none"></span><a href="#white-space" title="White Space"><span class="secnum">8</span> White Space</a></li><li><span class="item-toggle">◢</span><a href="#grammar" title="Grammar"><span class="secnum">9</span> Grammar</a><ol class="toc"><li><span class="item-toggle">◢</span><a href="#lexical-grammar" title="Lexical Grammar"><span class="secnum">9.1</span> Lexical Grammar</a><ol class="toc"><li><span class="item-toggle-none"></span><a href="#lexical-grammar-syntax" title="Syntax"><span class="secnum">9.1.1</span> Syntax</a></li></ol></li><li><span class="item-toggle">◢</span><a href="#syntactic-grammar" title="Syntactic Grammar"><span class="secnum">9.2</span> Syntactic Grammar</a><ol class="toc"><li><span class="item-toggle-none"></span><a href="#syntacic-grammar-syntax" title="Syntax"><span class="secnum">9.2.1</span> Syntax</a></li></ol></li></ol></li><li><span class="item-toggle-none"></span><a href="#parsers" title="Parsers"><span class="secnum">10</span> Parsers</a></li><li><span class="item-toggle-none"></span><a href="#generators" title="Generators"><span class="secnum">11</span> Generators</a></li><li><span class="item-toggle-none"></span><a href="#license" title="License"><span class="secnum">A</span> License</a></li></ol></div></div><div id="spec-container"><h1 class="shortname first">Draft JSON5</h1><h1 class="version">1.0.0 / September 28, 2017</h1><h1 class="title">The JSON5 Data Interchange Format</h1>
+
+<emu-biblio href="./biblio.json"></emu-biblio>
+
+<emu-clause id="introduction">
+  <h1><span class="secnum">1</span>Introduction</h1>
+
+  <p>
+    <a href="https://tools.ietf.org/html/rfc7159">JSON</a> is an excellent data
+    interchange format, but it has limitations that can cause problems when
+    written by hand. The JSON5 Data Interchange Format (JSON5) is a proposed
+    extension to JSON that aims to alleviate some of the limitations of JSON by
+    expanding its syntax to include some productions from  <a href="https://www.ecma-international.org/ecma-262/5.1/">ECMAScript 5.1</a>.
+  
+  </p>
+
+  <p>
+    JSON5 is a subset of ECMAScript 5.1 that adds no new data types, and is
+    backwards compatible with JSON documents.
+  
+  </p>
+
+  <p>
+    Similar to JSON, JSON5 can represent four primitive types (strings, numbers,
+    Booleans, and null) and two structured types (objects and arrays).
+  
+  </p>
+
+  <p>
+    A string is a sequence of zero or more  <a href="http://www.unicode.org/versions/latest/">Unicode</a> characters. Note
+    that this citation references the latest version of Unicode rather than a
+    specific release. It is not expected that future changes in the Unicode
+    specification will impact the syntax of JSON5.
+  
+  </p>
+
+  <p>
+    An object is an unordered collection of zero or more name/value pairs, where
+    a name is a string or identifier and a value is a string, number, Boolean,
+    null, object, or array.
+  
+  </p>
+
+  <p>
+    An array is an ordered sequence of zero or more values.
+  
+  </p>
+
+  <emu-clause id="summary-of-features">
+    <h1><span class="secnum">1.1</span>Summary of Features</h1>
+
+    <p>
+      The following ECMAScript 5.1 features, which are not supported in JSON,
+      have been extended to JSON5.
+    
+    </p>
+
+    <h2 id="summary-of-features-objects">Objects</h2>
+    <ul>
+      <li>Object keys may be an ECMAScript 5.1 <emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-7.6">IdentifierName</a></emu-nt>.</li>
+      <li>Objects may have a single trailing comma.</li>
+    </ul>
+
+    <h2 id="summary-of-features-arrays">Arrays</h2>
+    <ul>
+      <li>Arrays may have a single trailing comma.</li>
+    </ul>
+
+    <h2 id="summary-of-features-strings">Strings</h2>
+    <ul>
+      <li>Strings may be single quoted.</li>
+      <li>Strings may span multiple lines by escaping new line characters.</li>
+      <li>Strings may include character escapes.</li>
+    </ul>
+
+    <h2 id="summary-of-features-numbers">Numbers</h2>
+    <ul>
+      <li>Numbers may be hexadecimal (base 16).</li>
+      <li>Numbers may have a leading or trailing decimal point.</li>
+      <li>Numbers may be  <a href="http://ieeexplore.ieee.org/servlet/opac?punumber=4610933">IEEE
+      754</a>
+      Infinity, -Infinity, and NaN.</li>
+      <li>Numbers may begin with an explicit plus sign.</li>
+    </ul>
+
+    <h2 id="summary-of-features-comments">Comments</h2>
+    <ul>
+      <li>Single and multi-line comments are allowed.</li>
+    </ul>
+
+    <h2 id="summary-of-features-white-space">White Space</h2>
+    <ul>
+      <li>Additional white space characters are allowed.</li>
+    </ul>
+  </emu-clause>
+
+  <emu-clause id="short-example">
+    <h1><span class="secnum">1.2</span>Short Example</h1>
+
+    <emu-example><figure><figcaption>Example (Informative)</figcaption>
+      <pre><code class="javascript hljs">{
+  <span class="hljs-comment">// comments</span>
+  unquoted: <span class="hljs-string">'and you can quote me on that'</span>,
+  <span class="hljs-attr">singleQuotes</span>: <span class="hljs-string">'I can use "double quotes" here'</span>,
+  <span class="hljs-attr">lineBreaks</span>: <span class="hljs-string">"Look, Mom!\
+No \\n's!"</span>,
+  <span class="hljs-attr">hexadecimal</span>: <span class="hljs-number">0xdecaf</span>,
+  <span class="hljs-attr">leadingDecimalPoint</span>: <span class="hljs-number">.8675309</span>, <span class="hljs-attr">andTrailing</span>: <span class="hljs-number">8675309.</span>,
+  <span class="hljs-attr">positiveSign</span>: +<span class="hljs-number">1</span>,
+  <span class="hljs-attr">trailingComma</span>: <span class="hljs-string">'in objects'</span>, <span class="hljs-attr">andIn</span>: [<span class="hljs-string">'arrays'</span>,],
+  <span class="hljs-string">"backwardsCompatible"</span>: <span class="hljs-string">"with JSON"</span>,
+}</code></pre>
+    </figure></emu-example>
+  </emu-clause>
+</emu-clause>
+
+<emu-clause id="values">
+  <h1><span class="secnum">2</span>Values</h1>
+
+  <p>
+    A JSON5 value must be an  <emu-xref href="#objects" id="_ref_0"><a href="#objects">object</a></emu-xref>,
+    
+    <emu-xref href="#arrays" id="_ref_1"><a href="#arrays">array</a></emu-xref>,  <emu-xref href="#strings" id="_ref_2"><a href="#strings">string</a></emu-xref>, or  <emu-xref href="#numbers" id="_ref_3"><a href="#numbers">number</a></emu-xref>, or one of the three literal names
+    
+    <code>true</code>,  <code>false</code>, or  <code>null</code>.
+  
+  </p>
+
+  <emu-grammar><emu-production name="JSON5Value" id="prod-JSON5Value">
+    <emu-nt><a href="#prod-JSON5Value">JSON5Value</a></emu-nt><emu-geq>:</emu-geq><emu-rhs a="54f84188"><emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-7.8.1">NullLiteral</a></emu-nt></emu-rhs>
+    <emu-rhs a="3508e1fd"><emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-7.8.2">BooleanLiteral</a></emu-nt></emu-rhs>
+    <emu-rhs a="03b0fb59"><emu-nt id="_ref_8"><a href="#prod-JSON5String">JSON5String</a></emu-nt></emu-rhs>
+    <emu-rhs a="e66d304f"><emu-nt id="_ref_9"><a href="#prod-JSON5Number">JSON5Number</a></emu-nt></emu-rhs>
+    <emu-rhs a="6d543358"><emu-nt id="_ref_10"><a href="#prod-JSON5Object">JSON5Object</a></emu-nt></emu-rhs>
+    <emu-rhs a="f6cb38b6"><emu-nt id="_ref_11"><a href="#prod-JSON5Array">JSON5Array</a></emu-nt></emu-rhs>
+</emu-production></emu-grammar>
+
+</emu-clause>
+
+<emu-clause id="objects">
+  <h1><span class="secnum">3</span>Objects</h1>
+
+  <p>
+    An object structure is represented as a pair of curly brackets surrounding
+    zero or more name/value pairs (or members). A name is a string or
+    identifier. A single colon comes after each name, separating the name from
+    the value. A single comma separates a value from a following name. A single
+    comma may follow the name/value pair. The names within an object should be
+    unique.
+  
+  </p>
+
+  <emu-grammar><emu-production name="JSON5Object" id="prod-JSON5Object">
+    <emu-nt><a href="#prod-JSON5Object">JSON5Object</a></emu-nt><emu-geq>:</emu-geq><emu-rhs a="81ba5a4a"><emu-t>{</emu-t><emu-t>}</emu-t></emu-rhs>
+    <emu-rhs a="cd01fa60"><emu-t>{</emu-t><emu-nt id="_ref_12"><a href="#prod-JSON5MemberList">JSON5MemberList</a></emu-nt><emu-t optional="">,<emu-mods><emu-opt>opt</emu-opt></emu-mods></emu-t><emu-t>}</emu-t></emu-rhs>
+</emu-production>
+<emu-production name="JSON5MemberList" id="prod-JSON5MemberList">
+    <emu-nt><a href="#prod-JSON5MemberList">JSON5MemberList</a></emu-nt><emu-geq>:</emu-geq><emu-rhs a="7eb169bd"><emu-nt id="_ref_13"><a href="#prod-JSON5Member">JSON5Member</a></emu-nt></emu-rhs>
+    <emu-rhs a="dfa76288"><emu-nt id="_ref_14"><a href="#prod-JSON5MemberList">JSON5MemberList</a></emu-nt><emu-t>,</emu-t><emu-nt id="_ref_15"><a href="#prod-JSON5Member">JSON5Member</a></emu-nt></emu-rhs>
+</emu-production>
+<emu-production name="JSON5Member" id="prod-JSON5Member">
+    <emu-nt><a href="#prod-JSON5Member">JSON5Member</a></emu-nt><emu-geq>:</emu-geq><emu-rhs a="2c610f33"><emu-nt id="_ref_16"><a href="#prod-JSON5MemberName">JSON5MemberName</a></emu-nt><emu-t>:</emu-t><emu-nt id="_ref_17"><a href="#prod-JSON5Value">JSON5Value</a></emu-nt></emu-rhs>
+</emu-production>
+<emu-production name="JSON5MemberName" id="prod-JSON5MemberName">
+    <emu-nt><a href="#prod-JSON5MemberName">JSON5MemberName</a></emu-nt><emu-geq>:</emu-geq><emu-rhs a="0ebb31e2"><emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-7.6">IdentifierName</a></emu-nt></emu-rhs>
+    <emu-rhs a="03b0fb59"><emu-nt id="_ref_18"><a href="#prod-JSON5String">JSON5String</a></emu-nt></emu-rhs>
+</emu-production></emu-grammar>
+
+  <p>
+    An object whose names are all unique is interoperable in the sense that all
+    software implementations receiving that object will agree on the name-value
+    mappings. When the names within an object are not unique, the behavior of
+    software that receives such an object is unpredictable. Implementations may
+    report the last name/value pair only. Implementations may report an error or
+    fail to parse the object. Implementations may report all of the name/value
+    pairs, including duplicates.
+  
+  </p>
+
+  <p>
+    Implementations may make the ordering of object members visible to calling
+    software. Implementations whose behavior does not depend on member ordering
+    will be interoperable in the sense that they will not be affected by this.
+  
+  </p>
+
+  <emu-example><figure><figcaption>Example (Informative)</figcaption>
+    <pre><code class="javascript hljs"><span class="hljs-comment">// An empty object</span>
+{}
+
+<span class="hljs-comment">// An object with two properties and a trailing comma</span>
+{
+    <span class="hljs-attr">width</span>: <span class="hljs-number">1920</span>,
+    <span class="hljs-attr">height</span>: <span class="hljs-number">1080</span>,
+}
+
+<span class="hljs-comment">// Objects can be nested</span>
+{
+    <span class="hljs-attr">image</span>: {
+        <span class="hljs-attr">width</span>: <span class="hljs-number">1920</span>,
+        <span class="hljs-attr">height</span>: <span class="hljs-number">1080</span>,
+        <span class="hljs-string">'aspect-ratio'</span>: <span class="hljs-string">'16:9'</span>,
+    }
+}
+
+<span class="hljs-comment">// An array of objects</span>
+[
+    { <span class="hljs-attr">name</span>: <span class="hljs-string">'Joe'</span>, <span class="hljs-attr">age</span>: <span class="hljs-number">27</span> },
+    { <span class="hljs-attr">name</span>: <span class="hljs-string">'Jane'</span>, <span class="hljs-attr">age</span>: <span class="hljs-number">32</span> },
+]</code></pre>
+  </figure></emu-example>
+
+</emu-clause>
+
+<emu-clause id="arrays">
+  <h1><span class="secnum">4</span>Arrays</h1>
+
+  <p>
+    An array structure is represented as square brackets surrounding zero or
+    more values (or elements). Elements are separated by commas. A single comma
+    may follow the final element.
+  
+  </p>
+
+  <emu-grammar><emu-production name="JSON5Array" id="prod-JSON5Array">
+    <emu-nt><a href="#prod-JSON5Array">JSON5Array</a></emu-nt><emu-geq>:</emu-geq><emu-rhs a="99d85234"><emu-t>[</emu-t><emu-t>]</emu-t></emu-rhs>
+    <emu-rhs a="ddc4e558"><emu-t>[</emu-t><emu-nt id="_ref_19"><a href="#prod-JSON5ElementList">JSON5ElementList</a></emu-nt><emu-t optional="">,<emu-mods><emu-opt>opt</emu-opt></emu-mods></emu-t><emu-t>]</emu-t></emu-rhs>
+</emu-production>
+<emu-production name="JSON5ElementList" id="prod-JSON5ElementList">
+    <emu-nt><a href="#prod-JSON5ElementList">JSON5ElementList</a></emu-nt><emu-geq>:</emu-geq><emu-rhs a="f1666243"><emu-nt id="_ref_20"><a href="#prod-JSON5Value">JSON5Value</a></emu-nt></emu-rhs>
+    <emu-rhs a="948f0b7a"><emu-nt id="_ref_21"><a href="#prod-JSON5ElementList">JSON5ElementList</a></emu-nt><emu-t>,</emu-t><emu-nt id="_ref_22"><a href="#prod-JSON5Value">JSON5Value</a></emu-nt></emu-rhs>
+</emu-production></emu-grammar>
+
+  <p>
+    There is no requirement that the values in an array be of the same type.
+  
+  </p>
+
+  <emu-example><figure><figcaption>Example (Informative)</figcaption>
+    <pre><code class="javascript hljs"><span class="hljs-comment">// An empty array</span>
+[]
+
+<span class="hljs-comment">// An array with three elements and a trailing comma</span>
+[
+    <span class="hljs-number">1</span>,
+    <span class="hljs-literal">true</span>,
+    <span class="hljs-string">'three'</span>,
+]
+
+<span class="hljs-comment">// Arrays can be nested</span>
+[
+    [<span class="hljs-number">1</span>, <span class="hljs-literal">true</span>, <span class="hljs-string">'three'</span>],
+    [<span class="hljs-number">4</span>, <span class="hljs-string">"five"</span>, <span class="hljs-number">0x6</span>],
+]</code></pre>
+  </figure></emu-example>
+</emu-clause>
+
+<emu-clause id="strings">
+  <h1><span class="secnum">5</span>Strings</h1>
+
+  <p>
+    A string begins and ends with single or double quotation marks. The same
+    quotation mark that begins a string must also end the string. All Unicode
+    characters may be placed within the quotation marks, except for the
+    characters that must be escaped: the quotation mark used to begin and end
+    the string, reverse solidus, and the control characters (U+0000 through
+    U+001F).
+  
+  </p>
+
+  <emu-grammar><emu-production name="JSON5String" type="lexical" id="prod-JSON5String">
+    <emu-nt><a href="#prod-JSON5String">JSON5String</a></emu-nt><emu-geq>::</emu-geq><emu-rhs a="40fe6923"><emu-t>"</emu-t><emu-nt optional="" id="_ref_23"><a href="#prod-JSON5DoubleStringCharacters">JSON5DoubleStringCharacters</a><emu-mods><emu-opt>opt</emu-opt></emu-mods></emu-nt><emu-t>"</emu-t></emu-rhs>
+    <emu-rhs a="0a3baa5e"><emu-t>'</emu-t><emu-nt optional="" id="_ref_24"><a href="#prod-JSON5SingleStringCharacters">JSON5SingleStringCharacters</a><emu-mods><emu-opt>opt</emu-opt></emu-mods></emu-nt><emu-t>'</emu-t></emu-rhs>
+</emu-production>
+<emu-production name="JSON5DoubleStringCharacters" type="lexical" id="prod-JSON5DoubleStringCharacters">
+    <emu-nt><a href="#prod-JSON5DoubleStringCharacters">JSON5DoubleStringCharacters</a></emu-nt><emu-geq>::</emu-geq><emu-rhs a="49638c49"><emu-nt id="_ref_25"><a href="#prod-JSON5DoubleStringCharacter">JSON5DoubleStringCharacter</a></emu-nt><emu-nt optional="" id="_ref_26"><a href="#prod-JSON5DoubleStringCharacters">JSON5DoubleStringCharacters</a><emu-mods><emu-opt>opt</emu-opt></emu-mods></emu-nt></emu-rhs>
+</emu-production>
+<emu-production name="JSON5SingleStringCharacters" type="lexical" id="prod-JSON5SingleStringCharacters">
+    <emu-nt><a href="#prod-JSON5SingleStringCharacters">JSON5SingleStringCharacters</a></emu-nt><emu-geq>::</emu-geq><emu-rhs a="fc0649e4"><emu-nt id="_ref_27"><a href="#prod-JSON5SingleStringCharacter">JSON5SingleStringCharacter</a></emu-nt><emu-nt optional="" id="_ref_28"><a href="#prod-JSON5SingleStringCharacters">JSON5SingleStringCharacters</a><emu-mods><emu-opt>opt</emu-opt></emu-mods></emu-nt></emu-rhs>
+</emu-production>
+<emu-production name="JSON5DoubleStringCharacter" type="lexical" id="prod-JSON5DoubleStringCharacter">
+    <emu-nt><a href="#prod-JSON5DoubleStringCharacter">JSON5DoubleStringCharacter</a></emu-nt><emu-geq>::</emu-geq><emu-rhs a="a87f95ed"><emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-6">SourceCharacter</a></emu-nt><emu-gmod>but not one of <emu-t>"</emu-t> or <emu-t>\</emu-t> or <emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-7.3">LineTerminator</a></emu-nt></emu-gmod></emu-rhs>
+    <emu-rhs a="ea7d8d26"><emu-t>\</emu-t><emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-7.8.4">EscapeSequence</a></emu-nt></emu-rhs>
+    <emu-rhs a="00992933"><emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-7.8.4">LineContinuation</a></emu-nt></emu-rhs>
+    <emu-rhs a="27bf87fb"><emu-gprose>U+2028</emu-gprose></emu-rhs>
+    <emu-rhs a="4c68ccff"><emu-gprose>U+2029</emu-gprose></emu-rhs>
+</emu-production>
+<emu-production name="JSON5SingleStringCharacter" type="lexical" id="prod-JSON5SingleStringCharacter">
+    <emu-nt><a href="#prod-JSON5SingleStringCharacter">JSON5SingleStringCharacter</a></emu-nt><emu-geq>::</emu-geq><emu-rhs a="5ea9e1d2"><emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-6">SourceCharacter</a></emu-nt><emu-gmod>but not one of <emu-t>'</emu-t> or <emu-t>\</emu-t> or <emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-7.3">LineTerminator</a></emu-nt></emu-gmod></emu-rhs>
+    <emu-rhs a="ea7d8d26"><emu-t>\</emu-t><emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-7.8.4">EscapeSequence</a></emu-nt></emu-rhs>
+    <emu-rhs a="00992933"><emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-7.8.4">LineContinuation</a></emu-nt></emu-rhs>
+    <emu-rhs a="27bf87fb"><emu-gprose>U+2028</emu-gprose></emu-rhs>
+    <emu-rhs a="4c68ccff"><emu-gprose>U+2029</emu-gprose></emu-rhs>
+</emu-production></emu-grammar>
+
+  <emu-clause id="escapes">
+    <h1><span class="secnum">5.1</span>Escapes</h1>
+
+    <p>
+      Any character may be escaped. If the character is in the Basic Latin or
+      Latin-1 Supplement Unicode character ranges (U+0000 through U+00FF), then
+      it may be represented as a four-character sequence: a reverse solidus,
+      followed by the lower case letter <code>x</code>, followed by two hexadecimal digits
+      that encode the character's code point. A reverse solidus followed by the
+      lower case letter <code>x</code> must be followed by two hexadecimal digits. If the
+      character is in the Basic Multilingual Plane (U+0000 through U+FFFF), then
+      it may be represented as a six-character sequence: a reverse solidus,
+      followed by the lower case letter <code>u</code>, followed by four hexadecimal digits
+      that encode the character's code point. A reverse solidus followed by the
+      lower case letter <code>u</code> must be followed by four hexadecimal digits. The
+      hexadecimal letters A though F can be upper or lower case.
+    
+    </p>
+
+    <emu-example><figure><figcaption>Example 1 (Informative)</figcaption>
+      <p>
+        A string containing only a single reverse solidus character may be
+        represented as <code>'\x5C'</code> or <code>'\u005C'</code>.
+      
+      </p>
+    </figure></emu-example>
+
+    <p>
+      To escape an extended character that is not in the Basic Multilingual
+      Plane, the character is represented as a 12-character sequence, encoding
+      the UTF-16 surrogate pair.
+    
+    </p>
+
+    <emu-example><figure><figcaption>Example 2 (Informative)</figcaption>
+      <p>
+        A string containing only the musical score character 🎼 (U+1F3BC) may be
+        represented as <code>'\uD83C\uDFBC'</code>.
+      
+      </p>
+    </figure></emu-example>
+
+    <p>
+      Alternatively, there are two-character sequence escape representations of
+      some popular characters.
+    
+    </p>
+
+    <emu-table caption="Escape sequences"><figure><figcaption>Table 1: Escape sequences</figcaption>
+      <table>
+        <tbody><tr><th>Escape Sequence</th><th>Description</th><th>Code Point</th></tr>
+        <tr><td><code>\'</code></td><td>Apostrophe</td><td>U+0027</td></tr>
+        <tr><td><code>\"</code></td><td>Quotation mark</td><td>U+0022</td></tr>
+        <tr><td><code>\\</code></td><td>Reverse solidus</td><td>U+005C</td></tr>
+        <tr><td><code>\b</code></td><td>Backspace</td><td>U+0008</td></tr>
+        <tr><td><code>\f</code></td><td>Form feed</td><td>U+000C</td></tr>
+        <tr><td><code>\n</code></td><td>Line feed</td><td>U+000A</td></tr>
+        <tr><td><code>\r</code></td><td>Carriage return</td><td>U+000D</td></tr>
+        <tr><td><code>\t</code></td><td>Horizontal tab</td><td>U+0009</td></tr>
+        <tr><td><code>\v</code></td><td>Vertical tab</td><td>U+000B</td></tr>
+        <tr><td><code>\0</code></td><td>Null</td><td>U+0000</td></tr>
+      </tbody></table>
+    </figure></emu-table>
+
+    <emu-example><figure><figcaption>Example 3 (Informative)</figcaption>
+      <p>
+        A string containing only a single reverse solidus character may be
+        represented more compactly as <code>'\\'</code>.
+      
+      </p>
+    </figure></emu-example>
+
+    <p>
+      A string may be continued on a new line by following a reverse solidus
+      with one of the following line terminator sequences. The reverse solidus
+      and line terminator sequence are not included in the string.
+    
+    </p>
+
+    <emu-table caption="Line terminator sequences"><figure><figcaption>Table 2: Line terminator sequences</figcaption>
+      <table>
+        <tbody><tr><th>Code Points</th><th>Description</th></tr>
+        <tr><td>U+000A</td><td>Line feed</td></tr>
+        <tr><td>U+000D</td><td>Carriage return</td></tr>
+        <tr><td>U+000D U+000A</td><td>Carriage return and line feed</td></tr>
+        <tr><td>U+2028</td><td>Line separator</td></tr>
+        <tr><td>U+2029</td><td>Paragraph separator</td></tr>
+      </tbody></table>
+    </figure></emu-table>
+
+    <emu-example><figure><figcaption>Example 4 (Informative)</figcaption>
+      <p>
+        The following strings represent the same information.
+      
+      </p>
+
+      <pre><code class="javascript hljs"><span class="hljs-string">'Lorem ipsum dolor sit amet, \
+consectetur adipiscing elit.'</span>
+
+<span class="hljs-string">'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'</span></code></pre>
+    </figure></emu-example>
+
+    <p>
+      If any other character follows a reverse solidus, that character will be
+      included in the string, but the reverse solidus will not.
+    
+    </p>
+
+    <emu-example><figure><figcaption>Example 5 (Informative)</figcaption>
+      <p>
+          The following strings represent the same information.
+      
+      </p>
+
+      <pre><code class="javascript hljs"><span class="hljs-string">'\A\C\/\D\C'</span>
+
+<span class="hljs-string">'AC/DC'</span></code></pre>
+    </figure></emu-example>
+  </emu-clause>
+
+  <emu-clause id="separators">
+    <h1><span class="secnum">5.2</span>Paragraph and Line Separators</h1>
+
+    <p>
+      Like JSON, JSON5 allows the Unicode code points U+2028 and U+2029 to
+      appear unescaped in strings. Since ECMAScript 5.1 does not allow these
+      code points in strings, JSON5 authors should avoid including them in JSON5
+      documents. JSON5  <emu-xref href="#parsers" id="_ref_4"><a href="#parsers">parsers</a></emu-xref> should
+      produce a warning when they are found unescaped in strings. JSON5
+      
+      <emu-xref href="#generators" id="_ref_5"><a href="#generators">generators</a></emu-xref> should escape these
+      code points in strings.
+    
+    </p>
+  </emu-clause>
+</emu-clause>
+
+<emu-clause id="numbers">
+  <h1><span class="secnum">6</span>Numbers</h1>
+
+  <p>
+    The representation of numbers is similar to that used in most programming
+    languages. A number may be represented in in base 10 using decimal digits,
+    base 16 using hexadecimal digits, or the IEEE 754 values Infinity,
+    -Infinity, or NaN.
+  
+  </p>
+
+  <emu-grammar><emu-production name="JSON5Number" type="lexical" id="prod-JSON5Number">
+    <emu-nt><a href="#prod-JSON5Number">JSON5Number</a></emu-nt><emu-geq>::</emu-geq><emu-rhs a="2f9b3f72"><emu-nt id="_ref_29"><a href="#prod-JSON5NumericLiteral">JSON5NumericLiteral</a></emu-nt></emu-rhs>
+    <emu-rhs a="db2dbf34"><emu-t>+</emu-t><emu-nt id="_ref_30"><a href="#prod-JSON5NumericLiteral">JSON5NumericLiteral</a></emu-nt></emu-rhs>
+    <emu-rhs a="ed0eae61"><emu-t>-</emu-t><emu-nt id="_ref_31"><a href="#prod-JSON5NumericLiteral">JSON5NumericLiteral</a></emu-nt></emu-rhs>
+</emu-production>
+<emu-production name="JSON5NumericLiteral" type="lexical" id="prod-JSON5NumericLiteral">
+    <emu-nt><a href="#prod-JSON5NumericLiteral">JSON5NumericLiteral</a></emu-nt><emu-geq>::</emu-geq><emu-rhs a="a548b407"><emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-7.8.3">NumericLiteral</a></emu-nt></emu-rhs>
+    <emu-rhs a="4afe8df8"><emu-t>Infinity</emu-t></emu-rhs>
+    <emu-rhs a="4a46ffd2"><emu-t>NaN</emu-t></emu-rhs>
+</emu-production></emu-grammar>
+
+  <p>
+    Decimal numbers contain an integer component that may be prefixed with an
+    optional plus or minus sign, which may be followed by a fraction part and/or
+    an exponent part.
+  
+  </p>
+
+  <p>
+    A fraction part is a decimal point followed by one or more digits.
+  
+  </p>
+
+  <p>
+    An exponent part begins with the letter E in upper or lower case, which may
+    be followed by a plus or minus sign. The E and optional sign are followed by
+    one or more digits.
+  
+  </p>
+
+  <emu-example><figure><figcaption>Example 1 (Informative)</figcaption>
+    <pre><code class="javascript hljs">{
+    <span class="hljs-attr">integer</span>: <span class="hljs-number">123</span>,
+    <span class="hljs-attr">withFractionPart</span>: <span class="hljs-number">123.456</span>,
+    <span class="hljs-attr">onlyFractionPart</span>: <span class="hljs-number">.456</span>,
+    <span class="hljs-attr">withExponent</span>: <span class="hljs-number">123e-456</span>,
+}</code></pre>
+  </figure></emu-example>
+
+  <p>
+    Hexadecimal numbers contain the literal characters <code>0x</code> or <code>0X</code> that may be
+    prefixed with an optional plus or minus sign, which may be followed by one
+    or more hexadecimal digits. The hexadecimal letters A through F can be upper
+    or lower case.
+  
+  </p>
+
+  <emu-example><figure><figcaption>Example 2 (Informative)</figcaption>
+    <pre><code class="javascript hljs">{
+    <span class="hljs-attr">positiveHex</span>: <span class="hljs-number">0xdecaf</span>,
+    <span class="hljs-attr">negativeHex</span>: <span class="hljs-number">-0xC0FFEE</span>,
+}</code></pre>
+  </figure></emu-example>
+
+  <p>
+    IEEE 754 values must be the literal names <code>Infinity</code> or <code>NaN</code> and may be
+    prefixed with an optional plus or minus sign.
+  
+  </p>
+</emu-clause>
+
+<emu-clause id="comments">
+  <h1><span class="secnum">7</span>Comments</h1>
+
+  <p>
+    Comments can be either single or multi-line. Multi-line comments cannot
+    nest. Comments may appear before and after any <emu-nt id="_ref_32"><a href="#prod-JSON5Token">JSON5Token</a></emu-nt>.
+  
+  </p>
+
+  <p>
+    A single line comment begins with two soliduses and ends with a
+    <emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-7.3">LineTerminator</a></emu-nt>. All Unicode characters may be placed within the start and
+    end, except for a <emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-7.3">LineTerminator</a></emu-nt>.
+  
+  </p>
+
+  <p>
+    A multi-line comment begins with a solidus and an asterisk and ends with an
+    asterisk and a solidus. All Unicode characters may be placed within the
+    start and end, except for an asterisk immediately followed by a solidus.
+  
+  </p>
+
+  <emu-example><figure><figcaption>Example (Informative)</figcaption>
+    <pre><code class="javascript hljs"><span class="hljs-comment">// This is a single line comment.</span>
+
+<span class="hljs-comment">/* This is a multi-
+   line comment. */</span></code></pre>
+  </figure></emu-example>
+</emu-clause>
+
+<emu-clause id="white-space">
+  <h1><span class="secnum">8</span>White Space</h1>
+
+  <p>
+    White space may appear before and after any <emu-nt id="_ref_33"><a href="#prod-JSON5Token">JSON5Token</a></emu-nt>.
+  
+  </p>
+
+  <emu-table caption="White space"><figure><figcaption>Table 3: White space</figcaption>
+    <table>
+      <tbody><tr><th>Code Points</th><th>Description</th></tr>
+      <tr><td>U+0009</td><td>Horizontal tab</td></tr>
+      <tr><td>U+000A</td><td>Line feed</td></tr>
+      <tr><td>U+000B</td><td>Vertical tab</td></tr>
+      <tr><td>U+000C</td><td>Form feed</td></tr>
+      <tr><td>U+000D</td><td>Carriage return</td></tr>
+      <tr><td>U+0020</td><td>Space</td></tr>
+      <tr><td>U+00A0</td><td>Non-breaking space</td></tr>
+      <tr><td>U+2028</td><td>Line separator</td></tr>
+      <tr><td>U+2029</td><td>Paragraph separator</td></tr>
+      <tr><td>U+FEFF</td><td>Byte order mark</td></tr>
+      <tr><td>Unicode Zs category</td><td>Any other character in the Space
+      Separator Unicode category</td></tr>
+    </tbody></table>
+  </figure></emu-table>
+</emu-clause>
+
+<emu-clause id="grammar">
+  <h1><span class="secnum">9</span>Grammar</h1>
+
+  <p>
+    JSON5 is defined by a lexical grammar and a syntactic grammar. The lexical
+    grammar defines productions that translate text into tokens, and the
+    syntactic grammar defines productions that translate tokens into a JSON5
+    value.
+  
+  </p>
+
+  <p>
+    All productions that do not begin with the characters "JSON5" are defined by
+    productions of the  <a href="https://www.ecma-international.org/ecma-262/5.1/#sec-5.1.2">ECMAScript
+    5.1 Lexical Grammar</a>.
+  
+  </p>
+
+  <emu-clause id="lexical-grammar">
+    <h1><span class="secnum">9.1</span>Lexical Grammar</h1>
+
+    <p>
+      The lexical grammar for JSON5 has as its terminal symbols characters
+      (Unicode code units) that conform to the rules for <emu-nt id="_ref_34"><a href="#prod-JSON5SourceCharacter">JSON5SourceCharacter</a></emu-nt>.
+      It defines a set of productions, starting from the <emu-xref href="#sec-context-free-grammars"><a href="https://tc39.github.io/ecma262/#sec-context-free-grammars">goal symbol</a></emu-xref>
+      <emu-nt id="_ref_35"><a href="#prod-JSON5InputElement">JSON5InputElement</a></emu-nt>, that describe how sequences of such characters are
+      translated into a sequence of input elements.
+    
+    </p>
+
+    <p>
+      Input elements other than white space and comments form the terminal
+      symbols for the syntactic grammar for JSON5 and are called tokens. These
+      tokens are the identifiers, literals, and punctuators of the JSON5
+      language. Simple white space and comments are discarded and do not appear
+      in the stream of input elements for the syntactic grammar.
+    
+    </p>
+
+    <p>
+      Productions of the lexical grammar are distinguished by having two colons
+      "::" as separating punctuation.
+    
+    </p>
+
+    <emu-clause id="lexical-grammar-syntax">
+      <h1><span class="secnum">9.1.1</span>Syntax</h1>
+
+      <emu-grammar><emu-production name="JSON5SourceCharacter" type="lexical" id="prod-JSON5SourceCharacter">
+    <emu-nt><a href="#prod-JSON5SourceCharacter">JSON5SourceCharacter</a></emu-nt><emu-geq>::</emu-geq><emu-rhs a="bf779668"><emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-6">SourceCharacter</a></emu-nt></emu-rhs>
+</emu-production>
+<emu-production name="JSON5InputElement" type="lexical" id="prod-JSON5InputElement">
+    <emu-nt><a href="#prod-JSON5InputElement">JSON5InputElement</a></emu-nt><emu-geq>::</emu-geq><emu-rhs a="1424dc49"><emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-7.2">WhiteSpace</a></emu-nt></emu-rhs>
+    <emu-rhs a="3b331ccd"><emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-7.3">LineTerminator</a></emu-nt></emu-rhs>
+    <emu-rhs a="153d7a58"><emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-7.4">Comment</a></emu-nt></emu-rhs>
+    <emu-rhs a="1231f296"><emu-nt id="_ref_36"><a href="#prod-JSON5Token">JSON5Token</a></emu-nt></emu-rhs>
+</emu-production>
+<emu-production name="JSON5Token" type="lexical" id="prod-JSON5Token">
+    <emu-nt><a href="#prod-JSON5Token">JSON5Token</a></emu-nt><emu-geq>::</emu-geq><emu-rhs a="0ebb31e2"><emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-7.6">IdentifierName</a></emu-nt></emu-rhs>
+    <emu-rhs a="54f84188"><emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-7.8.1">NullLiteral</a></emu-nt></emu-rhs>
+    <emu-rhs a="3508e1fd"><emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-7.8.2">BooleanLiteral</a></emu-nt></emu-rhs>
+    <emu-rhs a="03b0fb59"><emu-nt id="_ref_37"><a href="#prod-JSON5String">JSON5String</a></emu-nt></emu-rhs>
+    <emu-rhs a="e66d304f"><emu-nt id="_ref_38"><a href="#prod-JSON5Number">JSON5Number</a></emu-nt></emu-rhs>
+</emu-production>
+<emu-production name="JSON5String" type="lexical">
+    <emu-nt><a href="#prod-JSON5String">JSON5String</a></emu-nt><emu-geq>::</emu-geq><emu-rhs a="40fe6923"><emu-t>"</emu-t><emu-nt optional="" id="_ref_39"><a href="#prod-JSON5DoubleStringCharacters">JSON5DoubleStringCharacters</a><emu-mods><emu-opt>opt</emu-opt></emu-mods></emu-nt><emu-t>"</emu-t></emu-rhs>
+    <emu-rhs a="0a3baa5e"><emu-t>'</emu-t><emu-nt optional="" id="_ref_40"><a href="#prod-JSON5SingleStringCharacters">JSON5SingleStringCharacters</a><emu-mods><emu-opt>opt</emu-opt></emu-mods></emu-nt><emu-t>'</emu-t></emu-rhs>
+</emu-production>
+<emu-production name="JSON5DoubleStringCharacters" type="lexical">
+    <emu-nt><a href="#prod-JSON5DoubleStringCharacters">JSON5DoubleStringCharacters</a></emu-nt><emu-geq>::</emu-geq><emu-rhs a="49638c49"><emu-nt id="_ref_41"><a href="#prod-JSON5DoubleStringCharacter">JSON5DoubleStringCharacter</a></emu-nt><emu-nt optional="" id="_ref_42"><a href="#prod-JSON5DoubleStringCharacters">JSON5DoubleStringCharacters</a><emu-mods><emu-opt>opt</emu-opt></emu-mods></emu-nt></emu-rhs>
+</emu-production>
+<emu-production name="JSON5SingleStringCharacters" type="lexical">
+    <emu-nt><a href="#prod-JSON5SingleStringCharacters">JSON5SingleStringCharacters</a></emu-nt><emu-geq>::</emu-geq><emu-rhs a="fc0649e4"><emu-nt id="_ref_43"><a href="#prod-JSON5SingleStringCharacter">JSON5SingleStringCharacter</a></emu-nt><emu-nt optional="" id="_ref_44"><a href="#prod-JSON5SingleStringCharacters">JSON5SingleStringCharacters</a><emu-mods><emu-opt>opt</emu-opt></emu-mods></emu-nt></emu-rhs>
+</emu-production>
+<emu-production name="JSON5DoubleStringCharacter" type="lexical">
+    <emu-nt><a href="#prod-JSON5DoubleStringCharacter">JSON5DoubleStringCharacter</a></emu-nt><emu-geq>::</emu-geq><emu-rhs a="a87f95ed"><emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-6">SourceCharacter</a></emu-nt><emu-gmod>but not one of <emu-t>"</emu-t> or <emu-t>\</emu-t> or <emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-7.3">LineTerminator</a></emu-nt></emu-gmod></emu-rhs>
+    <emu-rhs a="ea7d8d26"><emu-t>\</emu-t><emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-7.8.4">EscapeSequence</a></emu-nt></emu-rhs>
+    <emu-rhs a="00992933"><emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-7.8.4">LineContinuation</a></emu-nt></emu-rhs>
+    <emu-rhs a="27bf87fb"><emu-gprose>U+2028</emu-gprose></emu-rhs>
+    <emu-rhs a="4c68ccff"><emu-gprose>U+2029</emu-gprose></emu-rhs>
+</emu-production>
+<emu-production name="JSON5SingleStringCharacter" type="lexical">
+    <emu-nt><a href="#prod-JSON5SingleStringCharacter">JSON5SingleStringCharacter</a></emu-nt><emu-geq>::</emu-geq><emu-rhs a="5ea9e1d2"><emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-6">SourceCharacter</a></emu-nt><emu-gmod>but not one of <emu-t>'</emu-t> or <emu-t>\</emu-t> or <emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-7.3">LineTerminator</a></emu-nt></emu-gmod></emu-rhs>
+    <emu-rhs a="ea7d8d26"><emu-t>\</emu-t><emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-7.8.4">EscapeSequence</a></emu-nt></emu-rhs>
+    <emu-rhs a="00992933"><emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-7.8.4">LineContinuation</a></emu-nt></emu-rhs>
+    <emu-rhs a="27bf87fb"><emu-gprose>U+2028</emu-gprose></emu-rhs>
+    <emu-rhs a="4c68ccff"><emu-gprose>U+2029</emu-gprose></emu-rhs>
+</emu-production>
+<emu-production name="JSON5Number" type="lexical">
+    <emu-nt><a href="#prod-JSON5Number">JSON5Number</a></emu-nt><emu-geq>::</emu-geq><emu-rhs a="2f9b3f72"><emu-nt id="_ref_45"><a href="#prod-JSON5NumericLiteral">JSON5NumericLiteral</a></emu-nt></emu-rhs>
+    <emu-rhs a="db2dbf34"><emu-t>+</emu-t><emu-nt id="_ref_46"><a href="#prod-JSON5NumericLiteral">JSON5NumericLiteral</a></emu-nt></emu-rhs>
+    <emu-rhs a="ed0eae61"><emu-t>-</emu-t><emu-nt id="_ref_47"><a href="#prod-JSON5NumericLiteral">JSON5NumericLiteral</a></emu-nt></emu-rhs>
+</emu-production>
+<emu-production name="JSON5NumericLiteral" type="lexical">
+    <emu-nt><a href="#prod-JSON5NumericLiteral">JSON5NumericLiteral</a></emu-nt><emu-geq>::</emu-geq><emu-rhs a="a548b407"><emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-7.8.3">NumericLiteral</a></emu-nt></emu-rhs>
+    <emu-rhs a="4afe8df8"><emu-t>Infinity</emu-t></emu-rhs>
+    <emu-rhs a="4a46ffd2"><emu-t>NaN</emu-t></emu-rhs>
+</emu-production></emu-grammar>
+    </emu-clause>
+  </emu-clause>
+
+  <emu-clause id="syntactic-grammar">
+    <h1><span class="secnum">9.2</span>Syntactic Grammar</h1>
+
+    <p>
+      The syntactic grammar for JSON5 has tokens defined by the lexical grammar
+      as its terminal symbols. It defines a set of productions, starting from
+      the <emu-xref href="#sec-context-free-grammars"><a href="https://tc39.github.io/ecma262/#sec-context-free-grammars">goal symbol</a></emu-xref> <emu-nt id="_ref_48"><a href="#prod-JSON5Text">JSON5Text</a></emu-nt>, that describe how sequences of tokens can
+      form syntactically correct JSON5 values.
+    
+    </p>
+
+    <p>
+      When a stream of characters is to be parsed as a JSON5 value, it is first
+      converted to a stream of input elements by repeated application of the
+      lexical grammar; this stream of input elements is then parsed by a single
+      application of the syntactic grammar. The program is syntactically in
+      error if the tokens in the stream of input elements cannot be parsed as a
+      single instance of the goal nonterminal <emu-nt id="_ref_49"><a href="#prod-JSON5Text">JSON5Text</a></emu-nt>, with no tokens left
+      over.
+    
+    </p>
+
+    <p>
+      Productions of the syntactic grammar are distinguished by having just one
+      colon ":" as punctuation.
+    
+    </p>
+
+    <emu-clause id="syntacic-grammar-syntax">
+      <h1><span class="secnum">9.2.1</span>Syntax</h1>
+
+      <emu-grammar><emu-production name="JSON5Text" id="prod-JSON5Text">
+    <emu-nt><a href="#prod-JSON5Text">JSON5Text</a></emu-nt><emu-geq>:</emu-geq><emu-rhs a="f1666243"><emu-nt id="_ref_50"><a href="#prod-JSON5Value">JSON5Value</a></emu-nt></emu-rhs>
+</emu-production>
+<emu-production name="JSON5Value">
+    <emu-nt><a href="#prod-JSON5Value">JSON5Value</a></emu-nt><emu-geq>:</emu-geq><emu-rhs a="54f84188"><emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-7.8.1">NullLiteral</a></emu-nt></emu-rhs>
+    <emu-rhs a="3508e1fd"><emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-7.8.2">BooleanLiteral</a></emu-nt></emu-rhs>
+    <emu-rhs a="03b0fb59"><emu-nt id="_ref_51"><a href="#prod-JSON5String">JSON5String</a></emu-nt></emu-rhs>
+    <emu-rhs a="e66d304f"><emu-nt id="_ref_52"><a href="#prod-JSON5Number">JSON5Number</a></emu-nt></emu-rhs>
+    <emu-rhs a="6d543358"><emu-nt id="_ref_53"><a href="#prod-JSON5Object">JSON5Object</a></emu-nt></emu-rhs>
+    <emu-rhs a="f6cb38b6"><emu-nt id="_ref_54"><a href="#prod-JSON5Array">JSON5Array</a></emu-nt></emu-rhs>
+</emu-production>
+<emu-production name="JSON5Object">
+    <emu-nt><a href="#prod-JSON5Object">JSON5Object</a></emu-nt><emu-geq>:</emu-geq><emu-rhs a="81ba5a4a"><emu-t>{</emu-t><emu-t>}</emu-t></emu-rhs>
+    <emu-rhs a="cd01fa60"><emu-t>{</emu-t><emu-nt id="_ref_55"><a href="#prod-JSON5MemberList">JSON5MemberList</a></emu-nt><emu-t optional="">,<emu-mods><emu-opt>opt</emu-opt></emu-mods></emu-t><emu-t>}</emu-t></emu-rhs>
+</emu-production>
+<emu-production name="JSON5MemberList">
+    <emu-nt><a href="#prod-JSON5MemberList">JSON5MemberList</a></emu-nt><emu-geq>:</emu-geq><emu-rhs a="7eb169bd"><emu-nt id="_ref_56"><a href="#prod-JSON5Member">JSON5Member</a></emu-nt></emu-rhs>
+    <emu-rhs a="dfa76288"><emu-nt id="_ref_57"><a href="#prod-JSON5MemberList">JSON5MemberList</a></emu-nt><emu-t>,</emu-t><emu-nt id="_ref_58"><a href="#prod-JSON5Member">JSON5Member</a></emu-nt></emu-rhs>
+</emu-production>
+<emu-production name="JSON5Member">
+    <emu-nt><a href="#prod-JSON5Member">JSON5Member</a></emu-nt><emu-geq>:</emu-geq><emu-rhs a="2c610f33"><emu-nt id="_ref_59"><a href="#prod-JSON5MemberName">JSON5MemberName</a></emu-nt><emu-t>:</emu-t><emu-nt id="_ref_60"><a href="#prod-JSON5Value">JSON5Value</a></emu-nt></emu-rhs>
+</emu-production>
+<emu-production name="JSON5MemberName">
+    <emu-nt><a href="#prod-JSON5MemberName">JSON5MemberName</a></emu-nt><emu-geq>:</emu-geq><emu-rhs a="0ebb31e2"><emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-7.6">IdentifierName</a></emu-nt></emu-rhs>
+    <emu-rhs a="03b0fb59"><emu-nt id="_ref_61"><a href="#prod-JSON5String">JSON5String</a></emu-nt></emu-rhs>
+</emu-production>
+<emu-production name="JSON5Array">
+    <emu-nt><a href="#prod-JSON5Array">JSON5Array</a></emu-nt><emu-geq>:</emu-geq><emu-rhs a="99d85234"><emu-t>[</emu-t><emu-t>]</emu-t></emu-rhs>
+    <emu-rhs a="ddc4e558"><emu-t>[</emu-t><emu-nt id="_ref_62"><a href="#prod-JSON5ElementList">JSON5ElementList</a></emu-nt><emu-t optional="">,<emu-mods><emu-opt>opt</emu-opt></emu-mods></emu-t><emu-t>]</emu-t></emu-rhs>
+</emu-production>
+<emu-production name="JSON5ElementList">
+    <emu-nt><a href="#prod-JSON5ElementList">JSON5ElementList</a></emu-nt><emu-geq>:</emu-geq><emu-rhs a="f1666243"><emu-nt id="_ref_63"><a href="#prod-JSON5Value">JSON5Value</a></emu-nt></emu-rhs>
+    <emu-rhs a="948f0b7a"><emu-nt id="_ref_64"><a href="#prod-JSON5ElementList">JSON5ElementList</a></emu-nt><emu-t>,</emu-t><emu-nt id="_ref_65"><a href="#prod-JSON5Value">JSON5Value</a></emu-nt></emu-rhs>
+</emu-production></emu-grammar>
+    </emu-clause>
+  </emu-clause>
+</emu-clause>
+
+<emu-clause id="parsers">
+  <h1><span class="secnum">10</span>Parsers</h1>
+
+  <p>
+    A JSON5 parser transforms a JSON text into another representation. A JSON5
+    parser must accept all texts that conform to the JSON5  <emu-xref href="#grammar" id="_ref_6"><a href="#grammar">grammar</a></emu-xref>. A JSON5 parser may accept non-JSON5
+    forms or extensions.
+  
+  </p>
+
+  <p>
+    An implementation may set limits on the size of texts that it accepts, the
+    maximum depth of nesting, the range and precision of numbers, and the length
+    and character contents of strings.
+  
+  </p>
+</emu-clause>
+
+<emu-clause id="generators">
+  <h1><span class="secnum">11</span>Generators</h1>
+
+  <p>
+    A JSON5 generator produces JSON5 text. The resulting text must strictly
+    conform to the JSON5  <emu-xref href="#grammar" id="_ref_7"><a href="#grammar">grammar</a></emu-xref>.
+  
+  </p>
+</emu-clause>
+
+<emu-annex id="license">
+  <h1><span class="secnum">A</span>License</h1>
+
+  <p>
+    The MIT License (MIT)
+  
+  </p>
+
+  <p>
+    Copyright (c) 2017 Aseem Kishore, Jordan Tucker
+  
+  </p>
+
+  <p>
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to
+    deal in the Software without restriction, including without limitation the
+    rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+    sell copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+  
+  </p>
+
+  <p>
+    The above copyright notice and this permission notice shall be included in
+    all copies or substantial portions of the Software.
+  
+  </p>
+
+  <p>
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+    IN THE SOFTWARE.
+  
+  </p>
+</emu-annex>
+</div></body>
