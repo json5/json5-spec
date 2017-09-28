@@ -1,0 +1,38 @@
+/* Small devices (portrait and landscape phones, less than 768px)
+   No media query since this is the default */
+
+emu-example {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+pre {
+  max-width: 100%;
+}
+
+emu-grammar {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+emu-production {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  emu-grammar {
+    margin-left: 5ex;
+  }
+}
+
+/* Ecmarkup's breakpoint for showing the menu */
+@media (max-width: 1000px) {
+  /* Move all content down to accomodate the menu button */
+  #spec-container {
+    margin-top: 54px;
+  }
+}
