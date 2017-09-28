@@ -4,8 +4,8 @@
   "description": "The JSON5 Data Interchange Format",
   "private": true,
   "scripts": {
-    "build": "ecmarkup src/index.html docs/index.html",
-    "watch": "ecmarkup -w src/index.html docs/index.html"
+    "build": "ecmarkup src/index.html --css-out docs/ecmarkup.css --js-out docs/ecmarkup.js docs/index.html",
+    "watch": "ecmarkup -w src/index.html --css-out docs/ecmarkup.css --js-out docs/ecmarkup.js docs/index.html"
   },
   "repository": {
     "type": "git",
