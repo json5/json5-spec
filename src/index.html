@@ -622,65 +622,61 @@ consectetur adipiscing elit.'
       "::" as separating punctuation.
     </p>
 
-    <emu-clause id="lexical-grammar-syntax">
-      <h1>Syntax</h1>
+    <emu-grammar>
+      JSON5SourceCharacter ::
+        SourceCharacter
 
-      <emu-grammar>
-        JSON5SourceCharacter ::
-          SourceCharacter
+      JSON5InputElement ::
+        WhiteSpace
+        LineTerminator
+        Comment
+        JSON5Token
 
-        JSON5InputElement ::
-          WhiteSpace
-          LineTerminator
-          Comment
-          JSON5Token
+      JSON5Token ::
+        IdentifierName
+        NullLiteral
+        BooleanLiteral
+        JSON5String
+        JSON5Number
+        JSON5Punctuator
 
-        JSON5Token ::
-          IdentifierName
-          NullLiteral
-          BooleanLiteral
-          JSON5String
-          JSON5Number
-          JSON5Punctuator
+      JSON5String ::
+        `"` JSON5DoubleStringCharacters? `"`
+        `'` JSON5SingleStringCharacters? `'`
 
-        JSON5String ::
-          `"` JSON5DoubleStringCharacters? `"`
-          `'` JSON5SingleStringCharacters? `'`
+      JSON5DoubleStringCharacters ::
+        JSON5DoubleStringCharacter JSON5DoubleStringCharacters?
 
-        JSON5DoubleStringCharacters ::
-          JSON5DoubleStringCharacter JSON5DoubleStringCharacters?
+      JSON5SingleStringCharacters ::
+        JSON5SingleStringCharacter JSON5SingleStringCharacters?
 
-        JSON5SingleStringCharacters ::
-          JSON5SingleStringCharacter JSON5SingleStringCharacters?
+      JSON5DoubleStringCharacter ::
+        SourceCharacter but not one of `"` or `\` or LineTerminator
+        `\` EscapeSequence
+        LineContinuation
+        U+2028
+        U+2029
 
-        JSON5DoubleStringCharacter ::
-          SourceCharacter but not one of `"` or `\` or LineTerminator
-          `\` EscapeSequence
-          LineContinuation
-          U+2028
-          U+2029
+      JSON5SingleStringCharacter ::
+        SourceCharacter but not one of `'` or `\` or LineTerminator
+        `\` EscapeSequence
+        LineContinuation
+        U+2028
+        U+2029
 
-        JSON5SingleStringCharacter ::
-          SourceCharacter but not one of `'` or `\` or LineTerminator
-          `\` EscapeSequence
-          LineContinuation
-          U+2028
-          U+2029
+      JSON5Number ::
+        JSON5NumericLiteral
+        `+` JSON5NumericLiteral
+        `-` JSON5NumericLiteral
 
-        JSON5Number ::
-          JSON5NumericLiteral
-          `+` JSON5NumericLiteral
-          `-` JSON5NumericLiteral
+      JSON5NumericLiteral ::
+        NumericLiteral
+        `Infinity`
+        `NaN`
 
-        JSON5NumericLiteral ::
-          NumericLiteral
-          `Infinity`
-          `NaN`
-
-        JSON5Punctuator :: one of
-          `{` `}` `[` `]` `:` `,`
-      </emu-grammar>
-    </emu-clause>
+      JSON5Punctuator :: one of
+        `{` `}` `[` `]` `:` `,`
+    </emu-grammar>
   </emu-clause>
 
   <emu-clause id="syntactic-grammar">
@@ -708,45 +704,41 @@ consectetur adipiscing elit.'
       colon ":" as punctuation.
     </p>
 
-    <emu-clause id="syntacic-grammar-syntax">
-      <h1>Syntax</h1>
+    <emu-grammar>
+      JSON5Text :
+        JSON5Value
 
-      <emu-grammar>
-        JSON5Text :
-          JSON5Value
+      JSON5Value :
+        NullLiteral
+        BooleanLiteral
+        JSON5String
+        JSON5Number
+        JSON5Object
+        JSON5Array
 
-        JSON5Value :
-          NullLiteral
-          BooleanLiteral
-          JSON5String
-          JSON5Number
-          JSON5Object
-          JSON5Array
+      JSON5Object :
+        `{` `}`
+        `{` JSON5MemberList `,`? `}`
 
-        JSON5Object :
-          `{` `}`
-          `{` JSON5MemberList `,`? `}`
+      JSON5MemberList :
+        JSON5Member
+        JSON5MemberList `,` JSON5Member
 
-        JSON5MemberList :
-          JSON5Member
-          JSON5MemberList `,` JSON5Member
+      JSON5Member :
+        JSON5MemberName `:` JSON5Value
 
-        JSON5Member :
-          JSON5MemberName `:` JSON5Value
+      JSON5MemberName :
+        IdentifierName
+        JSON5String
 
-        JSON5MemberName :
-          IdentifierName
-          JSON5String
+      JSON5Array :
+        `[` `]`
+        `[` JSON5ElementList `,`? `]`
 
-        JSON5Array :
-          `[` `]`
-          `[` JSON5ElementList `,`? `]`
-
-        JSON5ElementList :
-          JSON5Value
-          JSON5ElementList `,` JSON5Value
-      </emu-grammar>
-    </emu-clause>
+      JSON5ElementList :
+        JSON5Value
+        JSON5ElementList `,` JSON5Value
+    </emu-grammar>
   </emu-clause>
 </emu-clause>
 
