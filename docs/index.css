@@ -26,6 +26,10 @@ emu-gmod emu-t {
   margin-left: 1ex;
 }
 
+emu-opt {
+  margin-right: 0;
+}
+
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
   emu-grammar {
