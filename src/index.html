@@ -102,7 +102,7 @@
       <li>Numbers may be <a
       href="http://ieeexplore.ieee.org/servlet/opac?punumber=4610933">IEEE
       754</a>
-      Infinity, -Infinity, and NaN.</li>
+      positive infinity, negative infinity, and NaN.</li>
       <li>Numbers may begin with an explicit plus sign.</li>
     </ul>
 
@@ -456,8 +456,8 @@ consectetur adipiscing elit.'
   <p>
     The representation of numbers is similar to that used in most programming
     languages. A number may be represented in in base 10 using decimal digits,
-    base 16 using hexadecimal digits, or the IEEE 754 values Infinity,
-    -Infinity, or NaN.
+    base 16 using hexadecimal digits, or the IEEE 754 values positive infinity,
+    negative infinity, or NaN.
   </p>
 
   <emu-grammar>
@@ -516,9 +516,29 @@ consectetur adipiscing elit.'
   </emu-example>
 
   <p>
-    IEEE 754 values must be the literal names `Infinity` or `NaN` and may be
+    The IEEE 754 value positive infinity must be the literal characters
+    `Infinity` and may be prefixed with an optional plus sign.
+  </p>
+
+  <p>
+    The IEEE 754 value negative infinity must be the literal characters
+    `-Infinity`.
+  </p>
+
+  <p>
+    The IEEE 754 value NaN must be the literal characters `NaN` and may be
     prefixed with an optional plus or minus sign.
   </p>
+
+  <emu-example>
+    <pre><code class="javascript">
+{
+    positiveInfinity: Infinity,
+    negativeInfinity: -Infinity,
+    notANumber: NaN,
+}
+</code></pre>
+  </emu-example>
 </emu-clause>
 
 <emu-clause id="comments">

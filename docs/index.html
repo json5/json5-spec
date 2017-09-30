@@ -99,7 +99,7 @@
       <li>Numbers may have a leading or trailing decimal point.</li>
       <li>Numbers may be  <a href="http://ieeexplore.ieee.org/servlet/opac?punumber=4610933">IEEE
       754</a>
-      Infinity, -Infinity, and NaN.</li>
+      positive infinity, negative infinity, and NaN.</li>
       <li>Numbers may begin with an explicit plus sign.</li>
     </ul>
 
@@ -459,8 +459,8 @@ consectetur adipiscing elit.'</span>
   <p>
     The representation of numbers is similar to that used in most programming
     languages. A number may be represented in in base 10 using decimal digits,
-    base 16 using hexadecimal digits, or the IEEE 754 values Infinity,
-    -Infinity, or NaN.
+    base 16 using hexadecimal digits, or the IEEE 754 values positive infinity,
+    negative infinity, or NaN.
   
   </p>
 
@@ -519,10 +519,30 @@ consectetur adipiscing elit.'</span>
   </figure></emu-example>
 
   <p>
-    IEEE 754 values must be the literal names <code>Infinity</code> or <code>NaN</code> and may be
+    The IEEE 754 value positive infinity must be the literal characters
+    <code>Infinity</code> and may be prefixed with an optional plus sign.
+  
+  </p>
+
+  <p>
+    The IEEE 754 value negative infinity must be the literal characters
+    <code>-Infinity</code>.
+  
+  </p>
+
+  <p>
+    The IEEE 754 value NaN must be the literal characters <code>NaN</code> and may be
     prefixed with an optional plus or minus sign.
   
   </p>
+
+  <emu-example><figure><figcaption>Example 3 (Informative)</figcaption>
+    <pre><code class="javascript hljs">{
+    <span class="hljs-attr">positiveInfinity</span>: <span class="hljs-literal">Infinity</span>,
+    <span class="hljs-attr">negativeInfinity</span>: -<span class="hljs-literal">Infinity</span>,
+    <span class="hljs-attr">notANumber</span>: <span class="hljs-literal">NaN</span>,
+}</code></pre>
+  </figure></emu-example>
 </emu-clause>
 
 <emu-clause id="comments">
