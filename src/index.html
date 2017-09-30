@@ -361,7 +361,8 @@ No \\n's!",
 
     <p>
       Alternatively, there are two-character sequence escape representations of
-      some popular characters.
+      some popular characters. A decimal digit must not follow a reverse solidus
+      followed by a zero.
     </p>
 
     <emu-table caption="Escape sequences">
@@ -418,8 +419,9 @@ consectetur adipiscing elit.'
     </emu-example>
 
     <p>
-      If any other character follows a reverse solidus, that character will be
-      included in the string, but the reverse solidus will not.
+      If any other character follows a reverse solidus, except for the decimal
+      digits 1 through 9, that character will be included in the string, but the
+      reverse solidus will not.
     </p>
 
     <emu-example>
