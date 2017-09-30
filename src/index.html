@@ -152,8 +152,8 @@ No \\n's!",
 
   <emu-grammar>
     JSON5Value :
-      NullLiteral
-      BooleanLiteral
+      JSON5Null
+      JSON5Boolean
       JSON5String
       JSON5Number
       JSON5Object
@@ -186,7 +186,7 @@ No \\n's!",
       JSON5MemberName `:` JSON5Value
 
     JSON5MemberName :
-      IdentifierName
+      JSON5Identifier
       JSON5String
   </emu-grammar>
 
@@ -649,12 +649,22 @@ consectetur adipiscing elit.'
         JSON5Token
 
       JSON5Token ::
-        IdentifierName
-        NullLiteral
-        BooleanLiteral
+        JSON5Identifier
+        JSON5Punctuator
         JSON5String
         JSON5Number
-        JSON5Punctuator
+
+      JSON5Identifier ::
+        IdentifierName
+
+      JSON5Punctuator :: one of
+        `{` `}` `[` `]` `:` `,`
+
+      JSON5Null ::
+        NullLiteral
+
+      JSON5Boolean ::
+        BooleanLiteral
 
       JSON5String ::
         `"` JSON5DoubleStringCharacters? `"`
@@ -689,9 +699,6 @@ consectetur adipiscing elit.'
         NumericLiteral
         `Infinity`
         `NaN`
-
-      JSON5Punctuator :: one of
-        `{` `}` `[` `]` `:` `,`
     </emu-grammar>
   </emu-clause>
 
@@ -725,8 +732,8 @@ consectetur adipiscing elit.'
         JSON5Value
 
       JSON5Value :
-        NullLiteral
-        BooleanLiteral
+        JSON5Null
+        JSON5Boolean
         JSON5String
         JSON5Number
         JSON5Object
@@ -744,7 +751,7 @@ consectetur adipiscing elit.'
         JSON5MemberName `:` JSON5Value
 
       JSON5MemberName :
-        IdentifierName
+        JSON5Identifier
         JSON5String
 
       JSON5Array :
