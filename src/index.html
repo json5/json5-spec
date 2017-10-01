@@ -547,7 +547,7 @@ consectetur adipiscing elit.'
   <h1>Comments</h1>
 
   <p>
-    Comments can be either single or multi-line. Multi-line comments must not
+    Comments can be either single or multi-line. Multi-line comments cannot
     nest. Comments may appear before and after any |JSON5Token|.
   </p>
 
@@ -719,8 +719,8 @@ consectetur adipiscing elit.'
       converted to a stream of input elements by repeated application of the
       lexical grammar; this stream of input elements is then parsed by a single
       application of the syntactic grammar. The program is syntactically in
-      error if the tokens in the stream of input elements must not be parsed as
-      a single instance of the goal nonterminal |JSON5Text|, with no tokens left
+      error if the tokens in the stream of input elements cannot be parsed as a
+      single instance of the goal nonterminal |JSON5Text|, with no tokens left
       over.
     </p>
 
