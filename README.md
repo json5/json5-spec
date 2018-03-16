@@ -2,7 +2,7 @@
 
 This is the JSON5 specification in Ecmarkup format.
 
-The latest version is available at https://json5.github.io/json5-spec/
+The latest version is available at https://spec.json5.org/
 
 ## Contributing
 
