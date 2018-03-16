@@ -1,0 +1,884 @@
+<!doctype html>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="icon.ico">
+<link rel="stylesheet" href="ecmarkup.css">
+<link rel="stylesheet" href="highlight.css">
+<link rel="stylesheet" href="index.css">
+
+<script src="ecmarkup.js"></script>
+
+<title>The JSON5 Data Interchange Format</title><script type="application/json" id="menu-search-biblio">[{"type":"clause","id":"abstract","aoid":null,"title":"Abstract","titleHTML":"Abstract","number":"","namespace":"https://json5.github.io/json5-spec","location":"","referencingIds":[],"key":"Abstract"},{"type":"clause","id":"summary-of-features","aoid":null,"title":"Summary of Features","titleHTML":"Summary of Features","number":"1.1","namespace":"https://json5.github.io/json5-spec","location":"","referencingIds":[],"key":"Summary of Features"},{"type":"clause","id":"short-example","aoid":null,"title":"Short Example","titleHTML":"Short Example","number":"1.2","namespace":"https://json5.github.io/json5-spec","location":"","referencingIds":[],"key":"Short Example"},{"type":"clause","id":"introduction","aoid":null,"title":"Introduction","titleHTML":"Introduction","number":"1","namespace":"https://json5.github.io/json5-spec","location":"","referencingIds":[],"key":"Introduction"},{"type":"production","id":"prod-JSON5Value","name":"JSON5Value","referencingIds":["_ref_19","_ref_23","_ref_25","_ref_55","_ref_67","_ref_71","_ref_73"],"namespace":"https://json5.github.io/json5-spec","location":"","key":"JSON5Value"},{"type":"clause","id":"values","aoid":null,"title":"Values","titleHTML":"Values","number":"2","namespace":"https://json5.github.io/json5-spec","location":"","referencingIds":[],"key":"Values"},{"type":"production","id":"prod-JSON5Object","name":"JSON5Object","referencingIds":["_ref_12","_ref_60"],"namespace":"https://json5.github.io/json5-spec","location":"","key":"JSON5Object"},{"type":"production","id":"prod-JSON5MemberList","name":"JSON5MemberList","referencingIds":["_ref_14","_ref_16","_ref_62","_ref_64"],"namespace":"https://json5.github.io/json5-spec","location":"","key":"JSON5MemberList"},{"type":"production","id":"prod-JSON5Member","name":"JSON5Member","referencingIds":["_ref_15","_ref_17","_ref_63","_ref_65"],"namespace":"https://json5.github.io/json5-spec","location":"","key":"JSON5Member"},{"type":"production","id":"prod-JSON5MemberName","name":"JSON5MemberName","referencingIds":["_ref_18","_ref_66"],"namespace":"https://json5.github.io/json5-spec","location":"","key":"JSON5MemberName"},{"type":"clause","id":"objects","aoid":null,"title":"Objects","titleHTML":"Objects","number":"3","namespace":"https://json5.github.io/json5-spec","location":"","referencingIds":["_ref_0"],"key":"Objects"},{"type":"production","id":"prod-JSON5Array","name":"JSON5Array","referencingIds":["_ref_13","_ref_61"],"namespace":"https://json5.github.io/json5-spec","location":"","key":"JSON5Array"},{"type":"production","id":"prod-JSON5ElementList","name":"JSON5ElementList","referencingIds":["_ref_22","_ref_24","_ref_70","_ref_72"],"namespace":"https://json5.github.io/json5-spec","location":"","key":"JSON5ElementList"},{"type":"clause","id":"arrays","aoid":null,"title":"Arrays","titleHTML":"Arrays","number":"4","namespace":"https://json5.github.io/json5-spec","location":"","referencingIds":["_ref_1"],"key":"Arrays"},{"type":"production","id":"prod-JSON5String","name":"JSON5String","referencingIds":["_ref_10","_ref_21","_ref_42","_ref_58","_ref_69"],"namespace":"https://json5.github.io/json5-spec","location":"","key":"JSON5String"},{"type":"production","id":"prod-JSON5DoubleStringCharacters","name":"JSON5DoubleStringCharacters","referencingIds":["_ref_26","_ref_29","_ref_44","_ref_47"],"namespace":"https://json5.github.io/json5-spec","location":"","key":"JSON5DoubleStringCharacters"},{"type":"production","id":"prod-JSON5SingleStringCharacters","name":"JSON5SingleStringCharacters","referencingIds":["_ref_27","_ref_31","_ref_45","_ref_49"],"namespace":"https://json5.github.io/json5-spec","location":"","key":"JSON5SingleStringCharacters"},{"type":"production","id":"prod-JSON5DoubleStringCharacter","name":"JSON5DoubleStringCharacter","referencingIds":["_ref_28","_ref_46"],"namespace":"https://json5.github.io/json5-spec","location":"","key":"JSON5DoubleStringCharacter"},{"type":"production","id":"prod-JSON5SingleStringCharacter","name":"JSON5SingleStringCharacter","referencingIds":["_ref_30","_ref_48"],"namespace":"https://json5.github.io/json5-spec","location":"","key":"JSON5SingleStringCharacter"},{"type":"clause","id":"escapes","aoid":null,"title":"Escapes","titleHTML":"Escapes","number":"5.1","namespace":"https://json5.github.io/json5-spec","location":"","referencingIds":[],"key":"Escapes"},{"type":"clause","id":"separators","aoid":null,"title":"Paragraph and Line Separators","titleHTML":"Paragraph and Line Separators","number":"5.2","namespace":"https://json5.github.io/json5-spec","location":"","referencingIds":[],"key":"Paragraph and Line Separators"},{"type":"clause","id":"strings","aoid":null,"title":"Strings","titleHTML":"Strings","number":"5","namespace":"https://json5.github.io/json5-spec","location":"","referencingIds":["_ref_2"],"key":"Strings"},{"type":"production","id":"prod-JSON5Number","name":"JSON5Number","referencingIds":["_ref_11","_ref_43","_ref_59"],"namespace":"https://json5.github.io/json5-spec","location":"","key":"JSON5Number"},{"type":"production","id":"prod-JSON5NumericLiteral","name":"JSON5NumericLiteral","referencingIds":["_ref_32","_ref_33","_ref_34","_ref_50","_ref_51","_ref_52"],"namespace":"https://json5.github.io/json5-spec","location":"","key":"JSON5NumericLiteral"},{"type":"clause","id":"numbers","aoid":null,"title":"Numbers","titleHTML":"Numbers","number":"6","namespace":"https://json5.github.io/json5-spec","location":"","referencingIds":["_ref_3"],"key":"Numbers"},{"type":"clause","id":"comments","aoid":null,"title":"Comments","titleHTML":"Comments","number":"7","namespace":"https://json5.github.io/json5-spec","location":"","referencingIds":[],"key":"Comments"},{"type":"clause","id":"white-space","aoid":null,"title":"White Space","titleHTML":"White Space","number":"8","namespace":"https://json5.github.io/json5-spec","location":"","referencingIds":[],"key":"White Space"},{"type":"production","id":"prod-JSON5SourceCharacter","name":"JSON5SourceCharacter","referencingIds":["_ref_37"],"namespace":"https://json5.github.io/json5-spec","location":"","key":"JSON5SourceCharacter"},{"type":"production","id":"prod-JSON5InputElement","name":"JSON5InputElement","referencingIds":["_ref_38"],"namespace":"https://json5.github.io/json5-spec","location":"","key":"JSON5InputElement"},{"type":"production","id":"prod-JSON5Token","name":"JSON5Token","referencingIds":["_ref_35","_ref_36","_ref_39"],"namespace":"https://json5.github.io/json5-spec","location":"","key":"JSON5Token"},{"type":"production","id":"prod-JSON5Identifier","name":"JSON5Identifier","referencingIds":["_ref_20","_ref_40","_ref_68"],"namespace":"https://json5.github.io/json5-spec","location":"","key":"JSON5Identifier"},{"type":"production","id":"prod-JSON5Punctuator","name":"JSON5Punctuator","referencingIds":["_ref_41"],"namespace":"https://json5.github.io/json5-spec","location":"","key":"JSON5Punctuator"},{"type":"production","id":"prod-JSON5Null","name":"JSON5Null","referencingIds":["_ref_8","_ref_56"],"namespace":"https://json5.github.io/json5-spec","location":"","key":"JSON5Null"},{"type":"production","id":"prod-JSON5Boolean","name":"JSON5Boolean","referencingIds":["_ref_9","_ref_57"],"namespace":"https://json5.github.io/json5-spec","location":"","key":"JSON5Boolean"},{"type":"clause","id":"lexical-grammar","aoid":null,"title":"Lexical Grammar","titleHTML":"Lexical Grammar","number":"9.1","namespace":"https://json5.github.io/json5-spec","location":"","referencingIds":[],"key":"Lexical Grammar"},{"type":"production","id":"prod-JSON5Text","name":"JSON5Text","referencingIds":["_ref_53","_ref_54"],"namespace":"https://json5.github.io/json5-spec","location":"","key":"JSON5Text"},{"type":"clause","id":"syntactic-grammar","aoid":null,"title":"Syntactic Grammar","titleHTML":"Syntactic Grammar","number":"9.2","namespace":"https://json5.github.io/json5-spec","location":"","referencingIds":[],"key":"Syntactic Grammar"},{"type":"clause","id":"grammar","aoid":null,"title":"Grammar","titleHTML":"Grammar","number":"9","namespace":"https://json5.github.io/json5-spec","location":"","referencingIds":["_ref_6","_ref_7"],"key":"Grammar"},{"type":"clause","id":"parsers","aoid":null,"title":"Parsers","titleHTML":"Parsers","number":"10","namespace":"https://json5.github.io/json5-spec","location":"","referencingIds":["_ref_4"],"key":"Parsers"},{"type":"clause","id":"generators","aoid":null,"title":"Generators","titleHTML":"Generators","number":"11","namespace":"https://json5.github.io/json5-spec","location":"","referencingIds":["_ref_5"],"key":"Generators"},{"type":"clause","id":"conformance","aoid":null,"title":"Conformance","titleHTML":"Conformance","number":"A","namespace":"https://json5.github.io/json5-spec","location":"","referencingIds":[],"key":"Conformance"},{"type":"clause","id":"license","aoid":null,"title":"License","titleHTML":"License","number":"B","namespace":"https://json5.github.io/json5-spec","location":"","referencingIds":[],"key":"License"}]</script></head><body><div id="menu-toggle">☰</div><div id="menu-spacer"></div><div id="menu"><div id="menu-search"><input type="text" id="menu-search-box" placeholder="Search..."><div id="menu-search-results" class="inactive"></div></div><div id="menu-pins"><div class="menu-pane-header">Pins</div><ul id="menu-pins-list"></ul></div><div class="menu-pane-header">Table of Contents</div><div id="menu-toc"><ol class="toc"><li><span class="item-toggle-none"></span><a href="#abstract" title="Abstract">Abstract</a></li><li><span class="item-toggle">◢</span><a href="#introduction" title="Introduction"><span class="secnum">1</span> Introduction</a><ol class="toc"><li><span class="item-toggle-none"></span><a href="#summary-of-features" title="Summary of Features"><span class="secnum">1.1</span> Summary of Features</a></li><li><span class="item-toggle-none"></span><a href="#short-example" title="Short Example"><span class="secnum">1.2</span> Short Example</a></li></ol></li><li><span class="item-toggle-none"></span><a href="#values" title="Values"><span class="secnum">2</span> Values</a></li><li><span class="item-toggle-none"></span><a href="#objects" title="Objects"><span class="secnum">3</span> Objects</a></li><li><span class="item-toggle-none"></span><a href="#arrays" title="Arrays"><span class="secnum">4</span> Arrays</a></li><li><span class="item-toggle">◢</span><a href="#strings" title="Strings"><span class="secnum">5</span> Strings</a><ol class="toc"><li><span class="item-toggle-none"></span><a href="#escapes" title="Escapes"><span class="secnum">5.1</span> Escapes</a></li><li><span class="item-toggle-none"></span><a href="#separators" title="Paragraph and Line Separators"><span class="secnum">5.2</span> Paragraph and Line Separators</a></li></ol></li><li><span class="item-toggle-none"></span><a href="#numbers" title="Numbers"><span class="secnum">6</span> Numbers</a></li><li><span class="item-toggle-none"></span><a href="#comments" title="Comments"><span class="secnum">7</span> Comments</a></li><li><span class="item-toggle-none"></span><a href="#white-space" title="White Space"><span class="secnum">8</span> White Space</a></li><li><span class="item-toggle">◢</span><a href="#grammar" title="Grammar"><span class="secnum">9</span> Grammar</a><ol class="toc"><li><span class="item-toggle-none"></span><a href="#lexical-grammar" title="Lexical Grammar"><span class="secnum">9.1</span> Lexical Grammar</a></li><li><span class="item-toggle-none"></span><a href="#syntactic-grammar" title="Syntactic Grammar"><span class="secnum">9.2</span> Syntactic Grammar</a></li></ol></li><li><span class="item-toggle-none"></span><a href="#parsers" title="Parsers"><span class="secnum">10</span> Parsers</a></li><li><span class="item-toggle-none"></span><a href="#generators" title="Generators"><span class="secnum">11</span> Generators</a></li><li><span class="item-toggle-none"></span><a href="#conformance" title="Conformance"><span class="secnum">A</span> Conformance</a></li><li><span class="item-toggle-none"></span><a href="#license" title="License"><span class="secnum">B</span> License</a></li></ol></div></div><div id="spec-container"><h1 class="shortname first">Standard JSON5</h1><h1 class="version">1.0.0 / March 2018</h1><h1 class="title">The JSON5 Data Interchange Format</h1>
+
+<emu-biblio href="./biblio.json"></emu-biblio>
+
+<emu-intro id="abstract">
+  <h1>Abstract</h1>
+
+  <p>
+    The JSON5 Data Interchange Format is a proposed extension to JSON that aims
+    to make it easier for humans to write and maintain by hand. It does this by
+    adding some minimal syntax features directly from ECMAScript 5.1.
+  
+  </p>
+</emu-intro>
+
+<emu-clause id="introduction">
+  <h1><span class="secnum">1</span>Introduction</h1>
+
+  <p>
+    The JSON5 Data Interchange Format (JSON5) is a superset of  <a href="https://tools.ietf.org/html/rfc7159">JSON</a> that aims to alleviate
+    some of the limitations of JSON by expanding its syntax to include some
+    productions from  <a href="https://www.ecma-international.org/ecma-262/5.1/">ECMAScript 5.1</a>.
+  
+  </p>
+
+  <p>
+    Similar to JSON, JSON5 can represent four primitive types (strings, numbers,
+    Booleans, and null) and two structured types (objects and arrays).
+  
+  </p>
+
+  <p>
+    A string is a sequence of zero or more  <a href="http://www.unicode.org/versions/latest/">Unicode</a> characters. Note
+    that this citation references the latest version of Unicode rather than a
+    specific release. It is not expected that future changes in the Unicode
+    specification will impact the syntax of JSON5.
+  
+  </p>
+
+  <p>
+    An object is an unordered collection of zero or more name/value pairs, where
+    a name is a string or identifier and a value is a string, number, Boolean,
+    null, object, or array.
+  
+  </p>
+
+  <p>
+    An array is an ordered sequence of zero or more values.
+  
+  </p>
+
+  <emu-clause id="summary-of-features">
+    <h1><span class="secnum">1.1</span>Summary of Features</h1>
+
+    <p>
+      The following ECMAScript 5.1 features, which are not supported in JSON,
+      have been extended to JSON5.
+    
+    </p>
+
+    <h2 id="summary-of-features-objects">Objects</h2>
+    <ul>
+      <li>Object keys may be an ECMAScript 5.1 <emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-7.6">IdentifierName</a></emu-nt>.</li>
+      <li>Objects may have a single trailing comma.</li>
+    </ul>
+
+    <h2 id="summary-of-features-arrays">Arrays</h2>
+    <ul>
+      <li>Arrays may have a single trailing comma.</li>
+    </ul>
+
+    <h2 id="summary-of-features-strings">Strings</h2>
+    <ul>
+      <li>Strings may be single quoted.</li>
+      <li>Strings may span multiple lines by escaping new line characters.</li>
+      <li>Strings may include character escapes.</li>
+    </ul>
+
+    <h2 id="summary-of-features-numbers">Numbers</h2>
+    <ul>
+      <li>Numbers may be hexadecimal.</li>
+      <li>Numbers may have a leading or trailing decimal point.</li>
+      <li>Numbers may be  <a href="http://ieeexplore.ieee.org/servlet/opac?punumber=4610933">IEEE
+      754</a>
+      positive infinity, negative infinity, and NaN.</li>
+      <li>Numbers may begin with an explicit plus sign.</li>
+    </ul>
+
+    <h2 id="summary-of-features-comments">Comments</h2>
+    <ul>
+      <li>Single and multi-line comments are allowed.</li>
+    </ul>
+
+    <h2 id="summary-of-features-white-space">White Space</h2>
+    <ul>
+      <li>Additional white space characters are allowed.</li>
+    </ul>
+  </emu-clause>
+
+  <emu-clause id="short-example">
+    <h1><span class="secnum">1.2</span>Short Example</h1>
+
+    <emu-example><figure><figcaption>Example (Informative)</figcaption>
+      <pre><code class="javascript hljs">{
+  <span class="hljs-comment">// comments</span>
+  unquoted: <span class="hljs-string">'and you can quote me on that'</span>,
+  <span class="hljs-attr">singleQuotes</span>: <span class="hljs-string">'I can use "double quotes" here'</span>,
+  <span class="hljs-attr">lineBreaks</span>: <span class="hljs-string">"Look, Mom! \
+No \\n's!"</span>,
+  <span class="hljs-attr">hexadecimal</span>: <span class="hljs-number">0xdecaf</span>,
+  <span class="hljs-attr">leadingDecimalPoint</span>: <span class="hljs-number">.8675309</span>, <span class="hljs-attr">andTrailing</span>: <span class="hljs-number">8675309.</span>,
+  <span class="hljs-attr">positiveSign</span>: +<span class="hljs-number">1</span>,
+  <span class="hljs-attr">trailingComma</span>: <span class="hljs-string">'in objects'</span>, <span class="hljs-attr">andIn</span>: [<span class="hljs-string">'arrays'</span>,],
+  <span class="hljs-string">"backwardsCompatible"</span>: <span class="hljs-string">"with JSON"</span>,
+}</code></pre>
+    </figure></emu-example>
+  </emu-clause>
+</emu-clause>
+
+<emu-clause id="values">
+  <h1><span class="secnum">2</span>Values</h1>
+
+  <p>
+    A JSON5 value must be an  <emu-xref href="#objects" id="_ref_0"><a href="#objects">object</a></emu-xref>,
+    
+    <emu-xref href="#arrays" id="_ref_1"><a href="#arrays">array</a></emu-xref>,  <emu-xref href="#strings" id="_ref_2"><a href="#strings">string</a></emu-xref>, or  <emu-xref href="#numbers" id="_ref_3"><a href="#numbers">number</a></emu-xref>, or one of the three literal names
+    
+    <code>true</code>,  <code>false</code>, or  <code>null</code>.
+  
+  </p>
+
+  <emu-grammar><emu-production name="JSON5Value" id="prod-JSON5Value">
+    <emu-nt><a href="#prod-JSON5Value">JSON5Value</a></emu-nt><emu-geq>:</emu-geq><emu-rhs a="645e60c0"><emu-nt id="_ref_8"><a href="#prod-JSON5Null">JSON5Null</a></emu-nt></emu-rhs>
+    <emu-rhs a="306430fb"><emu-nt id="_ref_9"><a href="#prod-JSON5Boolean">JSON5Boolean</a></emu-nt></emu-rhs>
+    <emu-rhs a="03b0fb59"><emu-nt id="_ref_10"><a href="#prod-JSON5String">JSON5String</a></emu-nt></emu-rhs>
+    <emu-rhs a="e66d304f"><emu-nt id="_ref_11"><a href="#prod-JSON5Number">JSON5Number</a></emu-nt></emu-rhs>
+    <emu-rhs a="6d543358"><emu-nt id="_ref_12"><a href="#prod-JSON5Object">JSON5Object</a></emu-nt></emu-rhs>
+    <emu-rhs a="f6cb38b6"><emu-nt id="_ref_13"><a href="#prod-JSON5Array">JSON5Array</a></emu-nt></emu-rhs>
+</emu-production></emu-grammar>
+</emu-clause>
+
+<emu-clause id="objects">
+  <h1><span class="secnum">3</span>Objects</h1>
+
+  <p>
+    An object structure is represented as a pair of curly brackets surrounding
+    zero or more name/value pairs (or members). A name is a string or
+    identifier. A single colon comes after each name, separating the name from
+    the value. A single comma separates a value from a following name. A single
+    comma may follow the name/value pair. The names within an object should be
+    unique.
+  
+  </p>
+
+  <emu-grammar><emu-production name="JSON5Object" id="prod-JSON5Object">
+    <emu-nt><a href="#prod-JSON5Object">JSON5Object</a></emu-nt><emu-geq>:</emu-geq><emu-rhs a="81ba5a4a"><emu-t>{</emu-t><emu-t>}</emu-t></emu-rhs>
+    <emu-rhs a="cd01fa60"><emu-t>{</emu-t><emu-nt id="_ref_14"><a href="#prod-JSON5MemberList">JSON5MemberList</a></emu-nt><emu-t optional="">,<emu-mods><emu-opt>opt</emu-opt></emu-mods></emu-t><emu-t>}</emu-t></emu-rhs>
+</emu-production>
+<emu-production name="JSON5MemberList" id="prod-JSON5MemberList">
+    <emu-nt><a href="#prod-JSON5MemberList">JSON5MemberList</a></emu-nt><emu-geq>:</emu-geq><emu-rhs a="7eb169bd"><emu-nt id="_ref_15"><a href="#prod-JSON5Member">JSON5Member</a></emu-nt></emu-rhs>
+    <emu-rhs a="dfa76288"><emu-nt id="_ref_16"><a href="#prod-JSON5MemberList">JSON5MemberList</a></emu-nt><emu-t>,</emu-t><emu-nt id="_ref_17"><a href="#prod-JSON5Member">JSON5Member</a></emu-nt></emu-rhs>
+</emu-production>
+<emu-production name="JSON5Member" id="prod-JSON5Member">
+    <emu-nt><a href="#prod-JSON5Member">JSON5Member</a></emu-nt><emu-geq>:</emu-geq><emu-rhs a="2c610f33"><emu-nt id="_ref_18"><a href="#prod-JSON5MemberName">JSON5MemberName</a></emu-nt><emu-t>:</emu-t><emu-nt id="_ref_19"><a href="#prod-JSON5Value">JSON5Value</a></emu-nt></emu-rhs>
+</emu-production>
+<emu-production name="JSON5MemberName" id="prod-JSON5MemberName">
+    <emu-nt><a href="#prod-JSON5MemberName">JSON5MemberName</a></emu-nt><emu-geq>:</emu-geq><emu-rhs a="aba979c7"><emu-nt id="_ref_20"><a href="#prod-JSON5Identifier">JSON5Identifier</a></emu-nt></emu-rhs>
+    <emu-rhs a="03b0fb59"><emu-nt id="_ref_21"><a href="#prod-JSON5String">JSON5String</a></emu-nt></emu-rhs>
+</emu-production></emu-grammar>
+
+  <p>
+    An object whose names are all unique is interoperable in the sense that all
+    software implementations receiving that object will agree on the name-value
+    mappings. When the names within an object are not unique, the behavior of
+    software that receives such an object is unpredictable. Implementations may
+    report the last name/value pair only, report an error or fail to parse the
+    object, or report all of the name/value pairs, including duplicates.
+  
+  </p>
+
+  <p>
+    Implementations may make the ordering of object members visible to calling
+    software. Implementations whose behavior does not depend on member ordering
+    will be interoperable in the sense that they will not be affected by this.
+  
+  </p>
+
+  <emu-example><figure><figcaption>Example (Informative)</figcaption>
+    <pre><code class="javascript hljs"><span class="hljs-comment">// An empty object</span>
+{}
+
+<span class="hljs-comment">// An object with two properties</span>
+<span class="hljs-comment">// and a trailing comma</span>
+{
+    <span class="hljs-attr">width</span>: <span class="hljs-number">1920</span>,
+    <span class="hljs-attr">height</span>: <span class="hljs-number">1080</span>,
+}
+
+<span class="hljs-comment">// Objects can be nested</span>
+{
+    <span class="hljs-attr">image</span>: {
+        <span class="hljs-attr">width</span>: <span class="hljs-number">1920</span>,
+        <span class="hljs-attr">height</span>: <span class="hljs-number">1080</span>,
+        <span class="hljs-string">'aspect-ratio'</span>: <span class="hljs-string">'16:9'</span>,
+    }
+}
+
+<span class="hljs-comment">// An array of objects</span>
+[
+    { <span class="hljs-attr">name</span>: <span class="hljs-string">'Joe'</span>, <span class="hljs-attr">age</span>: <span class="hljs-number">27</span> },
+    { <span class="hljs-attr">name</span>: <span class="hljs-string">'Jane'</span>, <span class="hljs-attr">age</span>: <span class="hljs-number">32</span> },
+]</code></pre>
+  </figure></emu-example>
+</emu-clause>
+
+<emu-clause id="arrays">
+  <h1><span class="secnum">4</span>Arrays</h1>
+
+  <p>
+    An array structure is represented as square brackets surrounding zero or
+    more values (or elements). Elements are separated by commas. A single comma
+    may follow the final element.
+  
+  </p>
+
+  <emu-grammar><emu-production name="JSON5Array" id="prod-JSON5Array">
+    <emu-nt><a href="#prod-JSON5Array">JSON5Array</a></emu-nt><emu-geq>:</emu-geq><emu-rhs a="99d85234"><emu-t>[</emu-t><emu-t>]</emu-t></emu-rhs>
+    <emu-rhs a="ddc4e558"><emu-t>[</emu-t><emu-nt id="_ref_22"><a href="#prod-JSON5ElementList">JSON5ElementList</a></emu-nt><emu-t optional="">,<emu-mods><emu-opt>opt</emu-opt></emu-mods></emu-t><emu-t>]</emu-t></emu-rhs>
+</emu-production>
+<emu-production name="JSON5ElementList" id="prod-JSON5ElementList">
+    <emu-nt><a href="#prod-JSON5ElementList">JSON5ElementList</a></emu-nt><emu-geq>:</emu-geq><emu-rhs a="f1666243"><emu-nt id="_ref_23"><a href="#prod-JSON5Value">JSON5Value</a></emu-nt></emu-rhs>
+    <emu-rhs a="948f0b7a"><emu-nt id="_ref_24"><a href="#prod-JSON5ElementList">JSON5ElementList</a></emu-nt><emu-t>,</emu-t><emu-nt id="_ref_25"><a href="#prod-JSON5Value">JSON5Value</a></emu-nt></emu-rhs>
+</emu-production></emu-grammar>
+
+  <p>
+    There is no requirement that the values in an array be of the same type.
+  
+  </p>
+
+  <emu-example><figure><figcaption>Example (Informative)</figcaption>
+    <pre><code class="javascript hljs"><span class="hljs-comment">// An empty array</span>
+[]
+
+<span class="hljs-comment">// An array with three elements</span>
+<span class="hljs-comment">// and a trailing comma</span>
+[
+    <span class="hljs-number">1</span>,
+    <span class="hljs-literal">true</span>,
+    <span class="hljs-string">'three'</span>,
+]
+
+<span class="hljs-comment">// Arrays can be nested</span>
+[
+    [<span class="hljs-number">1</span>, <span class="hljs-literal">true</span>, <span class="hljs-string">'three'</span>],
+    [<span class="hljs-number">4</span>, <span class="hljs-string">"five"</span>, <span class="hljs-number">0x6</span>],
+]</code></pre>
+  </figure></emu-example>
+</emu-clause>
+
+<emu-clause id="strings">
+  <h1><span class="secnum">5</span>Strings</h1>
+
+  <p>
+    A string begins and ends with single or double quotation marks. The same
+    quotation mark that begins a string must also end the string. All Unicode
+    characters may be placed within the quotation marks, except for the
+    characters that must be escaped: the quotation mark used to begin and end
+    the string, reverse solidus, and line terminators.
+  
+  </p>
+
+  <emu-grammar><emu-production name="JSON5String" type="lexical" id="prod-JSON5String">
+    <emu-nt><a href="#prod-JSON5String">JSON5String</a></emu-nt><emu-geq>::</emu-geq><emu-rhs a="40fe6923"><emu-t>"</emu-t><emu-nt optional="" id="_ref_26"><a href="#prod-JSON5DoubleStringCharacters">JSON5DoubleStringCharacters</a><emu-mods><emu-opt>opt</emu-opt></emu-mods></emu-nt><emu-t>"</emu-t></emu-rhs>
+    <emu-rhs a="0a3baa5e"><emu-t>'</emu-t><emu-nt optional="" id="_ref_27"><a href="#prod-JSON5SingleStringCharacters">JSON5SingleStringCharacters</a><emu-mods><emu-opt>opt</emu-opt></emu-mods></emu-nt><emu-t>'</emu-t></emu-rhs>
+</emu-production>
+<emu-production name="JSON5DoubleStringCharacters" type="lexical" id="prod-JSON5DoubleStringCharacters">
+    <emu-nt><a href="#prod-JSON5DoubleStringCharacters">JSON5DoubleStringCharacters</a></emu-nt><emu-geq>::</emu-geq><emu-rhs a="49638c49"><emu-nt id="_ref_28"><a href="#prod-JSON5DoubleStringCharacter">JSON5DoubleStringCharacter</a></emu-nt><emu-nt optional="" id="_ref_29"><a href="#prod-JSON5DoubleStringCharacters">JSON5DoubleStringCharacters</a><emu-mods><emu-opt>opt</emu-opt></emu-mods></emu-nt></emu-rhs>
+</emu-production>
+<emu-production name="JSON5SingleStringCharacters" type="lexical" id="prod-JSON5SingleStringCharacters">
+    <emu-nt><a href="#prod-JSON5SingleStringCharacters">JSON5SingleStringCharacters</a></emu-nt><emu-geq>::</emu-geq><emu-rhs a="fc0649e4"><emu-nt id="_ref_30"><a href="#prod-JSON5SingleStringCharacter">JSON5SingleStringCharacter</a></emu-nt><emu-nt optional="" id="_ref_31"><a href="#prod-JSON5SingleStringCharacters">JSON5SingleStringCharacters</a><emu-mods><emu-opt>opt</emu-opt></emu-mods></emu-nt></emu-rhs>
+</emu-production>
+<emu-production name="JSON5DoubleStringCharacter" type="lexical" id="prod-JSON5DoubleStringCharacter">
+    <emu-nt><a href="#prod-JSON5DoubleStringCharacter">JSON5DoubleStringCharacter</a></emu-nt><emu-geq>::</emu-geq><emu-rhs a="a87f95ed"><emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-6">SourceCharacter</a></emu-nt><emu-gmod>but not one of <emu-t>"</emu-t> or <emu-t>\</emu-t> or <emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-7.3">LineTerminator</a></emu-nt></emu-gmod></emu-rhs>
+    <emu-rhs a="ea7d8d26"><emu-t>\</emu-t><emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-7.8.4">EscapeSequence</a></emu-nt></emu-rhs>
+    <emu-rhs a="00992933"><emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-7.8.4">LineContinuation</a></emu-nt></emu-rhs>
+    <emu-rhs a="27bf87fb"><emu-gprose>U+2028</emu-gprose></emu-rhs>
+    <emu-rhs a="4c68ccff"><emu-gprose>U+2029</emu-gprose></emu-rhs>
+</emu-production>
+<emu-production name="JSON5SingleStringCharacter" type="lexical" id="prod-JSON5SingleStringCharacter">
+    <emu-nt><a href="#prod-JSON5SingleStringCharacter">JSON5SingleStringCharacter</a></emu-nt><emu-geq>::</emu-geq><emu-rhs a="5ea9e1d2"><emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-6">SourceCharacter</a></emu-nt><emu-gmod>but not one of <emu-t>'</emu-t> or <emu-t>\</emu-t> or <emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-7.3">LineTerminator</a></emu-nt></emu-gmod></emu-rhs>
+    <emu-rhs a="ea7d8d26"><emu-t>\</emu-t><emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-7.8.4">EscapeSequence</a></emu-nt></emu-rhs>
+    <emu-rhs a="00992933"><emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-7.8.4">LineContinuation</a></emu-nt></emu-rhs>
+    <emu-rhs a="27bf87fb"><emu-gprose>U+2028</emu-gprose></emu-rhs>
+    <emu-rhs a="4c68ccff"><emu-gprose>U+2029</emu-gprose></emu-rhs>
+</emu-production></emu-grammar>
+
+  <emu-clause id="escapes">
+    <h1><span class="secnum">5.1</span>Escapes</h1>
+
+    <p>
+      Any character may be escaped. If the character is in the Basic Latin or
+      Latin-1 Supplement Unicode character ranges (U+0000 through U+00FF), then
+      it may be represented as a four-character sequence: a reverse solidus,
+      followed by the lower case letter <code>x</code>, followed by two hexadecimal digits
+      that encode the character’s code point. A reverse solidus followed by the
+      lower case letter <code>x</code> must be followed by two hexadecimal digits.
+    
+    </p>
+
+    <p>
+      If the character is in the Basic Multilingual Plane (U+0000 through
+      U+FFFF), then it may be represented as a six-character sequence: a reverse
+      solidus, followed by the lower case letter <code>u</code>, followed by four
+      hexadecimal digits that encode the character’s code point. A reverse
+      solidus followed by the lower case letter <code>u</code> must be followed by four
+      hexadecimal digits. The hexadecimal letters A though F can be upper or
+      lower case.
+    
+    </p>
+
+    <emu-example><figure><figcaption>Example 1 (Informative)</figcaption>
+      <p>
+        A string containing only a single reverse solidus character may be
+        represented as <code>'\x5C'</code> or <code>'\u005C'</code>.
+      
+      </p>
+    </figure></emu-example>
+
+    <p>
+      To escape an extended character that is not in the Basic Multilingual
+      Plane, the character is represented as a 12-character sequence, encoding
+      the UTF-16 surrogate pair.
+    
+    </p>
+
+    <emu-example><figure><figcaption>Example 2 (Informative)</figcaption>
+      <p>
+        A string containing only the musical score character 🎼 (U+1F3BC) may be
+        represented as <code>'\uD83C\uDFBC'</code>.
+      
+      </p>
+    </figure></emu-example>
+
+    <p>
+      Alternatively, there are two-character sequence escape representations of
+      some popular characters. A decimal digit must not follow a reverse solidus
+      followed by a zero.
+    
+    </p>
+
+    <emu-table caption="Escape sequences"><figure><figcaption>Table 1: Escape sequences</figcaption>
+      <table>
+        <tbody><tr><th>Escape Sequence</th><th>Description</th><th>Code Point</th></tr>
+        <tr><td><code>\'</code></td><td>Apostrophe</td><td>U+0027</td></tr>
+        <tr><td><code>\"</code></td><td>Quotation mark</td><td>U+0022</td></tr>
+        <tr><td><code>\\</code></td><td>Reverse solidus</td><td>U+005C</td></tr>
+        <tr><td><code>\b</code></td><td>Backspace</td><td>U+0008</td></tr>
+        <tr><td><code>\f</code></td><td>Form feed</td><td>U+000C</td></tr>
+        <tr><td><code>\n</code></td><td>Line feed</td><td>U+000A</td></tr>
+        <tr><td><code>\r</code></td><td>Carriage return</td><td>U+000D</td></tr>
+        <tr><td><code>\t</code></td><td>Horizontal tab</td><td>U+0009</td></tr>
+        <tr><td><code>\v</code></td><td>Vertical tab</td><td>U+000B</td></tr>
+        <tr><td><code>\0</code></td><td>Null</td><td>U+0000</td></tr>
+      </tbody></table>
+    </figure></emu-table>
+
+    <emu-example><figure><figcaption>Example 3 (Informative)</figcaption>
+      <p>
+        A string containing only a single reverse solidus character may be
+        represented more compactly as <code>'\\'</code>.
+      
+      </p>
+    </figure></emu-example>
+
+    <p>
+      A string may be continued on a new line by following a reverse solidus
+      with one of the following line terminator sequences. The reverse solidus
+      and line terminator sequence are not included in the string.
+    
+    </p>
+
+    <emu-table caption="Line terminator sequences"><figure><figcaption>Table 2: Line terminator sequences</figcaption>
+      <table>
+        <tbody><tr><th>Code Points</th><th>Description</th></tr>
+        <tr><td>U+000A</td><td>Line feed</td></tr>
+        <tr><td>U+000D</td><td>Carriage return</td></tr>
+        <tr><td>U+000D U+000A</td><td>Carriage return and line feed</td></tr>
+        <tr><td>U+2028</td><td>Line separator</td></tr>
+        <tr><td>U+2029</td><td>Paragraph separator</td></tr>
+      </tbody></table>
+    </figure></emu-table>
+
+    <emu-example><figure><figcaption>Example 4 (Informative)</figcaption>
+      <p>
+        The following strings represent the same information.
+      
+      </p>
+
+      <pre><code class="javascript hljs"><span class="hljs-string">'Lorem ipsum dolor sit amet, \
+consectetur adipiscing elit.'</span>
+
+<span class="hljs-string">'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'</span></code></pre>
+    </figure></emu-example>
+
+    <p>
+      If any other character follows a reverse solidus, except for the decimal
+      digits 1 through 9, that character will be included in the string, but the
+      reverse solidus will not.
+    
+    </p>
+
+    <emu-example><figure><figcaption>Example 5 (Informative)</figcaption>
+      <p>
+          The following strings represent the same information.
+      
+      </p>
+
+      <pre><code class="javascript hljs"><span class="hljs-string">'\A\C\/\D\C'</span>
+
+<span class="hljs-string">'AC/DC'</span></code></pre>
+    </figure></emu-example>
+  </emu-clause>
+
+  <emu-clause id="separators">
+    <h1><span class="secnum">5.2</span>Paragraph and Line Separators</h1>
+
+    <p>
+      Like JSON, JSON5 allows the Unicode code points U+2028 and U+2029 to
+      appear unescaped in strings. Since ECMAScript 5.1 does not allow these
+      code points in strings, authors should avoid including them in JSON5
+      documents. JSON5  <emu-xref href="#parsers" id="_ref_4"><a href="#parsers">parsers</a></emu-xref> should
+      produce a warning when they are found unescaped in strings. JSON5
+      
+      <emu-xref href="#generators" id="_ref_5"><a href="#generators">generators</a></emu-xref> should escape these
+      code points in strings.
+    
+    </p>
+  </emu-clause>
+</emu-clause>
+
+<emu-clause id="numbers">
+  <h1><span class="secnum">6</span>Numbers</h1>
+
+  <p>
+    The representation of numbers is similar to that used in most programming
+    languages. A number may be represented in in base 10 using decimal digits,
+    base 16 using hexadecimal digits, or the IEEE 754 values positive infinity,
+    negative infinity, or NaN.
+  
+  </p>
+
+  <emu-grammar><emu-production name="JSON5Number" type="lexical" id="prod-JSON5Number">
+    <emu-nt><a href="#prod-JSON5Number">JSON5Number</a></emu-nt><emu-geq>::</emu-geq><emu-rhs a="2f9b3f72"><emu-nt id="_ref_32"><a href="#prod-JSON5NumericLiteral">JSON5NumericLiteral</a></emu-nt></emu-rhs>
+    <emu-rhs a="db2dbf34"><emu-t>+</emu-t><emu-nt id="_ref_33"><a href="#prod-JSON5NumericLiteral">JSON5NumericLiteral</a></emu-nt></emu-rhs>
+    <emu-rhs a="ed0eae61"><emu-t>-</emu-t><emu-nt id="_ref_34"><a href="#prod-JSON5NumericLiteral">JSON5NumericLiteral</a></emu-nt></emu-rhs>
+</emu-production>
+<emu-production name="JSON5NumericLiteral" type="lexical" id="prod-JSON5NumericLiteral">
+    <emu-nt><a href="#prod-JSON5NumericLiteral">JSON5NumericLiteral</a></emu-nt><emu-geq>::</emu-geq><emu-rhs a="a548b407"><emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-7.8.3">NumericLiteral</a></emu-nt></emu-rhs>
+    <emu-rhs a="4afe8df8"><emu-t>Infinity</emu-t></emu-rhs>
+    <emu-rhs a="4a46ffd2"><emu-t>NaN</emu-t></emu-rhs>
+</emu-production></emu-grammar>
+
+  <p>
+    Decimal numbers contain an integer component that may be prefixed with an
+    optional plus or minus sign, which may be followed by a fraction part and/or
+    an exponent part.
+  
+  </p>
+
+  <p>
+    A fraction part is a decimal point followed by one or more digits.
+  
+  </p>
+
+  <p>
+    An exponent part begins with the letter E in upper or lower case, which may
+    be followed by a plus or minus sign. The E and optional sign are followed by
+    one or more digits.
+  
+  </p>
+
+  <emu-example><figure><figcaption>Example 1 (Informative)</figcaption>
+    <pre><code class="javascript hljs">{
+    <span class="hljs-attr">integer</span>: <span class="hljs-number">123</span>,
+    <span class="hljs-attr">withFractionPart</span>: <span class="hljs-number">123.456</span>,
+    <span class="hljs-attr">onlyFractionPart</span>: <span class="hljs-number">.456</span>,
+    <span class="hljs-attr">withExponent</span>: <span class="hljs-number">123e-456</span>,
+}</code></pre>
+  </figure></emu-example>
+
+  <p>
+    Hexadecimal numbers contain the literal characters <code>0x</code> or <code>0X</code> that may be
+    prefixed with an optional plus or minus sign, which must be followed by one
+    or more hexadecimal digits. The hexadecimal letters A through F can be upper
+    or lower case.
+  
+  </p>
+
+  <emu-example><figure><figcaption>Example 2 (Informative)</figcaption>
+    <pre><code class="javascript hljs">{
+    <span class="hljs-attr">positiveHex</span>: <span class="hljs-number">0xdecaf</span>,
+    <span class="hljs-attr">negativeHex</span>: <span class="hljs-number">-0xC0FFEE</span>,
+}</code></pre>
+  </figure></emu-example>
+
+  <p>
+    The IEEE 754 value positive infinity must be the literal characters
+    <code>Infinity</code> and may be prefixed with an optional plus sign.
+  
+  </p>
+
+  <p>
+    The IEEE 754 value negative infinity must be the literal characters
+    <code>-Infinity</code>.
+  
+  </p>
+
+  <p>
+    The IEEE 754 value NaN must be the literal characters <code>NaN</code> and may be
+    prefixed with an optional plus or minus sign.
+  
+  </p>
+
+  <emu-example><figure><figcaption>Example 3 (Informative)</figcaption>
+    <pre><code class="javascript hljs">{
+    <span class="hljs-attr">positiveInfinity</span>: <span class="hljs-literal">Infinity</span>,
+    <span class="hljs-attr">negativeInfinity</span>: -<span class="hljs-literal">Infinity</span>,
+    <span class="hljs-attr">notANumber</span>: <span class="hljs-literal">NaN</span>,
+}</code></pre>
+  </figure></emu-example>
+</emu-clause>
+
+<emu-clause id="comments">
+  <h1><span class="secnum">7</span>Comments</h1>
+
+  <p>
+    Comments can be either single or multi-line. Multi-line comments cannot
+    nest. Comments may appear before and after any <emu-nt id="_ref_35"><a href="#prod-JSON5Token">JSON5Token</a></emu-nt>.
+  
+  </p>
+
+  <p>
+    A single line comment begins with two soliduses and ends with a
+    <emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-7.3">LineTerminator</a></emu-nt> or the end of the document. All Unicode characters may be
+    placed within the start and end, except for a <emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-7.3">LineTerminator</a></emu-nt>.
+  
+  </p>
+
+  <p>
+    A multi-line comment begins with a solidus and an asterisk and ends with an
+    asterisk and a solidus. All Unicode characters may be placed within the
+    start and end, except for an asterisk followed by a solidus.
+  
+  </p>
+
+  <emu-example><figure><figcaption>Example (Informative)</figcaption>
+    <pre><code class="javascript hljs"><span class="hljs-comment">// This is a single line comment.</span>
+
+<span class="hljs-comment">/* This is a multi-
+   line comment. */</span></code></pre>
+  </figure></emu-example>
+</emu-clause>
+
+<emu-clause id="white-space">
+  <h1><span class="secnum">8</span>White Space</h1>
+
+  <p>
+    White space may appear before and after any <emu-nt id="_ref_36"><a href="#prod-JSON5Token">JSON5Token</a></emu-nt>.
+  
+  </p>
+
+  <emu-table caption="White space"><figure><figcaption>Table 3: White space</figcaption>
+    <table>
+      <tbody><tr><th>Code Points</th><th>Description</th></tr>
+      <tr><td>U+0009</td><td>Horizontal tab</td></tr>
+      <tr><td>U+000A</td><td>Line feed</td></tr>
+      <tr><td>U+000B</td><td>Vertical tab</td></tr>
+      <tr><td>U+000C</td><td>Form feed</td></tr>
+      <tr><td>U+000D</td><td>Carriage return</td></tr>
+      <tr><td>U+0020</td><td>Space</td></tr>
+      <tr><td>U+00A0</td><td>Non-breaking space</td></tr>
+      <tr><td>U+2028</td><td>Line separator</td></tr>
+      <tr><td>U+2029</td><td>Paragraph separator</td></tr>
+      <tr><td>U+FEFF</td><td>Byte order mark</td></tr>
+      <tr><td>Unicode Zs category</td><td>Any other character in the Space
+      Separator Unicode category</td></tr>
+    </tbody></table>
+  </figure></emu-table>
+</emu-clause>
+
+<emu-clause id="grammar">
+  <h1><span class="secnum">9</span>Grammar</h1>
+
+  <p>
+    JSON5 is defined by a lexical grammar and a syntactic grammar. The lexical
+    grammar defines productions that translate text into tokens, and the
+    syntactic grammar defines productions that translate tokens into a JSON5
+    value.
+  
+  </p>
+
+  <p>
+    All productions that do not begin with the characters “JSON5” are defined by
+    productions of the  <a href="https://www.ecma-international.org/ecma-262/5.1/#sec-5.1.2">ECMAScript
+    5.1 Lexical Grammar</a>.
+  
+  </p>
+
+  <emu-clause id="lexical-grammar">
+    <h1><span class="secnum">9.1</span>Lexical Grammar</h1>
+
+    <p>
+      The lexical grammar for JSON5 has as its terminal symbols characters
+      (Unicode code units) that conform to the rules for <emu-nt id="_ref_37"><a href="#prod-JSON5SourceCharacter">JSON5SourceCharacter</a></emu-nt>.
+      It defines a set of productions, starting from the <emu-xref href="#sec-context-free-grammars"><a href="https://tc39.github.io/ecma262/#sec-context-free-grammars">goal symbol</a></emu-xref>
+      <emu-nt id="_ref_38"><a href="#prod-JSON5InputElement">JSON5InputElement</a></emu-nt>, that describe how sequences of such characters are
+      translated into a sequence of input elements.
+    
+    </p>
+
+    <p>
+      Input elements other than white space and comments form the terminal
+      symbols for the syntactic grammar for JSON5 and are called tokens. These
+      tokens are the identifiers, literals, and punctuators of the JSON5
+      language. Simple white space and comments are discarded and do not appear
+      in the stream of input elements for the syntactic grammar.
+    
+    </p>
+
+    <p>
+      Productions of the lexical grammar are distinguished by having two colons
+      “::” as separating punctuation.
+    
+    </p>
+
+    <emu-grammar><emu-production name="JSON5SourceCharacter" type="lexical" id="prod-JSON5SourceCharacter">
+    <emu-nt><a href="#prod-JSON5SourceCharacter">JSON5SourceCharacter</a></emu-nt><emu-geq>::</emu-geq><emu-rhs a="bf779668"><emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-6">SourceCharacter</a></emu-nt></emu-rhs>
+</emu-production>
+<emu-production name="JSON5InputElement" type="lexical" id="prod-JSON5InputElement">
+    <emu-nt><a href="#prod-JSON5InputElement">JSON5InputElement</a></emu-nt><emu-geq>::</emu-geq><emu-rhs a="1424dc49"><emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-7.2">WhiteSpace</a></emu-nt></emu-rhs>
+    <emu-rhs a="3b331ccd"><emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-7.3">LineTerminator</a></emu-nt></emu-rhs>
+    <emu-rhs a="153d7a58"><emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-7.4">Comment</a></emu-nt></emu-rhs>
+    <emu-rhs a="1231f296"><emu-nt id="_ref_39"><a href="#prod-JSON5Token">JSON5Token</a></emu-nt></emu-rhs>
+</emu-production>
+<emu-production name="JSON5Token" type="lexical" id="prod-JSON5Token">
+    <emu-nt><a href="#prod-JSON5Token">JSON5Token</a></emu-nt><emu-geq>::</emu-geq><emu-rhs a="aba979c7"><emu-nt id="_ref_40"><a href="#prod-JSON5Identifier">JSON5Identifier</a></emu-nt></emu-rhs>
+    <emu-rhs a="0bbbbe6c"><emu-nt id="_ref_41"><a href="#prod-JSON5Punctuator">JSON5Punctuator</a></emu-nt></emu-rhs>
+    <emu-rhs a="03b0fb59"><emu-nt id="_ref_42"><a href="#prod-JSON5String">JSON5String</a></emu-nt></emu-rhs>
+    <emu-rhs a="e66d304f"><emu-nt id="_ref_43"><a href="#prod-JSON5Number">JSON5Number</a></emu-nt></emu-rhs>
+</emu-production>
+<emu-production name="JSON5Identifier" type="lexical" id="prod-JSON5Identifier">
+    <emu-nt><a href="#prod-JSON5Identifier">JSON5Identifier</a></emu-nt><emu-geq>::</emu-geq><emu-rhs a="0ebb31e2"><emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-7.6">IdentifierName</a></emu-nt></emu-rhs>
+</emu-production>
+<emu-production name="JSON5Punctuator" type="lexical" oneof="" id="prod-JSON5Punctuator">
+    <emu-nt><a href="#prod-JSON5Punctuator">JSON5Punctuator</a></emu-nt><emu-geq>::</emu-geq><emu-oneof>one of</emu-oneof><emu-rhs><emu-t>{</emu-t><emu-t>}</emu-t><emu-t>[</emu-t><emu-t>]</emu-t><emu-t>:</emu-t><emu-t>,</emu-t></emu-rhs>
+</emu-production>
+<emu-production name="JSON5Null" type="lexical" id="prod-JSON5Null">
+    <emu-nt><a href="#prod-JSON5Null">JSON5Null</a></emu-nt><emu-geq>::</emu-geq><emu-rhs a="54f84188"><emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-7.8.1">NullLiteral</a></emu-nt></emu-rhs>
+</emu-production>
+<emu-production name="JSON5Boolean" type="lexical" id="prod-JSON5Boolean">
+    <emu-nt><a href="#prod-JSON5Boolean">JSON5Boolean</a></emu-nt><emu-geq>::</emu-geq><emu-rhs a="3508e1fd"><emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-7.8.2">BooleanLiteral</a></emu-nt></emu-rhs>
+</emu-production>
+<emu-production name="JSON5String" type="lexical">
+    <emu-nt><a href="#prod-JSON5String">JSON5String</a></emu-nt><emu-geq>::</emu-geq><emu-rhs a="40fe6923"><emu-t>"</emu-t><emu-nt optional="" id="_ref_44"><a href="#prod-JSON5DoubleStringCharacters">JSON5DoubleStringCharacters</a><emu-mods><emu-opt>opt</emu-opt></emu-mods></emu-nt><emu-t>"</emu-t></emu-rhs>
+    <emu-rhs a="0a3baa5e"><emu-t>'</emu-t><emu-nt optional="" id="_ref_45"><a href="#prod-JSON5SingleStringCharacters">JSON5SingleStringCharacters</a><emu-mods><emu-opt>opt</emu-opt></emu-mods></emu-nt><emu-t>'</emu-t></emu-rhs>
+</emu-production>
+<emu-production name="JSON5DoubleStringCharacters" type="lexical">
+    <emu-nt><a href="#prod-JSON5DoubleStringCharacters">JSON5DoubleStringCharacters</a></emu-nt><emu-geq>::</emu-geq><emu-rhs a="49638c49"><emu-nt id="_ref_46"><a href="#prod-JSON5DoubleStringCharacter">JSON5DoubleStringCharacter</a></emu-nt><emu-nt optional="" id="_ref_47"><a href="#prod-JSON5DoubleStringCharacters">JSON5DoubleStringCharacters</a><emu-mods><emu-opt>opt</emu-opt></emu-mods></emu-nt></emu-rhs>
+</emu-production>
+<emu-production name="JSON5SingleStringCharacters" type="lexical">
+    <emu-nt><a href="#prod-JSON5SingleStringCharacters">JSON5SingleStringCharacters</a></emu-nt><emu-geq>::</emu-geq><emu-rhs a="fc0649e4"><emu-nt id="_ref_48"><a href="#prod-JSON5SingleStringCharacter">JSON5SingleStringCharacter</a></emu-nt><emu-nt optional="" id="_ref_49"><a href="#prod-JSON5SingleStringCharacters">JSON5SingleStringCharacters</a><emu-mods><emu-opt>opt</emu-opt></emu-mods></emu-nt></emu-rhs>
+</emu-production>
+<emu-production name="JSON5DoubleStringCharacter" type="lexical">
+    <emu-nt><a href="#prod-JSON5DoubleStringCharacter">JSON5DoubleStringCharacter</a></emu-nt><emu-geq>::</emu-geq><emu-rhs a="a87f95ed"><emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-6">SourceCharacter</a></emu-nt><emu-gmod>but not one of <emu-t>"</emu-t> or <emu-t>\</emu-t> or <emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-7.3">LineTerminator</a></emu-nt></emu-gmod></emu-rhs>
+    <emu-rhs a="ea7d8d26"><emu-t>\</emu-t><emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-7.8.4">EscapeSequence</a></emu-nt></emu-rhs>
+    <emu-rhs a="00992933"><emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-7.8.4">LineContinuation</a></emu-nt></emu-rhs>
+    <emu-rhs a="27bf87fb"><emu-gprose>U+2028</emu-gprose></emu-rhs>
+    <emu-rhs a="4c68ccff"><emu-gprose>U+2029</emu-gprose></emu-rhs>
+</emu-production>
+<emu-production name="JSON5SingleStringCharacter" type="lexical">
+    <emu-nt><a href="#prod-JSON5SingleStringCharacter">JSON5SingleStringCharacter</a></emu-nt><emu-geq>::</emu-geq><emu-rhs a="5ea9e1d2"><emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-6">SourceCharacter</a></emu-nt><emu-gmod>but not one of <emu-t>'</emu-t> or <emu-t>\</emu-t> or <emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-7.3">LineTerminator</a></emu-nt></emu-gmod></emu-rhs>
+    <emu-rhs a="ea7d8d26"><emu-t>\</emu-t><emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-7.8.4">EscapeSequence</a></emu-nt></emu-rhs>
+    <emu-rhs a="00992933"><emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-7.8.4">LineContinuation</a></emu-nt></emu-rhs>
+    <emu-rhs a="27bf87fb"><emu-gprose>U+2028</emu-gprose></emu-rhs>
+    <emu-rhs a="4c68ccff"><emu-gprose>U+2029</emu-gprose></emu-rhs>
+</emu-production>
+<emu-production name="JSON5Number" type="lexical">
+    <emu-nt><a href="#prod-JSON5Number">JSON5Number</a></emu-nt><emu-geq>::</emu-geq><emu-rhs a="2f9b3f72"><emu-nt id="_ref_50"><a href="#prod-JSON5NumericLiteral">JSON5NumericLiteral</a></emu-nt></emu-rhs>
+    <emu-rhs a="db2dbf34"><emu-t>+</emu-t><emu-nt id="_ref_51"><a href="#prod-JSON5NumericLiteral">JSON5NumericLiteral</a></emu-nt></emu-rhs>
+    <emu-rhs a="ed0eae61"><emu-t>-</emu-t><emu-nt id="_ref_52"><a href="#prod-JSON5NumericLiteral">JSON5NumericLiteral</a></emu-nt></emu-rhs>
+</emu-production>
+<emu-production name="JSON5NumericLiteral" type="lexical">
+    <emu-nt><a href="#prod-JSON5NumericLiteral">JSON5NumericLiteral</a></emu-nt><emu-geq>::</emu-geq><emu-rhs a="a548b407"><emu-nt><a href="https://www.ecma-international.org/ecma-262/5.1/#sec-7.8.3">NumericLiteral</a></emu-nt></emu-rhs>
+    <emu-rhs a="4afe8df8"><emu-t>Infinity</emu-t></emu-rhs>
+    <emu-rhs a="4a46ffd2"><emu-t>NaN</emu-t></emu-rhs>
+</emu-production></emu-grammar>
+  </emu-clause>
+
+  <emu-clause id="syntactic-grammar">
+    <h1><span class="secnum">9.2</span>Syntactic Grammar</h1>
+
+    <p>
+      The syntactic grammar for JSON5 has tokens defined by the lexical grammar
+      as its terminal symbols. It defines a set of productions, starting from
+      the <emu-xref href="#sec-context-free-grammars"><a href="https://tc39.github.io/ecma262/#sec-context-free-grammars">goal symbol</a></emu-xref> <emu-nt id="_ref_53"><a href="#prod-JSON5Text">JSON5Text</a></emu-nt>, that describe how sequences of tokens can
+      form syntactically correct JSON5 values.
+    
+    </p>
+
+    <p>
+      When a stream of characters is to be parsed as a JSON5 value, it is first
+      converted to a stream of input elements by repeated application of the
+      lexical grammar; this stream of input elements is then parsed by a single
+      application of the syntactic grammar. The program is syntactically in
+      error if the tokens in the stream of input elements cannot be parsed as a
+      single instance of the goal nonterminal <emu-nt id="_ref_54"><a href="#prod-JSON5Text">JSON5Text</a></emu-nt>, with no tokens left
+      over.
+    
+    </p>
+
+    <p>
+      Productions of the syntactic grammar are distinguished by having just one
+      colon “:” as punctuation.
+    
+    </p>
+
+    <emu-grammar><emu-production name="JSON5Text" id="prod-JSON5Text">
+    <emu-nt><a href="#prod-JSON5Text">JSON5Text</a></emu-nt><emu-geq>:</emu-geq><emu-rhs a="f1666243"><emu-nt id="_ref_55"><a href="#prod-JSON5Value">JSON5Value</a></emu-nt></emu-rhs>
+</emu-production>
+<emu-production name="JSON5Value">
+    <emu-nt><a href="#prod-JSON5Value">JSON5Value</a></emu-nt><emu-geq>:</emu-geq><emu-rhs a="645e60c0"><emu-nt id="_ref_56"><a href="#prod-JSON5Null">JSON5Null</a></emu-nt></emu-rhs>
+    <emu-rhs a="306430fb"><emu-nt id="_ref_57"><a href="#prod-JSON5Boolean">JSON5Boolean</a></emu-nt></emu-rhs>
+    <emu-rhs a="03b0fb59"><emu-nt id="_ref_58"><a href="#prod-JSON5String">JSON5String</a></emu-nt></emu-rhs>
+    <emu-rhs a="e66d304f"><emu-nt id="_ref_59"><a href="#prod-JSON5Number">JSON5Number</a></emu-nt></emu-rhs>
+    <emu-rhs a="6d543358"><emu-nt id="_ref_60"><a href="#prod-JSON5Object">JSON5Object</a></emu-nt></emu-rhs>
+    <emu-rhs a="f6cb38b6"><emu-nt id="_ref_61"><a href="#prod-JSON5Array">JSON5Array</a></emu-nt></emu-rhs>
+</emu-production>
+<emu-production name="JSON5Object">
+    <emu-nt><a href="#prod-JSON5Object">JSON5Object</a></emu-nt><emu-geq>:</emu-geq><emu-rhs a="81ba5a4a"><emu-t>{</emu-t><emu-t>}</emu-t></emu-rhs>
+    <emu-rhs a="cd01fa60"><emu-t>{</emu-t><emu-nt id="_ref_62"><a href="#prod-JSON5MemberList">JSON5MemberList</a></emu-nt><emu-t optional="">,<emu-mods><emu-opt>opt</emu-opt></emu-mods></emu-t><emu-t>}</emu-t></emu-rhs>
+</emu-production>
+<emu-production name="JSON5MemberList">
+    <emu-nt><a href="#prod-JSON5MemberList">JSON5MemberList</a></emu-nt><emu-geq>:</emu-geq><emu-rhs a="7eb169bd"><emu-nt id="_ref_63"><a href="#prod-JSON5Member">JSON5Member</a></emu-nt></emu-rhs>
+    <emu-rhs a="dfa76288"><emu-nt id="_ref_64"><a href="#prod-JSON5MemberList">JSON5MemberList</a></emu-nt><emu-t>,</emu-t><emu-nt id="_ref_65"><a href="#prod-JSON5Member">JSON5Member</a></emu-nt></emu-rhs>
+</emu-production>
+<emu-production name="JSON5Member">
+    <emu-nt><a href="#prod-JSON5Member">JSON5Member</a></emu-nt><emu-geq>:</emu-geq><emu-rhs a="2c610f33"><emu-nt id="_ref_66"><a href="#prod-JSON5MemberName">JSON5MemberName</a></emu-nt><emu-t>:</emu-t><emu-nt id="_ref_67"><a href="#prod-JSON5Value">JSON5Value</a></emu-nt></emu-rhs>
+</emu-production>
+<emu-production name="JSON5MemberName">
+    <emu-nt><a href="#prod-JSON5MemberName">JSON5MemberName</a></emu-nt><emu-geq>:</emu-geq><emu-rhs a="aba979c7"><emu-nt id="_ref_68"><a href="#prod-JSON5Identifier">JSON5Identifier</a></emu-nt></emu-rhs>
+    <emu-rhs a="03b0fb59"><emu-nt id="_ref_69"><a href="#prod-JSON5String">JSON5String</a></emu-nt></emu-rhs>
+</emu-production>
+<emu-production name="JSON5Array">
+    <emu-nt><a href="#prod-JSON5Array">JSON5Array</a></emu-nt><emu-geq>:</emu-geq><emu-rhs a="99d85234"><emu-t>[</emu-t><emu-t>]</emu-t></emu-rhs>
+    <emu-rhs a="ddc4e558"><emu-t>[</emu-t><emu-nt id="_ref_70"><a href="#prod-JSON5ElementList">JSON5ElementList</a></emu-nt><emu-t optional="">,<emu-mods><emu-opt>opt</emu-opt></emu-mods></emu-t><emu-t>]</emu-t></emu-rhs>
+</emu-production>
+<emu-production name="JSON5ElementList">
+    <emu-nt><a href="#prod-JSON5ElementList">JSON5ElementList</a></emu-nt><emu-geq>:</emu-geq><emu-rhs a="f1666243"><emu-nt id="_ref_71"><a href="#prod-JSON5Value">JSON5Value</a></emu-nt></emu-rhs>
+    <emu-rhs a="948f0b7a"><emu-nt id="_ref_72"><a href="#prod-JSON5ElementList">JSON5ElementList</a></emu-nt><emu-t>,</emu-t><emu-nt id="_ref_73"><a href="#prod-JSON5Value">JSON5Value</a></emu-nt></emu-rhs>
+</emu-production></emu-grammar>
+  </emu-clause>
+</emu-clause>
+
+<emu-clause id="parsers">
+  <h1><span class="secnum">10</span>Parsers</h1>
+
+  <p>
+    A JSON5 parser transforms a JSON5 text into another representation. A JSON5
+    parser must accept all texts that conform to the JSON5  <emu-xref href="#grammar" id="_ref_6"><a href="#grammar">grammar</a></emu-xref>. A JSON5 parser may accept non-JSON5
+    forms or extensions.
+  
+  </p>
+
+  <p>
+    An implementation may set limits on the size of texts that it accepts, the
+    maximum depth of nesting, the range and precision of numbers, and the length
+    and character contents of strings.
+  
+  </p>
+</emu-clause>
+
+<emu-clause id="generators">
+  <h1><span class="secnum">11</span>Generators</h1>
+
+  <p>
+    A JSON5 generator produces JSON5 text. The resulting text must strictly
+    conform to the JSON5  <emu-xref href="#grammar" id="_ref_7"><a href="#grammar">grammar</a></emu-xref>.
+  
+  </p>
+</emu-clause>
+
+<emu-annex id="conformance">
+  <h1><span class="secnum">A</span>Conformance</h1>
+
+  <p>
+    The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”,
+    “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY”, and “OPTIONAL” in this
+    document are to be interpreted as described in  <a href="https://tools.ietf.org/html/rfc2119">RFC 2119</a>. However, for
+    readability, these words do not appear in all uppercase letters in this
+    specification.
+  
+  </p>
+
+  <p>
+    All of the text of this specification is normative except sections
+    explicitly marked as non-normative, examples, and notes.
+  
+  </p>
+
+  <p>
+    Examples in this specification are introduced with the words “for example”
+    or are set apart from the normative text like this:
+  
+  </p>
+
+  <emu-example><figure><figcaption>Example (Informative)</figcaption>
+    <p>
+      This is an example of an informative example.
+    
+    </p>
+  </figure></emu-example>
+
+  <p>
+    Informative notes begin with the word “Note” and are set apart from the
+    normative text like this:
+  
+  </p>
+
+  <emu-note><span class="note">Note</span><div class="note-contents">
+    This is an informative note.
+  
+  </div></emu-note>
+ </emu-annex>
+
+<emu-annex id="license">
+  <h1><span class="secnum">B</span>License</h1>
+
+  <p>
+    The MIT License (MIT)
+  
+  </p>
+
+  <p>
+    Copyright (c) 2017 Aseem Kishore, Jordan Tucker
+  
+  </p>
+
+  <p>
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the “Software”), to
+    deal in the Software without restriction, including without limitation the
+    rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+    sell copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+  
+  </p>
+
+  <p>
+    The above copyright notice and this permission notice shall be included in
+    all copies or substantial portions of the Software.
+  
+  </p>
+
+  <p>
+    THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+    IN THE SOFTWARE.
+  
+  </p>
+</emu-annex>
+</div></body>
