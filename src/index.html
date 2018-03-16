@@ -592,6 +592,32 @@ consectetur adipiscing elit.'
   </emu-table>
 </emu-clause>
 
+<emu-clause id="dates-and-times">
+  <h1>Dates and Times</h1>
+
+  <p>
+    It is recommended that JSON5 <emu-xref
+    href="#generators">generators</emu-xref> convert date and time values to
+    Coordinated Universal Time (UTC) and represent them as strings in internet
+    format as defined by <a
+    href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339</a> in the
+    interest of interoperability.
+  </p>
+
+  <p>
+    Alternatively, JSON5 generators may represent dates and times as Unix time,
+    which is the number of seconds that have elapsed since 00:00:00 Coordinated
+    Universal Time (UTC), Thursday, 1 January 1970, minus the number of leap
+    seconds that have taken place since then.
+  </p>
+
+  <p>
+    If a JSON5 <emu-xref href="#parsers">parser</emu-xref> expects a value to be
+    a date or time, it may attempt to convert the the value from one of the
+    earlier defined formats to a date and time.
+  </p>
+</emu-clause>
+
 <emu-clause id="grammar">
   <h1>Grammar</h1>
 
