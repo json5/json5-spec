@@ -604,12 +604,28 @@ consectetur adipiscing elit.'
     interest of interoperability.
   </p>
 
+  <emu-example>
+    <pre><code class="javascript">
+{
+    billenium: '2001-09-09T01:46:40Z',
+}
+</code></pre>
+  </emu-example>
+
   <p>
     Alternatively, JSON5 generators may represent dates and times as Unix time,
     which is the number of seconds that have elapsed since 00:00:00 Coordinated
     Universal Time (UTC), Thursday, 1 January 1970, minus the number of leap
     seconds that have taken place since then.
   </p>
+
+  <emu-example>
+    <pre><code class="javascript">
+{
+    json5Birthday: 1338150759534,
+}
+</code></pre>
+  </emu-example>
 
   <p>
     If a JSON5 <emu-xref href="#parsers">parser</emu-xref> expects a value to be
