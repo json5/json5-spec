@@ -596,18 +596,18 @@ consectetur adipiscing elit.'
   <h1>Dates and Times</h1>
 
   <p>
+    JSON5, like ECMAScript, defines a string interchange format for date-times 
+    based upon a simplification of the ISO 8601 Extended Format.
     A JSON5 string can be declared to encode a date, time or datetime, using
     the `jsondate:` prefix. Any string that is prefixed with `jsondate:` MUST 
-    conform to the `date-time` production of 
-    <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339</a>
-    and represents a moment in Coordinated Universal Time (UTC). 
-    Datetimes MUST use T as the separator character.
+    conform to the syntax and semantics of the `Date Time String Format` format of 
+    <a href="https://es5.github.io/x15.9.html#x15.9.1.15">ECMAScript 5</a>.
   </p>
 
   <emu-example>
     <pre><code class="javascript">
 {
-    billenium: 'jsondatetime:2001-09-09T01:46:40.000001Z',
+    billenium: 'jsondatetime:2001-09-09T01:46:40.0001Z',
 }
 </code></pre>
   </emu-example>
