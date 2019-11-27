@@ -592,6 +592,35 @@ consectetur adipiscing elit.'
   </emu-table>
 </emu-clause>
 
+<emu-clause id="dates-and-times">
+  <h1>Dates and Times</h1>
+
+  <p>
+    A JSON5 string can be declared to encode a date, time or datetime, using
+    the `jsondate:` prefix. Any string that is prefixed with `jsondate:` MUST 
+    conform to the `date-time` production of 
+    <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339</a>
+    and represents a moment in Coordinated Universal Time (UTC). 
+    Datetimes MUST use T as the separator character.
+  </p>
+
+  <emu-example>
+    <pre><code class="javascript">
+{
+    billenium: 'jsondatetime:2001-09-09T01:46:40.000001Z',
+}
+</code></pre>
+  </emu-example>
+
+  <p>
+    Some parsers may choose to have a mode where these dates are deserialized 
+    to language objects automatically. If the parser cannot represent all 
+    dates losslessly in native language objects, it should offer an option for 
+    returning the values as raw strings, custom objects or some other lossless format.
+  </p>
+
+</emu-clause>
+
 <emu-clause id="grammar">
   <h1>Grammar</h1>
 
