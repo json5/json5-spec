@@ -9,4 +9,4 @@ The latest version is available at https://spec.json5.org/
 To contribute to the spec, please install [Ecmarkup] and familiarize yourself
 with it.
 
-[Ecmarkup]: https://bterlson.github.io/ecmarkup/
+[Ecmarkup]: https://tc39.es/ecmarkup/
